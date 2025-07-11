@@ -46,14 +46,14 @@ void AniPlayer::Init()
 	animator.AddEvent("Idle", 0,
 		[]()
 		{
-			std::cout << "!!" << std::endl;
+			//std::cout << "!!" << std::endl;
 		}
 	);
 
 	animator.AddEvent("Idle", 0,
 		[]()
 		{
-			std::cout << "??" << std::endl;
+			//std::cout << "??" << std::endl;
 		}
 	);
 
@@ -92,7 +92,7 @@ void AniPlayer::Update(float dt)
 		{
 			currentJumpTime += dt;
 			isGrounded = false;
-			velocity.y = -1200.f;
+			velocity.y = -300.f;
 
 			animator.Play("animations/jump.csv");
 		}
