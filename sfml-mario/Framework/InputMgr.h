@@ -12,7 +12,7 @@ struct AxisInfo
 	std::list<int> positives; // 1.f;
 	std::list<int> negatives; // -1.f;
 
-	float sensi = 1.f;
+	float sensi = 1.5f;
 	float value = 0.f;
 };
 

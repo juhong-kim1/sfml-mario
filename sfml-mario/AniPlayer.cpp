@@ -121,20 +121,10 @@ void AniPlayer::Update(float dt)
 		if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
 		{
 			animator.Play("animations/stop.csv");
-
-			if (h < 0.f)
-			{
-				animator.Play("animations/run.csv");
-			}
 		}
 		if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
 		{
 			animator.Play("animations/stop.csv");
-
-			if (h > 0.f)
-			{
-				animator.Play("animations/run.csv");
-			}
 		}
 		if (h == 0.f)
 		{
@@ -154,17 +144,11 @@ void AniPlayer::Update(float dt)
 	}
 	if (animator.GetCurrentClipId() == "Stop")
 	{
-		if (velocity.x < 0.2f && velocity.x > -0.2f)
+		if (velocity.x < 0.3f && velocity.x > -0.3f)
 		{
 			animator.Play("animations/idle.csv");
 		}
 	}
-
-
-
-
-
-
 
 	// Big Mario Ani
 	if (animator.GetCurrentClipId() == "Big_Idle")

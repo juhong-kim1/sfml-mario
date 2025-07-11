@@ -11,6 +11,7 @@ protected:
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	float speed = 300.f;
+	float jumpSpeed = 500.f;
 
 public:
 	AniPlayer(const std::string& name = "");
