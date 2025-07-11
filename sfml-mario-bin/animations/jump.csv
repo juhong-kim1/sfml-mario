@@ -2,10 +2,4 @@
 Jump,10,0
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/sprite_sheet.png,0,360,120,120,0
-graphics/sprite_sheet.png,120,360,120,120,0
-graphics/sprite_sheet.png,240,360,120,120,0
-graphics/sprite_sheet.png,360,360,120,120,0
-graphics/sprite_sheet.png,480,360,120,120,0
-graphics/sprite_sheet.png,600,360,120,120,0
-graphics/sprite_sheet.png,720,360,120,120,0
+graphics/Mario.png,160,35,30,50,0
