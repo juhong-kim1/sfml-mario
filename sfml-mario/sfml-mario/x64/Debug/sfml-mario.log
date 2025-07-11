@@ -1,1 +1,7 @@
-﻿  sfml-mario.vcxproj -> C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario-bin\sfml-mario-d.exe
+﻿  AniPlayer.cpp
+  AnimationClip.cpp
+  Animator.cpp
+C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Animator.cpp(83,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SceneDev2.cpp
+  코드를 생성하고 있습니다...
+  sfml-mario.vcxproj -> C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario-bin\sfml-mario-d.exe

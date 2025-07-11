@@ -2,4 +2,4 @@
 Jump,10,0
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/Mario.png,160,35,30,50,0
+graphics/characters.gif,355,40,17,20,0

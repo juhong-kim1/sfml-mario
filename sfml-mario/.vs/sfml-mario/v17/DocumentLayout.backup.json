@@ -3,6 +3,54 @@
   "WorkspaceRootPath": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:AniPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\AnimationClip.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\Animator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\InputMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:AniPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\InputMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Framework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\Framework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Scenes\\SceneDev1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Scenes\\SceneDev2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\rapidcsv.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\rapidcsv.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\Animator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:Framework\\AnimationClip.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D790EBBE-2902-48B5-8C5E-33480702EB74}|sfml-mario.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -18,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,7 +78,163 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InputMgr.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.cpp",
+              "RelativeDocumentMoniker": "Framework\\InputMgr.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.cpp",
+              "RelativeToolTip": "Framework\\InputMgr.cpp",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T05:14:21.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InputMgr.h",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.h",
+              "RelativeDocumentMoniker": "Framework\\InputMgr.h",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\InputMgr.h",
+              "RelativeToolTip": "Framework\\InputMgr.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAcwBkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-11T04:47:45.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AniPlayer.h",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.h",
+              "RelativeDocumentMoniker": "AniPlayer.h",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.h",
+              "RelativeToolTip": "AniPlayer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-11T04:33:47.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Framework.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Framework.cpp",
+              "RelativeDocumentMoniker": "Framework\\Framework.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Framework.cpp",
+              "RelativeToolTip": "Framework\\Framework.cpp",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T04:10:47.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AnimationClip.h",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.h",
+              "RelativeDocumentMoniker": "Framework\\AnimationClip.h",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.h",
+              "RelativeToolTip": "Framework\\AnimationClip.h",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-11T03:59:06.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AniPlayer.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.cpp",
+              "RelativeDocumentMoniker": "AniPlayer.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\AniPlayer.cpp",
+              "RelativeToolTip": "AniPlayer.cpp",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAIgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T02:39:15.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "rapidcsv.h",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\rapidcsv.h",
+              "RelativeDocumentMoniker": "Framework\\rapidcsv.h",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\rapidcsv.h",
+              "RelativeToolTip": "Framework\\rapidcsv.h",
+              "ViewState": "AgIAAMwGAAAAAAAAAAAlwNwGAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-11T04:02:29.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SceneDev2.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev2.cpp",
+              "RelativeDocumentMoniker": "Scenes\\SceneDev2.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev2.cpp",
+              "RelativeToolTip": "Scenes\\SceneDev2.cpp",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T02:40:34.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SceneDev1.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev1.cpp",
+              "RelativeDocumentMoniker": "Scenes\\SceneDev1.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Scenes\\SceneDev1.cpp",
+              "RelativeToolTip": "Scenes\\SceneDev1.cpp",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADAAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T02:40:16.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Animator.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.cpp",
+              "RelativeDocumentMoniker": "Framework\\Animator.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.cpp",
+              "RelativeToolTip": "Framework\\Animator.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T02:38:57.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Animator.h",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.h",
+              "RelativeDocumentMoniker": "Framework\\Animator.h",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\Animator.h",
+              "RelativeToolTip": "Framework\\Animator.h",
+              "ViewState": "AgIAABEAAAAAAAAAAAAcwCEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-11T02:38:56.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AnimationClip.cpp",
+              "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.cpp",
+              "RelativeDocumentMoniker": "Framework\\AnimationClip.cpp",
+              "ToolTip": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\Framework\\AnimationClip.cpp",
+              "RelativeToolTip": "Framework\\AnimationClip.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-11T02:38:51.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "stdafx.h",
               "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\stdafx.h",
               "RelativeDocumentMoniker": "stdafx.h",
@@ -42,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\KGA\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git_hub\\sfml-mario\\sfml-mario\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
@@ -50,8 +254,7 @@
               "RelativeToolTip": "main.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-11T00:58:55.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T00:58:55.282Z"
             }
           ]
         }

@@ -56,6 +56,8 @@ void AniPlayer::Init()
 			std::cout << "??" << std::endl;
 		}
 	);
+
+	body.setScale({2.5f, 2.5f});
 }
 
 void AniPlayer::Release()
@@ -81,11 +83,12 @@ void AniPlayer::Update(float dt)
 		h = InputMgr::GetAxis(Axis::Horizontal);
 		velocity.x = h * speed;
 	}
-	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Space))
+	if (InputMgr::GetKey(sf::Keyboard::Space))
 	{
 		isGrounded = false;
-		velocity.y = -250.f;
+		velocity.y = -300.f;
 		animator.Play("animations/jump.csv");
+		
 	}
 	if (!isGrounded)
 	{
@@ -102,7 +105,7 @@ void AniPlayer::Update(float dt)
 
 	if (h != 0.f)
 	{
-		SetScale(h > 0.f ? sf::Vector2f(1.0f, 1.0) : sf::Vector2f(- 1.f, 1.0f));
+		SetScale(h > 0.f ? sf::Vector2f(2.5f, 2.5f) : sf::Vector2f(- 2.5f, 2.5f));
 	}
 
 	// Ani
@@ -131,6 +134,64 @@ void AniPlayer::Update(float dt)
 			animator.Play("animations/run.csv");
 		}
 	}
+	if (velocity.x > 0 && InputMgr::GetKey(sf::Keyboard::Left))
+
+
+
+	// Big Mario Ani
+	if (animator.GetCurrentClipId() == "Big_Idle")
+	{
+		if (h != 0.f)
+		{
+			animator.Play("animations/big_run.csv");
+		}
+	}
+	else if (animator.GetCurrentClipId() == "Big_Run")
+	{
+		if (h == 0.f)
+		{
+			animator.Play("animations/big_idle.csv");
+		}
+	}
+	else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
+	{
+		if (h == 0.f)
+		{
+			animator.Play("animations/big_idle.csv");
+		}
+		else
+		{
+			animator.Play("animations/big_run.csv");
+		}
+	}
+
+	// Power Mario Ani
+	if (animator.GetCurrentClipId() == "Big_Idle")
+	{
+		if (h != 0.f)
+		{
+			animator.Play("animations/big_run.csv");
+		}
+	}
+	else if (animator.GetCurrentClipId() == "Big_Run")
+	{
+		if (h == 0.f)
+		{
+			animator.Play("animations/big_idle.csv");
+		}
+	}
+	else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
+	{
+		if (h == 0.f)
+		{
+			animator.Play("animations/big_idle.csv");
+		}
+		else
+		{
+			animator.Play("animations/big_run.csv");
+		}
+	}
+
 }
 
 void AniPlayer::Draw(sf::RenderWindow& window)

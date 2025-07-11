@@ -1,0 +1,5 @@
+ID,FPS,"LoopType (0: Single, 1: Loop)		",,,
+big_Idle,10,"1	",,,
+"				",,,,,
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/characters.gif,0,40,34,57,0

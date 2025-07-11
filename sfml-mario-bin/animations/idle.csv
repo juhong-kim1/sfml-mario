@@ -2,4 +2,4 @@ ID,FPS,"LoopType (0: Single, 1: Loop)		",,,
 Idle,10,"1	",,,
 "				",,,,,
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/Mario.png,0,40,34,57,0
+graphics/characters.gif,275,40,15,20,0

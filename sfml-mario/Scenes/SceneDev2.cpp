@@ -9,21 +9,27 @@ SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 
 void SceneDev2::Init()
 {
-	texIds.push_back("graphics/Mario.png");
+	texIds.push_back("graphics/characters.gif");
+	texIds.push_back("graphics/Sky.png");
+
+
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
 	ANI_CLIP_MGR.Load("animations/jump.csv");
+	ANI_CLIP_MGR.Load("animations/big_idle.csv");
+	ANI_CLIP_MGR.Load("animations/big_run.csv");
+	ANI_CLIP_MGR.Load("animations/big_jump.csv");
 
-	TextGo* go = new TextGo("fonts/DS-DIGIT.ttf");
+	/*TextGo* go = new TextGo("fonts/DS-DIGIT.ttf");
 	go->SetString("Dev 2");
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);
 	go->sortingLayer = SortingLayers::UI;
-	go->sortingOrder = 0;
+	go->sortingOrder = 0;*/
 
-	AddGameObject(go);
+	//AddGameObject(go);
 
 	AddGameObject(new AniPlayer());
 

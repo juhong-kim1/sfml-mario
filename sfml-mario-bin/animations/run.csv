@@ -2,6 +2,6 @@
 Run,10,1
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/Mario.png,34,40,30,57,0
-graphics/Mario.png,68,40,30,57,0
-graphics/Mario.png,102,40,30,57,0
+graphics/characters.gif,290,40,15,20,0
+graphics/characters.gif,305,40,15,20,0
+graphics/characters.gif,320,40,15,20,0
