@@ -1,39 +1,24 @@
 ﻿  AniPlayer.cpp
   AnimationClip.cpp
   Animator.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\stdafx.h(14,10): error C1083: 포함 파일을 열 수 없습니다. 'SFML/Graphics.hpp': No such file or directory
+C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Animator.cpp(83,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Framework.cpp
-  (소스 파일 'AniPlayer.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\AnimationClip.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Animator.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Framework.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   GameObject.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\GameObject.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   HitBox.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\HitBox.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   InputMgr.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\InputMgr.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   Scene.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Scene.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   SceneMgr.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\SceneMgr.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   SoundMgr.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\SoundMgr.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   SpriteGo.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\SpriteGo.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   TextGo.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\TextGo.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   Utils.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Utils.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Utils.cpp(266,16): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Utils.cpp(293,16): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Variables.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Framework\Variables.cpp(1,10): error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
   main.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\stdafx.h(14,10): error C1083: 포함 파일을 열 수 없습니다. 'SFML/Graphics.hpp': No such file or directory
-  (소스 파일 'main.cpp'을(를) 컴파일하는 중)
-  
+  SceneDev1.cpp
+C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\Scenes\SceneDev1.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  SceneDev2.cpp
   stdafx.cpp
-C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario\stdafx.h(14,10): error C1083: 포함 파일을 열 수 없습니다. 'SFML/Graphics.hpp': No such file or directory
-  (소스 파일 'stdafx.cpp'을(를) 컴파일하는 중)
-  
   코드를 생성하고 있습니다...
+  sfml-mario.vcxproj -> C:\Users\KGA\OneDrive\바탕 화면\git_hub\sfml-mario\sfml-mario-bin\sfml-mario-d.exe
