@@ -7,10 +7,12 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 
-	sf::Vector2f gravity = { 0.f, 700.f };
+	sf::Vector2f gravity = { 0.f, 30000.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
+	sf::Vector2f velocityJump = { 0.f, 0.f };
 	bool isGrounded = true;
 	float speed = 300.f;
+	
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;
 

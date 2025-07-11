@@ -88,28 +88,26 @@ void AniPlayer::Update(float dt)
 
 	if (InputMgr::GetKey(sf::Keyboard::Space))
 	{
-		currentJumpTime += dt;
-
-		animator.Play("animations/jump.csv");
 		if (currentJumpTime < maxJumpTime)
 		{
+			currentJumpTime += dt;
 			isGrounded = false;
-			velocity.y = -300.f;
+			velocity.y = -1200.f;
+
 			animator.Play("animations/jump.csv");
 		}
 	}
-	
-
 	if (!isGrounded)
 	{
 		velocity += gravity * dt;
 	}
 	position += velocity * dt;
-	if (position.y > 0.f)
+	if (position.y >= 0.f)
 	{
 		velocity.y = 0.f;
 		position.y = 0.f;
 		isGrounded = true;
+		currentJumpTime = 0;
 	}
 	SetPosition(position);
 
