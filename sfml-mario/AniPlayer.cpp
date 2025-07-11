@@ -71,6 +71,8 @@ void AniPlayer::Reset()
 
 	animator.Play("animations/idle.csv");
 	SetOrigin(Origins::BC);
+
+	currentJumpTime = 0;
 }
 
 void AniPlayer::Update(float dt)
@@ -83,12 +85,16 @@ void AniPlayer::Update(float dt)
 		h = InputMgr::GetAxis(Axis::Horizontal);
 		velocity.x = h * speed;
 	}
+
 	if (InputMgr::GetKey(sf::Keyboard::Space))
 	{
-		isGrounded = false;
-		velocity.y = -300.f;
-		animator.Play("animations/jump.csv");
-		
+		currentJumpTime += dt;
+		if (currentJumpTime < maxJumpTime)
+		{
+			isGrounded = false;
+			velocity.y = -300.f;
+			animator.Play("animations/jump.csv");
+		}
 	}
 	if (!isGrounded)
 	{
