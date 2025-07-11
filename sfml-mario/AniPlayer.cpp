@@ -118,6 +118,24 @@ void AniPlayer::Update(float dt)
 	}
 	else if (animator.GetCurrentClipId() == "Run")
 	{
+		if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+		{
+			animator.Play("animations/stop.csv");
+
+			if (h < 0.f)
+			{
+				animator.Play("animations/run.csv");
+			}
+		}
+		if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+		{
+			animator.Play("animations/stop.csv");
+
+			if (h > 0.f)
+			{
+				animator.Play("animations/run.csv");
+			}
+		}
 		if (h == 0.f)
 		{
 			animator.Play("animations/idle.csv");
@@ -134,7 +152,17 @@ void AniPlayer::Update(float dt)
 			animator.Play("animations/run.csv");
 		}
 	}
-	if (velocity.x > 0 && InputMgr::GetKey(sf::Keyboard::Left))
+	if (animator.GetCurrentClipId() == "Stop")
+	{
+		if (velocity.x < 0.2f && velocity.x > -0.2f)
+		{
+			animator.Play("animations/idle.csv");
+		}
+	}
+
+
+
+
 
 
 

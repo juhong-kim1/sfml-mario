@@ -18,6 +18,7 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
 	ANI_CLIP_MGR.Load("animations/jump.csv");
+	ANI_CLIP_MGR.Load("animations/stop.csv");
 	ANI_CLIP_MGR.Load("animations/big_idle.csv");
 	ANI_CLIP_MGR.Load("animations/big_run.csv");
 	ANI_CLIP_MGR.Load("animations/big_jump.csv");

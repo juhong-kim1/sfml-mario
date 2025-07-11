@@ -1,4 +1,3 @@
-# Visual Studio 관련
 .vs/
 *.user
 *.suo
