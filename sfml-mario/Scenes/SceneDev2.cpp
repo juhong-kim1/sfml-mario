@@ -38,7 +38,10 @@ void SceneDev2::Init()
 	background->sortingLayer = SortingLayers::Background;
 
 	AddGameObject(background);
-	AddGameObject(new AniPlayer());
+
+	player = new AniPlayer();
+
+	AddGameObject(player);
 	AddGameObject(new SpriteGo("graphics/GroundBlock.png"));
 
 	Scene::Init();
@@ -59,6 +62,11 @@ void SceneDev2::Enter()
 void SceneDev2::Update(float dt)
 {
 	Scene::Update(dt);
+
+	if (player != nullptr)
+	{
+		worldView.setCenter(player->GetPosition());
+	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
