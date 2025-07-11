@@ -51,7 +51,7 @@ void SceneDev2::Enter()
 	uiView.setSize(size);
 	uiView.setCenter(center);
 	worldView.setSize(size);
-	worldView.setCenter({ 0.f, 20.f });
+	worldView.setCenter({ 0.f, 120.f });
 
 	Scene::Enter();
 }

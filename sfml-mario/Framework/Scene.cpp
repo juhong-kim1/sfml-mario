@@ -37,6 +37,10 @@ void Scene::Enter()
 	FONT_MGR.Load(fontIds);
 	SOUNDBUFFER_MGR.Load(soundIds);
 
+	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
+	worldView.setSize(windowSize);
+	worldView.setCenter(windowSize * 0.5f);
+
 	for (auto obj : gameObjects)
 	{
 		obj->Reset();

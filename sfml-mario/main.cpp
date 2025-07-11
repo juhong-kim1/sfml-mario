@@ -2,7 +2,7 @@
 
 int main()
 {
-    FRAMEWORK.Init(1280, 720, "Super Mario Bros");
+    FRAMEWORK.Init(850, 480, "Super Mario Bros 1985");
     FRAMEWORK.Do();
     FRAMEWORK.Release();
 

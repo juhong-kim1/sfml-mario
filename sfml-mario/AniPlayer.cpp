@@ -58,7 +58,7 @@ void AniPlayer::Init()
 	);
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 400.f });
+	SetPosition({ 100.f, 417.f });      //블럭 충돌처리 하면 수정
 }
 
 void AniPlayer::Release()
@@ -103,10 +103,10 @@ void AniPlayer::Update(float dt)
 		velocity += gravity * dt;
 	}
 	position += velocity * dt;
-	if (position.y >= 400.f)
+	if (position.y >= 417.f)             //블럭 충돌처리 하면 수정
 	{
-		velocity.y = 400.f;
-		position.y = 400.f;
+		velocity.y = 417.f;
+		position.y = 417.f;
 		isGrounded = true;
 		currentJumpTime = 0;
 	}
