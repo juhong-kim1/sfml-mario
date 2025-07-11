@@ -57,7 +57,8 @@ void AniPlayer::Init()
 		}
 	);
 
-	body.setScale({2.5f, 2.5f});
+	body.setScale({ 1.f, 1.f });
+	SetPosition({ 100.f, 400.f });
 }
 
 void AniPlayer::Release()
@@ -102,18 +103,21 @@ void AniPlayer::Update(float dt)
 		velocity += gravity * dt;
 	}
 	position += velocity * dt;
-	if (position.y >= 0.f)
+	if (position.y >= 400.f)
 	{
-		velocity.y = 0.f;
-		position.y = 0.f;
+		velocity.y = 400.f;
+		position.y = 400.f;
 		isGrounded = true;
 		currentJumpTime = 0;
 	}
 	SetPosition(position);
 
+
+
+
 	if (h != 0.f)
 	{
-		SetScale(h > 0.f ? sf::Vector2f(2.5f, 2.5f) : sf::Vector2f(- 2.5f, 2.5f));
+		SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(- 1.f, 1.f));
 	}
 
 	// Ani

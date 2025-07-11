@@ -2,6 +2,6 @@
 Run,10,1
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/characters.gif,290,40,15,20,0
-graphics/characters.gif,305,40,15,20,0
-graphics/characters.gif,320,40,15,20,0
+graphics/characters2x.png,580,80,30,40,0
+graphics/characters2x.png,610,80,30,40,0
+graphics/characters2x.png,640,80,30,40,0

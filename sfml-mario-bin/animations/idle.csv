@@ -2,4 +2,4 @@ ID,FPS,"LoopType (0: Single, 1: Loop)		",,,
 Idle,10,"1	",,,
 "				",,,,,
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/characters.gif,275,40,15,20,0
+graphics/characters2x.png,550,80,30,40,0

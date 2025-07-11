@@ -2,6 +2,7 @@
 #include "SceneDev2.h"
 #include "TextGo.h"
 #include "AniPlayer.h"
+#include "SpriteGo.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -9,11 +10,13 @@ SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 
 void SceneDev2::Init()
 {
-	texIds.push_back("graphics/characters.gif");
-	texIds.push_back("graphics/Sky.png");
-
+	texIds.push_back("graphics/temporary_background2x.png");
+	texIds.push_back("graphics/characters2x.png");
+	texIds.push_back("graphics/GroundBlock.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
+
+
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
@@ -31,8 +34,12 @@ void SceneDev2::Init()
 	go->sortingOrder = 0;*/
 
 	//AddGameObject(go);
+	SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
+	background->sortingLayer = SortingLayers::Background;
 
+	AddGameObject(background);
 	AddGameObject(new AniPlayer());
+	AddGameObject(new SpriteGo("graphics/GroundBlock.png"));
 
 	Scene::Init();
 }
@@ -44,7 +51,7 @@ void SceneDev2::Enter()
 	uiView.setSize(size);
 	uiView.setCenter(center);
 	worldView.setSize(size);
-	worldView.setCenter({ 0.f, -200.f });
+	worldView.setCenter({ 0.f, 20.f });
 
 	Scene::Enter();
 }
