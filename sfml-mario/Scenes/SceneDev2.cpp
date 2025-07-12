@@ -12,7 +12,7 @@ void SceneDev2::Init()
 {
 	texIds.push_back("graphics/temporary_background2x.png");
 	texIds.push_back("graphics/characters2x.png");
-	texIds.push_back("graphics/GroundBlock.png");
+	texIds.push_back("graphics/GroundBlock2x.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
 
@@ -42,7 +42,7 @@ void SceneDev2::Init()
 	player = new AniPlayer();
 
 	AddGameObject(player);
-	AddGameObject(new SpriteGo("graphics/GroundBlock.png"));
+	AddGameObject(new SpriteGo("graphics/GroundBlock2x.png"));
 
 	Scene::Init();
 }
@@ -68,8 +68,4 @@ void SceneDev2::Update(float dt)
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
-	{
-		SCENE_MGR.ChangeScene(SceneIds::Dev1);
-	}
 }
