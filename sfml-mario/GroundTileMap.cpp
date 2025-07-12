@@ -8,8 +8,6 @@ GroundTileMap::GroundTileMap(const std::string& name)
 
 void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 {
-    int groundTileCount = 0;
-
     cellCount = count;
     cellSize = size;
     va.clear();
@@ -35,20 +33,25 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
         { 0.f, 32.f },
     };
 
-    for (int i = 0; i < count.y; ++i) {
-        for (int j = 0; j < count.x; ++j) {
-            int texIndex = (i == count.y - 1) ? 1 : 0;
+    for (int i = 0; i < count.y; ++i)
+	{
+        for (int j = 0; j < count.x; ++j)
+		{
+			int texIndex = 0;
 
-			if (texIndex == 1) {
-				groundTileCount++;
+			if (i >= count.y - 2)
+			{
+				texIndex = 1;
 			}
+
 
             int quadIndex = i * count.x + j;
 
             tileTypes[quadIndex] = texIndex;
             sf::Vector2f quadPos(j * size.x, i * size.y);
 
-            for (int k = 0; k < 4; ++k) {
+            for (int k = 0; k < 4; ++k)
+			{
                 int vertexIndex = quadIndex * 4 + k;
 
                 va[vertexIndex].position = quadPos + posOffset[k];
@@ -126,7 +129,8 @@ bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
 	int x = static_cast<int>(localPos.x / cellSize.x);
 	int y = static_cast<int>(localPos.y / cellSize.y);
 
-	if (x < 0 || y < 0 || x >= cellCount.x || y >= cellCount.y) {
+	if (x < 0 || y < 0 || x >= cellCount.x || y >= cellCount.y)
+	{
 		return false;
 	}
 
@@ -145,7 +149,6 @@ void GroundTileMap::Init()
 {
 	sortingLayer = SortingLayers::Background;
 	sortingOrder = 0;
-	//Set({ 50, 15 }, { 32.f, 32.f });
 }
 
 void GroundTileMap::SetMapSize(int width, int height, float cellWidth, float cellHeight)
