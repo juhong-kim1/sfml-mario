@@ -63,9 +63,9 @@ void SceneDev2::Update(float dt)
 {
 	Scene::Update(dt);
 
-	if (player != nullptr)
+	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x)
 	{
-		worldView.setCenter(player->GetPosition());
+		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
