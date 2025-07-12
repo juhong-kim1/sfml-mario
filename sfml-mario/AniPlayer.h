@@ -15,7 +15,8 @@ protected:
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f velocityJump = { 0.f, 0.f };
 	bool isGrounded = true;
-	float speed = 250.f;
+	//float speed = 250.f;
+	float speed = 500.f;
 	
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;

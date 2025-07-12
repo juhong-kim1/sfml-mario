@@ -63,6 +63,7 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 
 	CreateHole(69, 13, 2, 2);
 	CreateHole(86, 13, 3, 2);
+    CreateHole(153, 13, 2, 2);
 
     CreatePipe(28, 2);
     CreatePipe(38, 3);

@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class AniPlayer;
+class Block;
 
 class SceneDev2 : public Scene
 {
@@ -16,6 +17,7 @@ public:
 	void Init() override;
 	void Enter() override;
 	void Update(float dt) override;
-
+	void AddQuestionBlock(std::string name, float x, float y);
+	void AddGeneralBlock(std::string name, float x, float y);
 };
 

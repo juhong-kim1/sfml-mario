@@ -41,3 +41,9 @@ enum class TileType
 	PipeBody,
 	Stair,
 };
+
+enum class BlockType
+{
+	GeneralBlock,
+	QuestionBlock,
+};
