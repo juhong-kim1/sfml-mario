@@ -56,10 +56,32 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 
                 va[vertexIndex].position = quadPos + posOffset[k];
                 va[vertexIndex].texCoords = texCoords[k];
-                va[vertexIndex].color = (texIndex == 0) ? sf::Color::Transparent : sf::Color::White;
+				va[vertexIndex].color = (texIndex == 0) ? sf::Color::Transparent : sf::Color::White;
             }
         }
     }
+
+	CreateHole(69, 13, 2, 2);
+	CreateHole(86, 13, 3, 2);
+
+}
+
+void GroundTileMap::CreateHole(int startX, int startY, int width, int height)
+{
+	for (int y = startY; y < startY + height; ++y)
+	{
+		for (int x = startX; x < startX + width; ++x)
+		{
+			int quadIndex = y * cellCount.x + x;
+			tileTypes[quadIndex] = 0;
+
+			for (int k = 0; k < 4; ++k)
+			{
+				int vertexIndex = quadIndex * 4 + k;
+				va[vertexIndex].color = sf::Color::Transparent;
+			}
+		}
+	}
 }
 
 void GroundTileMap::UpdateTransform()
@@ -140,7 +162,7 @@ bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
 
 float GroundTileMap::GetGroundHeight()
 {
-	return (cellCount.y - 1) * cellSize.y + position.y;
+	return (cellCount.y - 2) * cellSize.y + position.y;
 }
 
 
