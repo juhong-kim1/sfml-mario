@@ -1,9 +1,22 @@
 #include "stdafx.h"
 #include "AniPlayer.h"
+#include "HitBox.h"
+#include "GroundTileMap.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name)
 {
+}
+
+bool AniPlayer::CheckBorder(const sf::Vector2f pos)
+{
+	sf::FloatRect localBounds = body.getLocalBounds();
+	sf::Transformable temp;
+	temp.setPosition(pos);
+	hitBox.UpdateTransform(temp, localBounds);
+
+	sf::FloatRect wallet(300, 300, 100, 100);
+	return hitBox.rect.getGlobalBounds().intersects(wallet);
 }
 
 void AniPlayer::SetPosition(const sf::Vector2f& pos)
@@ -216,9 +229,12 @@ void AniPlayer::Update(float dt)
 		}
 	}
 
+	hitBox.UpdateTransform(body, body.getLocalBounds());
+
 }
 
 void AniPlayer::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	hitBox.Draw(window);
 }

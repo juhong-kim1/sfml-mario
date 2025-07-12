@@ -18,8 +18,10 @@ public:
 	virtual ~GroundTileMap() = default;
 
 	void Set(const sf::Vector2i& count, const sf::Vector2f& size);
-	void RemoveTile(int x, int y);
 	void CreateHole(int startX, int startY, int width, int height);
+	void CreatePipe(int x, int height);
+	void CreateStairs(int startX, int maxHeight);
+	void CreateReverseStairs(int startX, int maxHeight);
 	void UpdateTransform();
 
 	void SetPosition(const sf::Vector2f& pos) override;

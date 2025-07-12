@@ -1,5 +1,9 @@
 #pragma once
 #include "Animator.h"
+#include "HitBox.h"
+
+class HitBox;
+class GroundTileMap;
 
 class AniPlayer : public GameObject
 {
@@ -16,10 +20,14 @@ protected:
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;
 
+	HitBox hitBox;
+
 
 public:
 	AniPlayer(const std::string& name = "");
 	~AniPlayer() = default;
+
+	bool CheckBorder(const sf::Vector2f pos);
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -33,4 +41,9 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	const HitBox& GetHitBox() const
+	{
+		return hitBox;
+	}
 };

@@ -37,11 +37,11 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 	{
         for (int j = 0; j < count.x; ++j)
 		{
-			int texIndex = 0;
+			int texIndex = static_cast<int>(TileType::Empty);
 
 			if (i >= count.y - 2)
 			{
-				texIndex = 1;
+				texIndex = static_cast<int>(TileType::Ground);
 			}
 
 
@@ -56,13 +56,30 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 
                 va[vertexIndex].position = quadPos + posOffset[k];
                 va[vertexIndex].texCoords = texCoords[k];
-				va[vertexIndex].color = (texIndex == 0) ? sf::Color::Transparent : sf::Color::White;
+				va[vertexIndex].color = (texIndex == static_cast<int>(TileType::Empty)) ? sf::Color::Transparent : sf::Color::White;
             }
         }
     }
 
 	CreateHole(69, 13, 2, 2);
 	CreateHole(86, 13, 3, 2);
+
+    CreatePipe(28, 2);
+    CreatePipe(38, 3);
+    CreatePipe(46, 4);
+    CreatePipe(57, 4);
+    CreatePipe(163, 2);
+    CreatePipe(179, 2);
+
+    CreateStairs(134, 4);
+    CreateStairs(148, 4);
+    CreateStairs(149, 4);
+    CreateStairs(181, 8);
+    CreateStairs(182, 8);
+
+    CreateReverseStairs(140, 4);
+    CreateReverseStairs(155, 4);
+
 
 }
 
@@ -82,6 +99,164 @@ void GroundTileMap::CreateHole(int startX, int startY, int width, int height)
 			}
 		}
 	}
+}
+
+void GroundTileMap::CreatePipe(int x, int height)
+{
+     int startY = cellCount.y - 2 - height;
+
+    for (int y = startY + 1; y < cellCount.y - 2; ++y)
+    {
+        if (x >= 0 && x < cellCount.x && y >= 0 && y < cellCount.y)
+        {
+            int quadIndex = y * cellCount.x + x;
+            tileTypes[quadIndex] = static_cast<int>(TileType::PipeBody);
+
+            sf::Vector2f texCoords[4] = {
+                {0.f, 288.f},
+                {32.f, 288.f},
+                {32.f, 320.f},
+                {0.f, 320.f}
+            };
+
+            for (int k = 0; k < 4; ++k)
+            {
+                int vertexIndex = quadIndex * 4 + k;
+                va[vertexIndex].texCoords = texCoords[k];
+                va[vertexIndex].color = sf::Color::White;
+            }
+        }
+
+        if (x + 1 >= 0 && x + 1 < cellCount.x && y >= 0 && y < cellCount.y)
+        {
+            int quadIndex = y * cellCount.x + (x + 1);
+            tileTypes[quadIndex] = static_cast<int>(TileType::PipeBody);
+
+
+            sf::Vector2f texCoords[4] = {
+                {32.f, 288.f},
+                {64.f, 288.f},
+                {64.f, 320.f},
+                {32.f, 320.f}
+            };
+
+            for (int k = 0; k < 4; ++k)
+            {
+                int vertexIndex = quadIndex * 4 + k;
+                va[vertexIndex].texCoords = texCoords[k];
+                va[vertexIndex].color = sf::Color::White;
+            }
+        }
+    }
+
+        if (x >= 0 && x < cellCount.x && startY >= 0 && startY < cellCount.y)
+        {
+            int quadIndex = startY * cellCount.x + x;
+            tileTypes[quadIndex] = static_cast<int>(TileType::PipeHead);
+
+            sf::Vector2f texCoords[4] = {
+                {0.f, 256.f},
+                {32.f, 256.f},
+                {32.f, 288.f},
+                {0.f, 288.f}
+            };
+
+            for (int k = 0; k < 4; ++k)
+            {
+                int vertexIndex = quadIndex * 4 + k;
+                va[vertexIndex].texCoords = texCoords[k];
+                va[vertexIndex].color = sf::Color::White;
+            }
+        }
+ 
+
+   
+        if (x + 1 >= 0 && x + 1 < cellCount.x && startY >= 0 && startY < cellCount.y)
+        {
+            int quadIndex = startY * cellCount.x + (x + 1);
+            tileTypes[quadIndex] = static_cast<int>(TileType::PipeHead);
+
+            sf::Vector2f texCoords[4] = {
+                {32.f, 256.f},
+                {64.f, 256.f},
+                {64.f, 288.f},
+                {32.f, 288.f}
+            };
+
+            for (int k = 0; k < 4; ++k)
+            {
+                int vertexIndex = quadIndex * 4 + k;
+                va[vertexIndex].texCoords = texCoords[k];
+                va[vertexIndex].color = sf::Color::White;
+            }
+        }
+    
+}
+
+void GroundTileMap::CreateStairs(int startX, int maxHeight)
+{
+    for (int i = 0; i < maxHeight; ++i)
+    {
+        int stepHeight = i + 1;
+        int stepY = cellCount.y - 2 - stepHeight;
+
+        for (int y = stepY; y < cellCount.y - 2; ++y)
+        {
+            int stairX = startX + i;
+            if (stairX >= 0 && stairX < cellCount.x && y >= 0 && y < cellCount.y)
+            {
+                int quadIndex = y * cellCount.x + stairX;
+                tileTypes[quadIndex] = static_cast<int>(TileType::Stair);
+
+                sf::Vector2f texCoords[4] = {
+                    {0.f, 32.f},
+                    {32.f, 32.f},
+                    {32.f, 64.f},
+                    {0.f, 64.f}
+                };
+
+                for (int k = 0; k < 4; ++k)
+                {
+                    int vertexIndex = quadIndex * 4 + k;
+                    va[vertexIndex].texCoords = texCoords[k];
+                    va[vertexIndex].color = sf::Color::White;
+                }
+            }
+        }
+    }
+}
+
+void GroundTileMap::CreateReverseStairs(int startX, int maxHeight)
+{
+    for (int i = 0; i < maxHeight; ++i)
+    {
+        int stepHeight = maxHeight - i;
+        int stepY = cellCount.y - 2 - stepHeight;
+
+        for (int y = stepY; y < cellCount.y - 2; ++y)
+        {
+            int stairX = startX + i;
+            if (stairX >= 0 && stairX < cellCount.x && y >= 0 && y < cellCount.y)
+            {
+                int quadIndex = y * cellCount.x + stairX;
+                tileTypes[quadIndex] = static_cast<int>(TileType::Stair);
+
+                sf::Vector2f texCoords[4] = {
+                    {0.f, 32.f},
+                    {32.f, 32.f},
+                    {32.f, 64.f},
+                    {0.f, 64.f}
+                };
+
+                for (int k = 0; k < 4; ++k)
+                {
+                    int vertexIndex = quadIndex * 4 + k;
+                    va[vertexIndex].texCoords = texCoords[k];
+                    va[vertexIndex].color = sf::Color::White;
+                }
+            }
+        }
+    }
 }
 
 void GroundTileMap::UpdateTransform()

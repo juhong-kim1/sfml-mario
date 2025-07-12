@@ -32,3 +32,12 @@ enum class Sides
 	Right,
 	None,
 };
+
+enum class TileType
+{
+	Empty,
+	Ground,
+	PipeHead,
+	PipeBody,
+	Stair,
+};
