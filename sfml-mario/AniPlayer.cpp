@@ -93,7 +93,7 @@ void AniPlayer::Update(float dt)
 		{
 			currentJumpTime += dt;
 			isGrounded = false;
-			velocity.y = -300.f;
+			velocity.y = -220.f;
 
 			animator.Play("animations/jump.csv");
 		}
