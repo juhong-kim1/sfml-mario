@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AniPlayer.cpp" />
+    <ClCompile Include="BackGroundElements.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
     <ClCompile Include="Framework\Animator.cpp" />
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AniPlayer.h" />
+    <ClInclude Include="BackGroundElements.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
     <ClInclude Include="Framework\Animator.h" />

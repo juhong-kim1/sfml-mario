@@ -5,6 +5,7 @@
 #include "SpriteGo.h"
 #include "GroundTileMap.h"
 #include "Block.h"
+#include "BackgroundElements.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -12,13 +13,20 @@ SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 
 void SceneDev2::Init()
 {
+	texIds.push_back("graphics/background2.png");
 	texIds.push_back("graphics/temporary_background2x.png");
+	texIds.push_back("graphics/Bush1.png");
+	texIds.push_back("graphics/Bush2.png");
+	texIds.push_back("graphics/Bush3.png");
+	texIds.push_back("graphics/Cloud1.png");
+	texIds.push_back("graphics/Cloud2.png");
+	texIds.push_back("graphics/Cloud3.png");
+	texIds.push_back("graphics/Hill1.png");
+	texIds.push_back("graphics/Hill2.png");
 	texIds.push_back("graphics/characters2x.png");
 	texIds.push_back("graphics/tiles2x.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
-
-
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
@@ -28,12 +36,55 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/big_run.csv");
 	ANI_CLIP_MGR.Load("animations/big_jump.csv");
 
-	
+	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
+	background->sortingLayer = SortingLayers::Background;
+	AddGameObject(background);*/
 
-
-	SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
+	SpriteGo* background = new SpriteGo("graphics/background2.png");
 	background->sortingLayer = SortingLayers::Background;
 	AddGameObject(background);
+
+	float hill1Y = 422.f;
+	float hill2Y = 442.f;
+	float bushY = 432.f;
+
+	AddHill("", 0.f, hill2Y, "graphics/Hill2.png");
+	AddBush("", 368.f, bushY, "graphics/Bush3.png");
+	AddHill("", 512.f, hill1Y, "graphics/Hill1.png");
+	AddBush("", 752.f, bushY, "graphics/Bush1.png");
+	AddBush("", 1328.f, bushY, "graphics/Bush2.png");
+	AddHill("", 1536.f, hill2Y, "graphics/Hill2.png");
+	AddBush("", 1904.f, bushY, "graphics/Bush3.png");
+	AddHill("", 2048.f, hill1Y, "graphics/Hill1.png");
+	AddBush("", 2288.f, bushY, "graphics/Bush1.png");
+	AddBush("", 2864.f, bushY, "graphics/Bush2.png");
+	AddHill("", 3072.f, hill2Y, "graphics/Hill2.png");
+	AddBush("", 3440.f, bushY, "graphics/Bush3.png");
+	AddHill("", 3584.f, hill1Y, "graphics/Hill1.png");
+	AddBush("", 3824.f, bushY, "graphics/Bush1.png");
+	AddBush("", 4400.f, bushY, "graphics/Bush2.png");
+	AddHill("", 4608.f, hill2Y, "graphics/Hill2.png");
+	AddBush("", 5040.f, bushY, "graphics/Bush1.png");
+	AddHill("", 5120.f, hill1Y, "graphics/Hill1.png");
+	AddBush("", 5360.f, bushY, "graphics/Bush1.png");
+	AddHill("", 6144.f, hill2Y, "graphics/Hill2.png");
+
+	AddCloud("", 604.f, 128.f, "graphics/Cloud1.png");
+	AddCloud("", 880.f, 144.f, "graphics/Cloud3.png");
+	AddCloud("", 1200.f,102.f, "graphics/Cloud2.png");
+	AddCloud("", 1800.f, 140.f, "graphics/Cloud1.png");
+	AddCloud("", 2148.f, 102.f, "graphics/Cloud1.png");
+	AddCloud("", 2400.f, 148.f, "graphics/Cloud3.png");
+	AddCloud("", 2700.f, 114.f, "graphics/Cloud2.png");
+	AddCloud("", 3340.f, 132.f, "graphics/Cloud1.png");
+	AddCloud("", 3732.f, 116.f, "graphics/Cloud1.png");
+	AddCloud("", 3974.f, 128.f, "graphics/Cloud3.png");
+	AddCloud("", 4300.f, 114.f, "graphics/Cloud2.png");
+	AddCloud("", 4900.f, 128.f, "graphics/Cloud1.png");
+	AddCloud("", 5200.f, 102.f, "graphics/Cloud1.png");
+	AddCloud("", 5550.f, 116.f, "graphics/Cloud3.png");
+	AddCloud("", 5900.f, 128.f, "graphics/Cloud1.png");
+	AddCloud("", 6260.f, 144.f, "graphics/Cloud1.png");
 
 	AddQuestionBlock("Question", 512.f, 288.f);  // 나중에 이름 제거
 	AddQuestionBlock("Question", 672.f, 288.f);
@@ -129,4 +180,31 @@ void SceneDev2::AddGeneralBlock(std::string name, float x, float y)
 	Block* block = new Block(name, BlockType::GeneralBlock);
 	block->SetPosition({ x, y });
 	AddGameObject(block);
+}
+
+void SceneDev2::AddBush(std::string name, float x, float y, std::string texId)
+{
+	BackGroundElements* bush = new BackGroundElements(name);
+	bush->SetTexture(texId);
+	bush->SetPosition({ x, y });
+	bush->sortingLayer = SortingLayers::Background;
+	AddGameObject(bush);
+}
+
+void SceneDev2::AddCloud(std::string name, float x, float y, std::string texId)
+{
+	BackGroundElements* cloud = new BackGroundElements(name);
+	cloud->SetTexture(texId);
+	cloud->SetPosition({ x, y });
+	cloud->sortingLayer = SortingLayers::Background;
+	AddGameObject(cloud);
+}
+
+void SceneDev2::AddHill(std::string name, float x, float y, std::string texId)
+{
+	BackGroundElements* hill = new BackGroundElements(name);
+	hill->SetTexture(texId);
+	hill->SetPosition({ x, y });
+	hill->sortingLayer = SortingLayers::Background;
+	AddGameObject(hill);
 }
