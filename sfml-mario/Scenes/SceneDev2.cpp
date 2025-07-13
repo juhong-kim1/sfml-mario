@@ -139,6 +139,7 @@ void SceneDev2::Init()
 	AddGameObject(groundMap);
 
 	player = new AniPlayer();
+	player->SetGroundMap(groundMap);
 	AddGameObject(player);
 
 	Scene::Init();

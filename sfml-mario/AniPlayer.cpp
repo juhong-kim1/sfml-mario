@@ -8,16 +8,16 @@ AniPlayer::AniPlayer(const std::string& name)
 {
 }
 
-bool AniPlayer::CheckBorder(const sf::Vector2f pos)
-{
-	sf::FloatRect localBounds = body.getLocalBounds();
-	sf::Transformable temp;
-	temp.setPosition(pos);
-	hitBox.UpdateTransform(temp, localBounds);
-
-	sf::FloatRect wallet(300, 300, 100, 100);
-	return hitBox.rect.getGlobalBounds().intersects(wallet);
-}
+//bool AniPlayer::CheckBorder(const sf::Vector2f pos)
+//{
+//	sf::FloatRect localBounds = body.getLocalBounds();
+//	sf::Transformable temp;
+//	temp.setPosition(pos);
+//	hitBox.UpdateTransform(temp, localBounds);
+//
+//	sf::FloatRect wallet(300, 300, 100, 100);
+//	return hitBox.rect.getGlobalBounds().intersects(wallet);
+//}
 
 void AniPlayer::SetPosition(const sf::Vector2f& pos)
 {
@@ -71,7 +71,7 @@ void AniPlayer::Init()
 	);
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 417.f });      //블럭 충돌처리 하면 수정
+	SetPosition({ 100.f, 417.f });
 }
 
 void AniPlayer::Release()
@@ -116,13 +116,16 @@ void AniPlayer::Update(float dt)
 		velocity += gravity * dt;
 	}
 	position += velocity * dt;
-	if (position.y >= 417.f)             //블럭 충돌처리 하면 수정
-	{
-		velocity.y = 417.f;
-		position.y = 417.f;
-		isGrounded = true;
-		currentJumpTime = 0;
-	}
+	//if (position.y >= 417.f)             //블럭 충돌처리 하면 수정
+	//{
+	//	velocity.y = 417.f;
+	//	position.y = 417.f;
+	//	isGrounded = true;
+	//	currentJumpTime = 0;
+	//}
+
+	isWallCehck();
+	isGroundedCheck();
 	SetPosition(position);
 
 
@@ -237,4 +240,88 @@ void AniPlayer::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 	hitBox.Draw(window);
+}
+
+sf::FloatRect AniPlayer::GetHitBoxBottom() const
+{
+	sf::FloatRect globalBounds = body.getGlobalBounds();
+	return sf::FloatRect(globalBounds.left +4.f, globalBounds.top + globalBounds.height -4.f, globalBounds.width -8.f, 4.f);
+}
+
+sf::FloatRect AniPlayer::GetHitBoxTop() const
+{
+	sf::FloatRect globalBounds = body.getGlobalBounds();
+
+	return sf::FloatRect(globalBounds.left + 2.f, globalBounds.top, globalBounds.width - 4.f, 4.f);
+}
+
+sf::FloatRect AniPlayer::GetHitBoxLeft() const
+{
+	sf::FloatRect globalBounds = body.getGlobalBounds();
+
+	return sf::FloatRect(globalBounds.left, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+}
+
+sf::FloatRect AniPlayer::GetHitBoxRight() const
+{
+	sf::FloatRect globalBounds = body.getGlobalBounds();
+
+	return sf::FloatRect(globalBounds.left + globalBounds.width - 4.f, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+}
+
+void AniPlayer::isGroundedCheck()
+{
+	if (!ground)
+	{
+		return;
+	}
+
+	sf::FloatRect bottomBox = GetHitBoxBottom();
+
+	if (velocity.y >= 0)
+	{
+
+		bool foundGround = false;
+
+		for (float i = bottomBox.left; i < bottomBox.left + bottomBox.width; ++i)
+		{
+			if (ground->IsGroundAt({ i, bottomBox.top + bottomBox.height }))
+			{
+				float groundY = ground->GetGroundHeight();
+				position.y = groundY;
+				velocity.y = 0;
+				isGrounded = true;
+				currentJumpTime = 0;
+				foundGround = true;
+				return;
+			}
+		}
+		if (!foundGround)
+		{
+			isGrounded = false;
+		}
+
+	}
+}
+
+void AniPlayer::isWallCehck()
+{
+	if (!ground) return;
+
+	if (velocity.x > 0)
+	{
+		sf::FloatRect rightBox = GetHitBoxRight();
+		if (ground->IsWallAt({ rightBox.left + rightBox.width, rightBox.top + rightBox.height / 2 }))
+		{
+			velocity.x = 0;
+		}
+	}
+	else if (velocity.x < 0)
+	{
+		sf::FloatRect leftBox = GetHitBoxLeft();
+		if (ground->IsWallAt({ leftBox.left, leftBox.top + leftBox.height / 2 }))
+		{
+			velocity.x = 0;
+		}
+	}
 }

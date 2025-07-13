@@ -10,13 +10,14 @@ class AniPlayer : public GameObject
 protected:
 	sf::Sprite body;
 	Animator animator;
+	GroundTileMap* ground = nullptr;
 
 	sf::Vector2f gravity = { 0.f, 700.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f velocityJump = { 0.f, 0.f };
 	bool isGrounded = true;
-	//float speed = 250.f;
-	float speed = 500.f;
+	float speed = 220.f;
+	//float speed = 500.f;
 	
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;
@@ -28,7 +29,7 @@ public:
 	AniPlayer(const std::string& name = "");
 	~AniPlayer() = default;
 
-	bool CheckBorder(const sf::Vector2f pos);
+	//bool CheckBorder(const sf::Vector2f pos);
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -42,6 +43,15 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	sf::FloatRect GetHitBoxBottom() const;
+	sf::FloatRect GetHitBoxTop() const;
+	sf::FloatRect GetHitBoxLeft() const;
+	sf::FloatRect GetHitBoxRight() const;
+
+	void isGroundedCheck();
+	void isWallCehck();
+	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
 	const HitBox& GetHitBox() const
 	{

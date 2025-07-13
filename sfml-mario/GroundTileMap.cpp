@@ -318,7 +318,9 @@ bool GroundTileMap::IsWallAt(const sf::Vector2f& worldPos)
 		return true;
 	}
 	int index = y * cellCount.x + x;
-	return tileTypes[index] == 3;
+	return (tileTypes[index] == static_cast<int>(TileType::PipeHead) ||
+        tileTypes[index] == static_cast<int>(TileType::PipeBody) ||
+        tileTypes[index] == static_cast<int>(TileType::Stair));
 }
 
 bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
@@ -333,7 +335,9 @@ bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
 	}
 
 	int index = y * cellCount.x + x;
-	return tileTypes[index] == 1;
+	return (tileTypes[index] == static_cast<int>(TileType::Ground) || tileTypes[index] == static_cast<int>(TileType::PipeHead) ||
+        tileTypes[index] == static_cast<int>(TileType::PipeBody) ||
+        tileTypes[index] == static_cast<int>(TileType::Stair));
 }
 
 float GroundTileMap::GetGroundHeight()
