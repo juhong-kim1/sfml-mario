@@ -19,6 +19,10 @@ public:
 	void SetScale(const sf::Vector2f& s) override;
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
+	sf::FloatRect GetGlobalBounds() const
+	{
+		return block.getGlobalBounds();
+	}
 
 
 	// GameObject을(를) 통해 상속됨

@@ -1,23 +1,14 @@
-#include "stdafx.h"
+癤�#include "stdafx.h"
 #include "AniPlayer.h"
 #include "HitBox.h"
 #include "GroundTileMap.h"
+#include "SceneDev2.h"
+#include "Block.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name)
 {
 }
-
-//bool AniPlayer::CheckBorder(const sf::Vector2f pos)
-//{
-//	sf::FloatRect localBounds = body.getLocalBounds();
-//	sf::Transformable temp;
-//	temp.setPosition(pos);
-//	hitBox.UpdateTransform(temp, localBounds);
-//
-//	sf::FloatRect wallet(300, 300, 100, 100);
-//	return hitBox.rect.getGlobalBounds().intersects(wallet);
-//}
 
 void AniPlayer::SetPosition(const sf::Vector2f& pos)
 {
@@ -56,20 +47,6 @@ void AniPlayer::Init()
 {
 	animator.SetTarget(&body);
 
-	animator.AddEvent("Idle", 0,
-		[]()
-		{
-			//std::cout << "!!" << std::endl;
-		}
-	);
-
-	animator.AddEvent("Idle", 0,
-		[]()
-		{
-			//std::cout << "??" << std::endl;
-		}
-	);
-
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 417.f });
 }
@@ -94,11 +71,10 @@ void AniPlayer::Update(float dt)
 	animator.Update(dt);
 
 	float h = 0.f;
-	if (isGrounded)
-	{
-		h = InputMgr::GetAxis(Axis::Horizontal);
-		velocity.x = h * speed;
-	}
+
+	h = InputMgr::GetAxis(Axis::Horizontal);
+	velocity.x = h * speed;
+
 
 	if (InputMgr::GetKey(sf::Keyboard::Space))
 	{
@@ -106,34 +82,27 @@ void AniPlayer::Update(float dt)
 		{
 			currentJumpTime += dt;
 			isGrounded = false;
-			velocity.y = -220.f;
-
+			velocity.y = -250.f;
 			animator.Play("animations/jump.csv");
 		}
 	}
+
 	if (!isGrounded)
 	{
 		velocity += gravity * dt;
 	}
-	position += velocity * dt;
-	//if (position.y >= 417.f)             //블럭 충돌처리 하면 수정
-	//{
-	//	velocity.y = 417.f;
-	//	position.y = 417.f;
-	//	isGrounded = true;
-	//	currentJumpTime = 0;
-	//}
 
 	isWallCehck();
+	isBlockCheck();
+
+	position += velocity * dt;
+
 	isGroundedCheck();
 	SetPosition(position);
 
-
-
-
 	if (h != 0.f)
 	{
-		SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(- 1.f, 1.f));
+		SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(-1.f, 1.f));
 	}
 
 	// Ani
@@ -233,7 +202,6 @@ void AniPlayer::Update(float dt)
 	}
 
 	hitBox.UpdateTransform(body, body.getLocalBounds());
-
 }
 
 void AniPlayer::Draw(sf::RenderWindow& window)
@@ -245,27 +213,24 @@ void AniPlayer::Draw(sf::RenderWindow& window)
 sf::FloatRect AniPlayer::GetHitBoxBottom() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-	return sf::FloatRect(globalBounds.left +4.f, globalBounds.top + globalBounds.height -4.f, globalBounds.width -8.f, 4.f);
+	return sf::FloatRect(globalBounds.left + 4.f, globalBounds.top + globalBounds.height - 4.f, globalBounds.width - 8.f, 4.f);
 }
 
 sf::FloatRect AniPlayer::GetHitBoxTop() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-
 	return sf::FloatRect(globalBounds.left + 2.f, globalBounds.top, globalBounds.width - 4.f, 4.f);
 }
 
 sf::FloatRect AniPlayer::GetHitBoxLeft() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-
 	return sf::FloatRect(globalBounds.left, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
 }
 
 sf::FloatRect AniPlayer::GetHitBoxRight() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-
 	return sf::FloatRect(globalBounds.left + globalBounds.width - 4.f, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
 }
 
@@ -278,17 +243,33 @@ void AniPlayer::isGroundedCheck()
 
 	sf::FloatRect bottomBox = GetHitBoxBottom();
 
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (scene)
+	{
+		auto blocks = scene->GetBlocks();
+
+		for (auto* block : blocks)
+		{
+			sf::FloatRect blockBounds = block->GetGlobalBounds();
+			if (bottomBox.intersects(blockBounds))
+			{
+				return;
+			}
+		}
+	}
+
 	if (velocity.y >= 0)
 	{
-
 		bool foundGround = false;
 
 		for (float i = bottomBox.left; i < bottomBox.left + bottomBox.width; ++i)
 		{
 			if (ground->IsGroundAt({ i, bottomBox.top + bottomBox.height }))
 			{
-				float groundY = ground->GetGroundHeight();
-				position.y = groundY;
+				int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
+				float tileTopY = tileY * 32.f;
+
+				position.y = tileTopY;
 				velocity.y = 0;
 				isGrounded = true;
 				currentJumpTime = 0;
@@ -300,7 +281,6 @@ void AniPlayer::isGroundedCheck()
 		{
 			isGrounded = false;
 		}
-
 	}
 }
 
@@ -322,6 +302,50 @@ void AniPlayer::isWallCehck()
 		if (ground->IsWallAt({ leftBox.left, leftBox.top + leftBox.height / 2 }))
 		{
 			velocity.x = 0;
+		}
+	}
+}
+
+void AniPlayer::isBlockCheck()
+{
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (!scene) return;
+
+	auto blocks = scene->GetBlocks();
+
+	for (auto* block : blocks)
+	{
+		sf::FloatRect blockBounds = block->GetGlobalBounds();
+
+		sf::FloatRect bottomBox = GetHitBoxBottom();
+		sf::FloatRect topBox = GetHitBoxTop();
+		sf::FloatRect leftBox = GetHitBoxLeft();
+		sf::FloatRect rightBox = GetHitBoxRight();
+
+		if (velocity.y > 0 && bottomBox.intersects(blockBounds))
+		{
+
+			//position.y = blockBounds.top;
+
+			velocity.y = 0;
+			isGrounded = true;
+			currentJumpTime = 0;
+			return;
+		}
+		if (velocity.y < 0 && topBox.intersects(blockBounds))
+		{
+			velocity.y = 0;
+			return;
+		}
+		if (velocity.x > 0 && rightBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
+		}
+		if (velocity.x < 0 && leftBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
 		}
 	}
 }

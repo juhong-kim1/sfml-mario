@@ -32,14 +32,9 @@ public:
 
 	bool IsWallAt(const sf::Vector2f& worldPos);
 	bool IsGroundAt(const sf::Vector2f& worldPos);
-	float GetGroundHeight();
 
 	// GameObject을(를) 통해 상속됨
 	void Init() override;
-
-	void SetMapSize(int width, int height, float cellWidth, float cellHeight);
-
-	void SetMapSize(int width, int height);
 
 	void Release() override;
 

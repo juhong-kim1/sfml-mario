@@ -174,6 +174,7 @@ void SceneDev2::AddQuestionBlock(std::string name, float x, float y)
 	Block* block = new Block(name, BlockType::QuestionBlock);
 	block->SetPosition({ x, y });
 	AddGameObject(block);
+	blocks.push_back(block);
 }
 
 void SceneDev2::AddGeneralBlock(std::string name, float x, float y)
@@ -181,6 +182,7 @@ void SceneDev2::AddGeneralBlock(std::string name, float x, float y)
 	Block* block = new Block(name, BlockType::GeneralBlock);
 	block->SetPosition({ x, y });
 	AddGameObject(block);
+	blocks.push_back(block);
 }
 
 void SceneDev2::AddBush(std::string name, float x, float y, std::string texId)

@@ -310,17 +310,19 @@ void GroundTileMap::SetOrigin(Origins preset)
 
 bool GroundTileMap::IsWallAt(const sf::Vector2f& worldPos)
 {
-	sf::Vector2f localPos = transform.getInverse().transformPoint(worldPos);
-	int x = static_cast<int>(localPos.x / cellSize.x);
-	int y = static_cast<int>(localPos.y / cellSize.y);
-	if (x < 0 || y < 0 || x >= cellCount.x || y >= cellCount.y)
-	{
-		return true;
-	}
-	int index = y * cellCount.x + x;
-	return (tileTypes[index] == static_cast<int>(TileType::PipeHead) ||
-        tileTypes[index] == static_cast<int>(TileType::PipeBody) ||
-        tileTypes[index] == static_cast<int>(TileType::Stair));
+    sf::Vector2f localPos = transform.getInverse().transformPoint(worldPos);
+    int x = static_cast<int>(localPos.x / cellSize.x);
+    int y = static_cast<int>(localPos.y / cellSize.y);
+
+    if (x < 0 || y < 0 || x >= cellCount.x || y >= cellCount.y)
+    {
+        return true;
+    }
+
+    int index = y * cellCount.x + x;
+    int tileType = tileTypes[index];
+
+    return (tileType == static_cast<int>(TileType::Ground) || tileType == static_cast<int>(TileType::PipeHead) || tileType == static_cast<int>(TileType::PipeBody) || tileType == static_cast<int>(TileType::Stair));
 }
 
 bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
@@ -340,27 +342,10 @@ bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
         tileTypes[index] == static_cast<int>(TileType::Stair));
 }
 
-float GroundTileMap::GetGroundHeight()
-{
-	return (cellCount.y - 2) * cellSize.y + position.y;
-}
-
-
-
 void GroundTileMap::Init()
 {
 	sortingLayer = SortingLayers::Background;
 	sortingOrder = 0;
-}
-
-void GroundTileMap::SetMapSize(int width, int height, float cellWidth, float cellHeight)
-{
-	Set({ width, height }, { cellWidth, cellHeight });
-}
-
-void GroundTileMap::SetMapSize(int width, int height)
-{
-	SetMapSize(width, height, 32.f, 32.f);
 }
 
 void GroundTileMap::Release()
