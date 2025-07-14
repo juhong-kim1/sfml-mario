@@ -81,11 +81,7 @@ void Block::Reset()
 
 void Block::Update(float dt)
 {
-
-
-
-
-
+	BlockShakeAnimation(dt);
 }
 
 void Block::Draw(sf::RenderWindow& window)
@@ -95,9 +91,45 @@ void Block::Draw(sf::RenderWindow& window)
 
 void Block::BlockShakeAnimation(float dt)
 {
+	if (!isShaking)
+	{
+		return;
+	}
+
+	shakeCurrentTime += dt;
+
+	if (shakeCurrentTime < shakeMaxTime)
+	{
+		float shake = shakeCurrentTime / shakeMaxTime;
+
+		if (shake < 0.25f)
+		{
+			block.setPosition(originPosition + sf::Vector2f(0, -4.0f));
+		}
+		else if (shake < 0.5f)
+		{
+			block.setPosition(originPosition + sf::Vector2f(0, -8.0f));
+		}
+		else if (shake < 0.75f)
+		{
+			block.setPosition(originPosition + sf::Vector2f(0, -4.0f));
+		}
+		else
+		{
+			block.setPosition(originPosition);
+		}
+	}
+	else
+	{
+		isShaking = false;
+		block.setPosition(originPosition);
+	}
 
 }
 
 void Block::BlockShakeAnimationStart()
 {
+	isShaking = true;
+	shakeCurrentTime = 0.0f;
+	originPosition = position;
 }

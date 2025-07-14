@@ -8,7 +8,11 @@ protected:
 	sf::IntRect blockRect;
 	BlockType blocktype = BlockType::GeneralBlock;
 
-
+	bool isShaking = false;
+	float shakeCurrentTime = 0.0f;
+	float shakeMaxTime = 0.15f;
+	float shakeDistance = 2.0f;
+	sf::Vector2f originPosition;
 
 public:
 	Block(const std::string& name, BlockType type);
@@ -35,6 +39,11 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 	void BlockShakeAnimation(float dt);
 	void BlockShakeAnimationStart();
+
+	bool IsShaking() const
+	{
+		return isShaking;
+	}
 
 };
 

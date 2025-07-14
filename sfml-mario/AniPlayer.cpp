@@ -283,11 +283,15 @@ void AniPlayer::isBlockCheck()
 			currentJumpTime = 0;
 			return;
 		}
-		if (velocity.y < 0 && topBox.intersects(blockBounds))
+		if (velocity.y < 0 && topBox.intersects(blockBounds) && position.x > blockBounds.left - 4.f && position.x < blockBounds.left + blockBounds.width + 4.f)
 		{
-			velocity.y = 0;
-			block->BlockShakeAnimationStart();
-			return;
+			if (!block->IsShaking())
+			{
+				velocity.y = 0;
+				currentJumpTime = maxJumpTime;
+				block->BlockShakeAnimationStart();
+				return;
+			}
 		}
 		if (velocity.x > 0 && rightBox.intersects(blockBounds))
 		{
