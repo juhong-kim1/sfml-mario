@@ -8,6 +8,8 @@ protected:
 	sf::IntRect blockRect;
 	BlockType blocktype = BlockType::GeneralBlock;
 
+
+
 public:
 	Block(const std::string& name, BlockType type);
 	virtual ~Block() = default;
@@ -19,11 +21,11 @@ public:
 	void SetScale(const sf::Vector2f& s) override;
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
+
 	sf::FloatRect GetGlobalBounds() const
 	{
 		return block.getGlobalBounds();
 	}
-
 
 	// GameObject을(를) 통해 상속됨
 	void Init() override;
@@ -31,6 +33,8 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+	void BlockShakeAnimation(float dt);
+	void BlockShakeAnimationStart();
 
 };
 

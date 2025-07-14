@@ -153,7 +153,7 @@ void SceneDev2::Init()
 	AddEnemy("", 1300.f, 380.f);
 	AddEnemy("", 1600.f, 380.f);
 	AddEnemy("", 1664.f, 380.f);
-
+	AddEnemy("", 3000.f, 0.f);
 
 	Scene::Init();
 }
@@ -179,7 +179,10 @@ void SceneDev2::Update(float dt)
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
 
-
+	//AddEnemy("", 700.f, 380.f, 100.f);
+	//AddEnemy("", 1300.f, 380.f, 700.f);
+	//AddEnemy("", 1600.f, 380.f, 900.f);
+	//AddEnemy("", 1664.f, 380.f, 900.f);
 
 
 }
@@ -229,7 +232,12 @@ void SceneDev2::AddHill(std::string name, float x, float y, std::string texId)
 
 void SceneDev2::AddEnemy(std::string name, float x, float y)
 {
-	Enemy* enemy = new Enemy("Enemy", x, y);
-	enemy->SetGroundMapEnemy(groundMap);
-	AddGameObject(enemy);
+	
+	//if (marioPos == player->GetPosition().x)
+	//{
+		Enemy* enemy = new Enemy("Enemy", x, y);
+		enemy->SetGroundMapEnemy(groundMap);
+		AddGameObject(enemy);
+		enemy->SetActive(true);
+	//}
 }

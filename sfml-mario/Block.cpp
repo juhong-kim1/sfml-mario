@@ -76,14 +76,28 @@ void Block::Reset()
 	block.setPosition(position);
 
 	SetOrigin(Origins::TL);
-	SetScale({ 0.1f, 0.1f });
+	SetScale({ 1.f, 1.f });
 }
 
 void Block::Update(float dt)
 {
+
+
+
+
+
 }
 
 void Block::Draw(sf::RenderWindow& window)
 {
 	window.draw(block);
+}
+
+void Block::BlockShakeAnimation(float dt)
+{
+
+}
+
+void Block::BlockShakeAnimationStart()
+{
 }

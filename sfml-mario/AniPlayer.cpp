@@ -286,11 +286,7 @@ void AniPlayer::isBlockCheck()
 		if (velocity.y < 0 && topBox.intersects(blockBounds))
 		{
 			velocity.y = 0;
-
-			sf::Vector2f blockpos = block->GetPosition();
-			blockpos.y -= 10000000000000000.f;
-			block->SetPosition(blockpos);
-			
+			block->BlockShakeAnimationStart();
 			return;
 		}
 		if (velocity.x > 0 && rightBox.intersects(blockBounds))
