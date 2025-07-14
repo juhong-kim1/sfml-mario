@@ -142,9 +142,6 @@ void SceneDev2::Init()
 	AddGeneralBlock("General", 5408.f, 288.f);
 	AddGeneralBlock("General", 5472.f, 288.f);
 
-	AddEnemy("", 200.f, 300.f);
-	AddEnemy("", 400.f, 300.f);
-
 	groundMap = new GroundTileMap("GroundTileMap");
 	AddGameObject(groundMap);
 
@@ -152,7 +149,7 @@ void SceneDev2::Init()
 	player->SetGroundMap(groundMap);
 	AddGameObject(player);
 
-	Enemy* enemy2 = new Enemy("Enemy", 800.f, 0.f);
+	Enemy* enemy2 = new Enemy("Enemy", 1300.f, 0.f);
 	enemy2->SetGroundMapEnemy(groundMap);
 	AddGameObject(enemy2);
 

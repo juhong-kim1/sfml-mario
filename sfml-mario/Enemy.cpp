@@ -77,6 +77,8 @@ void Enemy::Update(float dt)
 		velocity += gravity * dt;
 	}
 
+	isWallCheckEnemy();
+	isBlockCheckEnemy();
 	isGroundedCheckEnemy();
 
 	SetPosition(position);
@@ -136,15 +138,31 @@ void Enemy::isGroundedCheckEnemy()
 
 void Enemy::isWallCheckEnemy()
 {
+	if (!ground) return;
+
+	if (velocity.x > 0)
+	{
+		sf::FloatRect hitBox = GetHitBoxEnemy();
+		if (ground->IsWallAt({ hitBox.left + hitBox.width, hitBox.top + hitBox.height / 2 }))
+		{
+			velocity.x = 0;
+		}
+	}
+	else if (velocity.x < 0)
+	{
+		sf::FloatRect hitBox = GetHitBoxEnemy();
+		if (ground->IsWallAt({ hitBox.left, hitBox.top + hitBox.height / 2 }))
+		{
+			velocity.x = 0;
+		}
+	}
 }
 
 void Enemy::isBlockCheckEnemy()
 {
 	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
 	if (!scene)
-	{
-		return;
-	}
+	{return;}
 
 	auto blocks = scene->GetBlocks();
 
@@ -157,9 +175,7 @@ void Enemy::isBlockCheckEnemy()
 
 		if (velocity.y > 0 && hitBox.intersects(blockBounds))
 		{
-
 			//position.y = blockBounds.top;
-
 			velocity.y = 0;
 			isGrounded = true;
 			return;
