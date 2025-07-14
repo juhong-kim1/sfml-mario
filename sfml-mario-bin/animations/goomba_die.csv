@@ -1,0 +1,5 @@
+ID,FPS,"LoopType (1: Single, 0: Loop)"
+Goomba_Die,10,1
+
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/characters2x.png,318,80,34,40,0

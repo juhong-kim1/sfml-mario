@@ -2,12 +2,14 @@
 #include "Scene.h"
 
 class AniPlayer;
+class Enemy;
 class Block;
 
 class SceneDev2 : public Scene
 {
 protected:
 	AniPlayer* player;
+	Enemy* enemy;
 	std::vector<Block*> blocks;
 
 public:
@@ -21,6 +23,7 @@ public:
 	void AddBush(std::string name, float x, float y, std::string texId);
 	void AddCloud(std::string name, float x, float y, std::string texId);
 	void AddHill(std::string name, float x, float y, std::string texId);
+	void AddEnemy(std::string name, float x, float y);
 	std::vector<Block*> GetBlocks() const { return blocks; }
 };
 

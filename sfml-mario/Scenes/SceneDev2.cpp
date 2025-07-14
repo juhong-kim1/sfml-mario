@@ -6,6 +6,7 @@
 #include "GroundTileMap.h"
 #include "Block.h"
 #include "BackgroundElements.h"
+#include "Enemy.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -32,9 +33,15 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/run.csv");
 	ANI_CLIP_MGR.Load("animations/jump.csv");
 	ANI_CLIP_MGR.Load("animations/stop.csv");
+
 	ANI_CLIP_MGR.Load("animations/big_idle.csv");
 	ANI_CLIP_MGR.Load("animations/big_run.csv");
 	ANI_CLIP_MGR.Load("animations/big_jump.csv");
+
+	ANI_CLIP_MGR.Load("animations/goomba_move.csv");
+	ANI_CLIP_MGR.Load("animations/goomba_die.csv");
+
+
 
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
 	background->sortingLayer = SortingLayers::Background;
@@ -48,7 +55,7 @@ void SceneDev2::Init()
 	float hill2Y = 442.f;
 	float bushY = 432.f;
 
-	AddHill("", 0.f, hill2Y, "graphics/Hill2.png");
+	AddHill("", 0.f, hill2Y, "graphics/Hill2.png");  // 나중에 이름 제거
 	AddBush("", 368.f, bushY, "graphics/Bush3.png");
 	AddHill("", 512.f, hill1Y, "graphics/Hill1.png");
 	AddBush("", 752.f, bushY, "graphics/Bush1.png");
@@ -86,7 +93,7 @@ void SceneDev2::Init()
 	AddCloud("", 5900.f, 128.f, "graphics/Cloud1.png");
 	AddCloud("", 6260.f, 144.f, "graphics/Cloud1.png");
 
-	AddQuestionBlock("Question", 512.f, 288.f);  // 나중에 이름 제거
+	AddQuestionBlock("Question", 512.f, 288.f);
 	AddQuestionBlock("Question", 672.f, 288.f);
 	AddQuestionBlock("Question", 704.f, 160.f);
 	AddQuestionBlock("Question", 736.f, 288.f);
@@ -135,12 +142,16 @@ void SceneDev2::Init()
 	AddGeneralBlock("General", 5408.f, 288.f);
 	AddGeneralBlock("General", 5472.f, 288.f);
 
+	AddEnemy("", 200.f, 300.f);
+	AddEnemy("", 400.f, 300.f);
+
 	GroundTileMap* groundMap = new GroundTileMap("GroundTileMap");
 	AddGameObject(groundMap);
 
 	player = new AniPlayer();
 	player->SetGroundMap(groundMap);
 	AddGameObject(player);
+
 
 	Scene::Init();
 }
@@ -210,4 +221,10 @@ void SceneDev2::AddHill(std::string name, float x, float y, std::string texId)
 	hill->SetPosition({ x, y });
 	hill->sortingLayer = SortingLayers::Background;
 	AddGameObject(hill);
+}
+
+void SceneDev2::AddEnemy(std::string name, float x, float y)
+{
+	Enemy* enemy = new Enemy("Enemy", x, y);
+	AddGameObject(enemy);
 }

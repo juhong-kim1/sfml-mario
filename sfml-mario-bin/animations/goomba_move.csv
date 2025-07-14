@@ -1,0 +1,10 @@
+ID,FPS,"LoopType (0: Single, 1: Loop)"
+Goomba_Move,10,1
+
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/characters2x.png,587,370,40,42,0
+graphics/characters2x.png,587,370,40,42,0
+graphics/characters2x.png,587,370,40,42,0
+graphics/characters2x.png,627,370,40,42,0
+graphics/characters2x.png,627,370,40,42,0
+graphics/characters2x.png,627,370,40,42,0

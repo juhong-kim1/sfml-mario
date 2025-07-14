@@ -12,7 +12,7 @@ protected:
 	Animator animator;
 	GroundTileMap* ground = nullptr;
 
-	sf::Vector2f gravity = { 0.f, 1500.f };
+	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f velocityJump = { 0.f, 0.f };
 	bool isGrounded = true;
