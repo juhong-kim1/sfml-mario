@@ -337,9 +337,7 @@ bool GroundTileMap::IsGroundAt(const sf::Vector2f& worldPos)
 	}
 
 	int index = y * cellCount.x + x;
-	return (tileTypes[index] == static_cast<int>(TileType::Ground) || tileTypes[index] == static_cast<int>(TileType::PipeHead) ||
-        tileTypes[index] == static_cast<int>(TileType::PipeBody) ||
-        tileTypes[index] == static_cast<int>(TileType::Stair));
+	return (tileTypes[index] == static_cast<int>(TileType::Ground) || tileTypes[index] == static_cast<int>(TileType::PipeHead) || tileTypes[index] == static_cast<int>(TileType::PipeBody) || tileTypes[index] == static_cast<int>(TileType::Stair));
 }
 
 void GroundTileMap::Init()

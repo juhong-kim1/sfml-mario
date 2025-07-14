@@ -1,8 +1,10 @@
 #pragma once
 #include "Animator.h"
 #include "GameObject.h"
+#include "HitBox.h"
 
 class GroundTileMap;
+class HitBox;
 
 class Enemy : public GameObject
 {
@@ -10,6 +12,7 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 	GroundTileMap* ground = nullptr;
+	HitBox hitBox;
 
 	float positionX = 0.f;
 	float positionY = 0.f;
@@ -17,7 +20,7 @@ protected:
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
-	float speed = 100.f;
+	float speed = -100.f;
 
 
 public:
@@ -35,4 +38,11 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void isGroundedCheckEnemy();
+	void isWallCheckEnemy();
+	void isBlockCheckEnemy();
+	void SetGroundMapEnemy(GroundTileMap* groundMap) { ground = groundMap; };
+
+	sf::FloatRect GetHitBoxEnemy() const;
 };

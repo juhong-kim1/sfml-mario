@@ -145,12 +145,16 @@ void SceneDev2::Init()
 	AddEnemy("", 200.f, 300.f);
 	AddEnemy("", 400.f, 300.f);
 
-	GroundTileMap* groundMap = new GroundTileMap("GroundTileMap");
+	groundMap = new GroundTileMap("GroundTileMap");
 	AddGameObject(groundMap);
 
 	player = new AniPlayer();
 	player->SetGroundMap(groundMap);
 	AddGameObject(player);
+
+	Enemy* enemy2 = new Enemy("Enemy", 800.f, 0.f);
+	enemy2->SetGroundMapEnemy(groundMap);
+	AddGameObject(enemy2);
 
 
 	Scene::Init();
@@ -172,12 +176,10 @@ void SceneDev2::Update(float dt)
 {
 	Scene::Update(dt);
 
-
 	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x)
 	{
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
-
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y)
@@ -226,5 +228,6 @@ void SceneDev2::AddHill(std::string name, float x, float y, std::string texId)
 void SceneDev2::AddEnemy(std::string name, float x, float y)
 {
 	Enemy* enemy = new Enemy("Enemy", x, y);
+	enemy->SetGroundMapEnemy(groundMap);
 	AddGameObject(enemy);
 }

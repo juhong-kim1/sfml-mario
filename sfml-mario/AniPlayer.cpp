@@ -92,7 +92,7 @@ void AniPlayer::Update(float dt)
 		velocity += gravity * dt;
 	}
 
-	isWallCehck();
+	isWallCheck();
 	isBlockCheck();
 
 	position += velocity * dt;
@@ -144,60 +144,6 @@ void AniPlayer::Update(float dt)
 		if (velocity.x < 0.3f && velocity.x > -0.3f)
 		{
 			animator.Play("animations/idle.csv");
-		}
-	}
-
-	// Big Mario Ani
-	if (animator.GetCurrentClipId() == "Big_Idle")
-	{
-		if (h != 0.f)
-		{
-			animator.Play("animations/big_run.csv");
-		}
-	}
-	else if (animator.GetCurrentClipId() == "Big_Run")
-	{
-		if (h == 0.f)
-		{
-			animator.Play("animations/big_idle.csv");
-		}
-	}
-	else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
-	{
-		if (h == 0.f)
-		{
-			animator.Play("animations/big_idle.csv");
-		}
-		else
-		{
-			animator.Play("animations/big_run.csv");
-		}
-	}
-
-	// Power Mario Ani
-	if (animator.GetCurrentClipId() == "Big_Idle")
-	{
-		if (h != 0.f)
-		{
-			animator.Play("animations/big_run.csv");
-		}
-	}
-	else if (animator.GetCurrentClipId() == "Big_Run")
-	{
-		if (h == 0.f)
-		{
-			animator.Play("animations/big_idle.csv");
-		}
-	}
-	else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
-	{
-		if (h == 0.f)
-		{
-			animator.Play("animations/big_idle.csv");
-		}
-		else
-		{
-			animator.Play("animations/big_run.csv");
 		}
 	}
 
@@ -284,7 +230,7 @@ void AniPlayer::isGroundedCheck()
 	}
 }
 
-void AniPlayer::isWallCehck()
+void AniPlayer::isWallCheck()
 {
 	if (!ground) return;
 

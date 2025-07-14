@@ -1,9 +1,11 @@
 #pragma once
 #include "Scene.h"
+#include "GroundTileMap.h"
 
 class AniPlayer;
 class Enemy;
 class Block;
+
 
 class SceneDev2 : public Scene
 {
@@ -11,6 +13,8 @@ protected:
 	AniPlayer* player;
 	Enemy* enemy;
 	std::vector<Block*> blocks;
+	GroundTileMap* groundMap = nullptr;
+
 
 public:
 	SceneDev2();

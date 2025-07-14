@@ -50,12 +50,12 @@ public:
 	sf::FloatRect GetHitBoxRight() const;
 
 	void isGroundedCheck();
-	void isWallCehck();
+	void isWallCheck();
 	void isBlockCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
-	const HitBox& GetHitBox() const
-	{
-		return hitBox;
-	}
+	//const HitBox& GetHitBox() const
+	//{
+	//	return hitBox;
+	//}
 };

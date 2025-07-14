@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "Enemy.h"
+#include "HitBox.h"
+#include "SceneDev2.h"
+#include "Block.h"
+#include "GroundTileMap.h"
 
 Enemy::Enemy(const std::string& name, float x, float y)
 	:GameObject(name), positionX(x), positionY(y)
@@ -65,8 +69,15 @@ void Enemy::Update(float dt)
 {
 	animator.Update(dt);
 
-	velocity.x = -speed;
-	position.x += velocity.x * dt;
+	velocity.x = speed;
+	position += velocity * dt;
+
+	if (!isGrounded)
+	{
+		velocity += gravity * dt;
+	}
+
+	isGroundedCheckEnemy();
 
 	SetPosition(position);
 }
@@ -75,3 +86,99 @@ void Enemy::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 }
+
+void Enemy::isGroundedCheckEnemy()
+{
+	if (!ground)
+	{
+		return;
+	}
+
+	sf::FloatRect hitBox = body.getGlobalBounds();
+
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (scene)
+	{
+		auto blocks = scene->GetBlocks();
+
+		for (auto* block : blocks)
+		{
+			sf::FloatRect blockBounds = block->GetGlobalBounds();
+			if (hitBox.intersects(blockBounds))
+			{
+				return;
+			}
+		}
+	}
+
+	if (velocity.y >= 0)
+	{
+		bool foundGround = false;
+
+		for (float i = hitBox.left; i < hitBox.left + hitBox.width; ++i)
+		{
+			if (ground->IsGroundAt({ i, hitBox.top + hitBox.height }))
+			{
+				position.y = 380.f;
+				velocity.y = 0;
+				isGrounded = true;
+				foundGround = true;
+				return;
+			}
+		}
+		if (!foundGround)
+		{
+			isGrounded = false;
+		}
+	}
+
+}
+
+void Enemy::isWallCheckEnemy()
+{
+}
+
+void Enemy::isBlockCheckEnemy()
+{
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (!scene)
+	{
+		return;
+	}
+
+	auto blocks = scene->GetBlocks();
+
+	for (auto* block : blocks)
+	{
+		sf::FloatRect blockBounds = block->GetGlobalBounds();
+
+		sf::FloatRect hitBox = GetHitBoxEnemy();
+
+
+		if (velocity.y > 0 && hitBox.intersects(blockBounds))
+		{
+
+			//position.y = blockBounds.top;
+
+			velocity.y = 0;
+			isGrounded = true;
+			return;
+		}
+		if (velocity.x > 0 && hitBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
+		}
+		if (velocity.x < 0 && hitBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
+		}
+	}
+}
+
+sf::FloatRect Enemy::GetHitBoxEnemy() const
+{
+	return body.getGlobalBounds();
+}
+
