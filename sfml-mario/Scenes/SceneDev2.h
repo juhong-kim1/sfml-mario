@@ -13,6 +13,7 @@ protected:
 	AniPlayer* player;
 	Enemy* enemy;
 	std::vector<Block*> blocks;
+	std::vector<Enemy*> enemies;
 	GroundTileMap* groundMap = nullptr;
 
 public:

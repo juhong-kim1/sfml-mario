@@ -153,7 +153,20 @@ void SceneDev2::Init()
 	AddEnemy("", 1300.f, 380.f);
 	AddEnemy("", 1600.f, 380.f);
 	AddEnemy("", 1664.f, 380.f);
-	AddEnemy("", 3000.f, 0.f);
+	AddEnemy("", 2600.f, 100.f);
+	AddEnemy("", 2670.f, 100.f);
+	AddEnemy("", 3100.f, 380.f);
+	AddEnemy("", 3164.f, 380.f);
+	AddEnemy("", 3664.f, 380.f);
+	AddEnemy("", 3728.f, 380.f);
+	AddEnemy("", 3900.f, 380.f);
+	AddEnemy("", 3954.f, 380.f);
+	AddEnemy("", 4028.f, 380.f);
+	AddEnemy("", 4092.f, 380.f);
+	AddEnemy("", 4028.f, 380.f);
+	AddEnemy("", 4092.f, 380.f);
+	AddEnemy("", 5560.f, 380.f);
+	AddEnemy("", 5624.f, 380.f);
 
 	Scene::Init();
 }
@@ -179,10 +192,17 @@ void SceneDev2::Update(float dt)
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
 
-	//AddEnemy("", 700.f, 380.f, 100.f);
-	//AddEnemy("", 1300.f, 380.f, 700.f);
-	//AddEnemy("", 1600.f, 380.f, 900.f);
-	//AddEnemy("", 1664.f, 380.f, 900.f);
+	for (auto* enemy : enemies)
+	{
+		if (!enemy->GetActive())
+		{
+			float distance = abs(player->GetPosition().x - enemy->GetPosition().x);
+			if (distance <= 600.f)
+			{
+				enemy->SetActive(true);
+			}
+		}
+	}
 
 
 }
@@ -232,12 +252,9 @@ void SceneDev2::AddHill(std::string name, float x, float y, std::string texId)
 
 void SceneDev2::AddEnemy(std::string name, float x, float y)
 {
-	
-	//if (marioPos == player->GetPosition().x)
-	//{
-		Enemy* enemy = new Enemy("Enemy", x, y);
-		enemy->SetGroundMapEnemy(groundMap);
-		AddGameObject(enemy);
-		enemy->SetActive(true);
-	//}
+	Enemy* enemy = new Enemy("Enemy", x, y);
+	enemy->SetGroundMapEnemy(groundMap);
+	enemy->SetActive(false);
+	AddGameObject(enemy);
+	enemies.push_back(enemy);
 }

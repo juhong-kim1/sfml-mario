@@ -20,7 +20,7 @@ protected:
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
-	float speed = -90.f;
+	float speed = -80.f;
 
 
 public:

@@ -194,6 +194,7 @@ void Enemy::isBlockCheckEnemy()
 			velocity.x = 0;
 			return;
 		}
+
 	}
 }
 
