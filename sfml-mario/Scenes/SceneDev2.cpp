@@ -149,9 +149,10 @@ void SceneDev2::Init()
 	player->SetGroundMap(groundMap);
 	AddGameObject(player);
 
-	Enemy* enemy2 = new Enemy("Enemy", 1300.f, 0.f);
-	enemy2->SetGroundMapEnemy(groundMap);
-	AddGameObject(enemy2);
+	AddEnemy("", 700.f, 380.f);
+	AddEnemy("", 1300.f, 380.f);
+	AddEnemy("", 1600.f, 380.f);
+	AddEnemy("", 1664.f, 380.f);
 
 
 	Scene::Init();
@@ -177,6 +178,10 @@ void SceneDev2::Update(float dt)
 	{
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
+
+
+
+
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y)

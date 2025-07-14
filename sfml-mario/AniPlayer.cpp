@@ -232,7 +232,10 @@ void AniPlayer::isGroundedCheck()
 
 void AniPlayer::isWallCheck()
 {
-	if (!ground) return;
+	if (!ground)
+	{
+		return;
+	}
 
 	if (velocity.x > 0)
 	{
@@ -255,7 +258,10 @@ void AniPlayer::isWallCheck()
 void AniPlayer::isBlockCheck()
 {
 	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
-	if (!scene) return;
+	if (!scene)
+	{
+		return;
+	}
 
 	auto blocks = scene->GetBlocks();
 
@@ -270,7 +276,6 @@ void AniPlayer::isBlockCheck()
 
 		if (velocity.y > 0 && bottomBox.intersects(blockBounds))
 		{
-
 			//position.y = blockBounds.top;
 
 			velocity.y = 0;
@@ -281,6 +286,11 @@ void AniPlayer::isBlockCheck()
 		if (velocity.y < 0 && topBox.intersects(blockBounds))
 		{
 			velocity.y = 0;
+
+			sf::Vector2f blockpos = block->GetPosition();
+			blockpos.y -= 10000000000000000.f;
+			block->SetPosition(blockpos);
+			
 			return;
 		}
 		if (velocity.x > 0 && rightBox.intersects(blockBounds))

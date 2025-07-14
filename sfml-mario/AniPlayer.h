@@ -54,6 +54,8 @@ public:
 	void isBlockCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
+	void hitBlock();
+
 	//const HitBox& GetHitBox() const
 	//{
 	//	return hitBox;

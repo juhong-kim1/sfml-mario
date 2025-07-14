@@ -15,7 +15,6 @@ protected:
 	std::vector<Block*> blocks;
 	GroundTileMap* groundMap = nullptr;
 
-
 public:
 	SceneDev2();
 

@@ -2,4 +2,4 @@
 Jump,10,0
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/characters2x.png,710,80,34,40,0
+graphics/characters2x.png,710,86,34,40,0

@@ -138,14 +138,17 @@ void Enemy::isGroundedCheckEnemy()
 
 void Enemy::isWallCheckEnemy()
 {
-	if (!ground) return;
+	if (!ground)
+	{
+		return;
+	}
 
 	if (velocity.x > 0)
 	{
 		sf::FloatRect hitBox = GetHitBoxEnemy();
 		if (ground->IsWallAt({ hitBox.left + hitBox.width, hitBox.top + hitBox.height / 2 }))
 		{
-			velocity.x = 0;
+			speed = -speed;
 		}
 	}
 	else if (velocity.x < 0)
@@ -153,7 +156,8 @@ void Enemy::isWallCheckEnemy()
 		sf::FloatRect hitBox = GetHitBoxEnemy();
 		if (ground->IsWallAt({ hitBox.left, hitBox.top + hitBox.height / 2 }))
 		{
-			velocity.x = 0;
+			speed = -speed;
+			//velocity.x = 0;
 		}
 	}
 }
