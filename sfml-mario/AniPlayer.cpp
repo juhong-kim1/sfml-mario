@@ -116,7 +116,7 @@ void AniPlayer::Update(float dt)
 				if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small)
 				{
 					mario = Mario::Big;
-					animator.Play("animations/get_mushroom.csv");
+					animator.Play("animations/big_idle.csv");
 
 					SetOrigin(Origins::BC);
 				}
