@@ -1,0 +1,6 @@
+ID,FPS,"LoopType (0: Single, 1: Loop)"
+Coin,10,1
+
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/items2x.png,0,172,32,32,0
+graphics/items2x.png,0,172,32,32,0

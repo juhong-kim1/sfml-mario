@@ -7,6 +7,7 @@
 #include "Block.h"
 #include "BackgroundElements.h"
 #include "Enemy.h"
+#include "Item.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -26,6 +27,7 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/Hill2.png");
 	texIds.push_back("graphics/characters2x.png");
 	texIds.push_back("graphics/tiles2x.png");
+	texIds.push_back("graphics/items2x.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
 
@@ -41,6 +43,7 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/goomba_move.csv");
 	ANI_CLIP_MGR.Load("animations/goomba_die.csv");
 
+	ANI_CLIP_MGR.Load("animations/mushroom.csv");
 
 
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
@@ -93,19 +96,19 @@ void SceneDev2::Init()
 	AddCloud("", 5900.f, 128.f, "graphics/Cloud1.png");
 	AddCloud("", 6260.f, 144.f, "graphics/Cloud1.png");
 
-	AddQuestionBlock("Question", 512.f, 288.f);
-	AddQuestionBlock("Question", 672.f, 288.f);
-	AddQuestionBlock("Question", 704.f, 160.f);
-	AddQuestionBlock("Question", 736.f, 288.f);
-	AddQuestionBlock("Question", 2496.f, 288.f);
-	AddQuestionBlock("Question", 3008.f, 160.f);
-	AddQuestionBlock("Question", 3392.f, 288.f);
-	AddQuestionBlock("Question", 3488.f, 288.f);
-	AddQuestionBlock("Question", 3488.f, 160.f);
-	AddQuestionBlock("Question", 3584.f, 288.f);
-	AddQuestionBlock("Question", 4128.f, 160.f);
-	AddQuestionBlock("Question", 4160.f, 160.f);
-	AddQuestionBlock("Question", 5440.f, 288.f);
+	AddQuestionBlock("coin1", 512.f, 288.f, ItemType::Coin);
+	AddQuestionBlock("mushroom", 672.f, 288.f, ItemType::Mushroom);
+	AddQuestionBlock("coin1", 704.f, 160.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 736.f, 288.f, ItemType::Coin);
+	AddQuestionBlock("mushroom", 2496.f, 288.f, ItemType::Mushroom);
+	AddQuestionBlock("coin1", 3008.f, 160.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 3392.f, 288.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 3488.f, 288.f, ItemType::Coin);
+	AddQuestionBlock("mushroom", 3488.f, 160.f, ItemType::Mushroom);
+	AddQuestionBlock("coin1", 3584.f, 288.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 4128.f, 160.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 4160.f, 160.f, ItemType::Coin);
+	AddQuestionBlock("coin1", 5440.f, 288.f, ItemType::Coin);
 	
 	AddGeneralBlock("General", 640.f, 288.f);
 	AddGeneralBlock("General", 704.f, 288.f);
@@ -207,12 +210,20 @@ void SceneDev2::Update(float dt)
 
 }
 
-void SceneDev2::AddQuestionBlock(std::string name, float x, float y)
+void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType blockItem)
 {
 	Block* block = new Block(name, BlockType::QuestionBlock);
-	block->SetPosition({ x, y });
+	block->SetPosition({ x , y });
 	AddGameObject(block);
 	blocks.push_back(block);
+
+	Item* item = new Item(name, blockItem);
+	item->SetPosition({ x,y });
+	item->SetActive(false);
+	AddGameObject(item);
+	items.push_back(item);
+
+	block->SetItem(item);
 }
 
 void SceneDev2::AddGeneralBlock(std::string name, float x, float y)

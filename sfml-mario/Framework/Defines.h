@@ -47,3 +47,10 @@ enum class BlockType
 	GeneralBlock,
 	QuestionBlock,
 };
+
+enum class ItemType
+{
+	Empty,
+	Coin,
+	Mushroom,
+};

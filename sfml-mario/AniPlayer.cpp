@@ -290,6 +290,7 @@ void AniPlayer::isBlockCheck()
 				velocity.y = 0;
 				currentJumpTime = maxJumpTime;
 				block->BlockShakeAnimationStart();
+				block->ReleaseItem();
 				return;
 			}
 		}

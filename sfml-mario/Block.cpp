@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Block.h"
+#include "Item.h"
+#include "sceneDev2.h"
 
 Block::Block(const std::string& name, BlockType type)
 	:GameObject(name), blocktype(type)
@@ -132,4 +134,21 @@ void Block::BlockShakeAnimationStart()
 	isShaking = true;
 	shakeCurrentTime = 0.0f;
 	originPosition = position;
+}
+
+void Block::SetItem(Item* item)
+{
+	items = item;
+}
+
+void Block::ReleaseItem()
+{
+	if (items != nullptr && !items->GetActive())
+	{
+			items->SetActive(true);
+
+			sf::Vector2f newPos = position;
+			newPos.y -= 32.f;
+			items->SetPosition(newPos);
+	}
 }

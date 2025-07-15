@@ -1,5 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "item.h"
+#include "SceneDev2.h"
+
+
 class Block : public GameObject
 {
 protected:
@@ -7,6 +11,8 @@ protected:
 	sf::Transform transform;
 	sf::IntRect blockRect;
 	BlockType blocktype = BlockType::GeneralBlock;
+
+	Item* items = nullptr;
 
 	bool isShaking = false;
 	float shakeCurrentTime = 0.0f;
@@ -44,6 +50,9 @@ public:
 	{
 		return isShaking;
 	}
+
+	void SetItem(Item* item);
+	void ReleaseItem();
 
 };
 
