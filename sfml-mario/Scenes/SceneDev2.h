@@ -31,5 +31,6 @@ public:
 	void AddEnemy(std::string name, float x, float y);
 	std::vector<Block*> GetBlocks() const { return blocks; }
 	std::vector<Item*>& GetItems() { return items; }
+	std::vector<Enemy*> GetEnemies() { return enemies; }
 };
 

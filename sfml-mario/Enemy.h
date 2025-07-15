@@ -22,6 +22,10 @@ protected:
 	bool isGrounded = true;
 	float speed = -80.f;
 
+	bool isDying = false;
+	float deathCurrentTimer = 0.0f;
+	float deathTimer = 0.5f;
+
 
 public:
 	Enemy(const std::string& name = "", float x = 0.f, float y = 0.f);
@@ -43,6 +47,8 @@ public:
 	void isWallCheckEnemy();
 	void isBlockCheckEnemy();
 	void SetGroundMapEnemy(GroundTileMap* groundMap) { ground = groundMap; };
+	void Die();
+	bool IsDying() const{ return isDying; };
 
 	sf::FloatRect GetHitBoxEnemy() const;
 };

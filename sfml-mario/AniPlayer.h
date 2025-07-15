@@ -54,6 +54,7 @@ public:
 	void isGroundedCheck();
 	void isWallCheck();
 	void isBlockCheck();
+	void isEnemyCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
 	/*void MarioGetMushroom();*/

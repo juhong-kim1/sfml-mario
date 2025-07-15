@@ -207,7 +207,7 @@ void SceneDev2::Update(float dt)
 
 	for (auto* enemy : enemies)
 	{
-		if (!enemy->GetActive())
+		if (!enemy->GetActive() && !enemy->IsDying())
 		{
 			float distance = abs(player->GetPosition().x - enemy->GetPosition().x);
 			if (distance <= 600.f)

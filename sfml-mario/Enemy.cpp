@@ -67,8 +67,24 @@ void Enemy::Reset()
 
 void Enemy::Update(float dt)
 {
-	animator.Update(dt);
+	if (!GetActive())
+	{
+		return;
+	}
 
+	if (isDying)
+	{
+		animator.Update(dt);
+		deathCurrentTimer += dt;
+
+		if (deathCurrentTimer >= deathTimer)
+		{
+			SetActive(false);
+		}
+		return;
+	}
+
+	animator.Update(dt);
 	velocity.x = speed;
 	position += velocity * dt;
 
@@ -195,6 +211,17 @@ void Enemy::isBlockCheckEnemy()
 			return;
 		}
 
+	}
+}
+
+void Enemy::Die()
+{
+	if (!isDying)
+	{
+		isDying = true;
+		deathCurrentTimer = 0.0f;
+		animator.Play("animations/goomba_die.csv");
+		velocity.x = 0;
 	}
 }
 

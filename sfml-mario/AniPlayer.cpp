@@ -4,6 +4,7 @@
 #include "GroundTileMap.h"
 #include "SceneDev2.h"
 #include "Block.h"
+#include "Enemy.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name), mario(Mario::Small)
@@ -102,6 +103,7 @@ void AniPlayer::Update(float dt)
 
 	isWallCheck();
 	isBlockCheck();
+	isEnemyCheck();
 
 	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
 	if (scene)
@@ -431,6 +433,39 @@ void AniPlayer::isBlockCheck()
 		{
 			velocity.x = 0;
 			return;
+		}
+	}
+}
+
+void AniPlayer::isEnemyCheck()
+{
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (!scene) return;
+
+	auto enemies = scene->GetEnemies();
+
+	sf::FloatRect bottomBox = GetHitBoxBottom();
+	sf::FloatRect playerBounds = body.getGlobalBounds();
+
+	for (auto* enemy : enemies)
+	{
+		if (!enemy->GetActive() || enemy->IsDying())
+		{
+			continue;
+		}
+
+		sf::FloatRect enemyBounds = enemy->GetHitBoxEnemy();
+
+		if (velocity.y > 0 && bottomBox.intersects(enemyBounds))
+		{
+			enemy->Die();
+			velocity.y = -200.f;
+			return;
+		}
+
+		else if (playerBounds.intersects(enemyBounds))
+		{
+
 		}
 	}
 }
