@@ -84,16 +84,16 @@ void AniPlayer::Update(float dt)
 	velocity.x = h * speed;
 
 
-	if (InputMgr::GetKey(sf::Keyboard::Space))
-	{
-		if (currentJumpTime < maxJumpTime)
-		{
-			currentJumpTime += dt;
-			isGrounded = false;
-			velocity.y = -250.f;
-			animator.Play("animations/jump.csv");
-		}
-	}
+	//if (InputMgr::GetKey(sf::Keyboard::Space))
+	//{
+	//	if (currentJumpTime < maxJumpTime)
+	//	{
+	//		currentJumpTime += dt;
+	//		isGrounded = false;
+	//		velocity.y = -250.f;
+	//		animator.Play("animations/jump.csv");
+	//	}
+	//}
 
 	if (!isGrounded)
 	{
@@ -157,8 +157,73 @@ void AniPlayer::Update(float dt)
 				animator.Play("animations/idle.csv");
 			}
 		}
+		if (InputMgr::GetKey(sf::Keyboard::Space))
+		{
+			if (currentJumpTime < maxJumpTime)
+			{
+				currentJumpTime += dt;
+				isGrounded = false;
+				velocity.y = -250.f;
+				animator.Play("animations/jump.csv");
+			}
+		}
+	case Mario::Big:
+		if (animator.GetCurrentClipId() == "Big_Idle")
+		{
+			if (h != 0.f)
+			{
+				animator.Play("animations/big_run.csv");
+			}
+		}
+		else if (animator.GetCurrentClipId() == "Big_Run")
+		{
+			if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+			{
+				animator.Play("animations/big_stop.csv");
+			}
+			if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+			{
+				animator.Play("animations/big_stop.csv");
+			}
+			if (h == 0.f)
+			{
+				animator.Play("animations/big_idle.csv");
+			}
+		}
+		else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
+		{
+			if (h == 0.f)
+			{
+				animator.Play("animations/big_idle.csv");
+			}
+			else
+			{
+				animator.Play("animations/big_run.csv");
+			}
+		}
+		if (animator.GetCurrentClipId() == "Big_Stop")
+		{
+			if (velocity.x < 0.3f && velocity.x > -0.3f)
+			{
+				animator.Play("animations/big_idle.csv");
+			}
+		}
+		if (InputMgr::GetKey(sf::Keyboard::Space))
+		{
+			if (currentJumpTime < maxJumpTime)
+			{
+				currentJumpTime += dt;
+				isGrounded = false;
+				velocity.y = -250.f;
+				animator.Play("animations/big_jump.csv");
+			}
+		}
+		if (InputMgr::GetKey(sf::Keyboard::S))
+		{
+			//speed 변경해야할듯?
+			animator.Play("animations/big_sitdown.csv");
+		}
 	}
-
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 }
 
