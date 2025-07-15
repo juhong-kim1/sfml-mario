@@ -17,8 +17,20 @@ protected:
 	bool isShaking = false;
 	float shakeCurrentTime = 0.0f;
 	float shakeMaxTime = 0.15f;
-	float shakeDistance = 2.0f;
 	sf::Vector2f originPosition;
+
+	bool isItemUsed = false;
+	bool isAnimateCoin = false;
+	float coinCurrentTime = 0.0;
+	float coinMaxTime = 1.f;
+	float coinDistance = 80.f;
+	sf::Vector2f originCoinPosition;
+
+	bool isAnimateMushroom = false;
+	float mushroomCurrentTime = 0.0;
+	float mushroomMaxTime = 1.f;
+	float mushroomDistance = 32.f;
+	sf::Vector2f originMushroomPosition;
 
 public:
 	Block(const std::string& name, BlockType type);
@@ -53,6 +65,11 @@ public:
 
 	void SetItem(Item* item);
 	void ReleaseItem();
+	void CoinReleaseAnimationStart(const sf::Vector2f& pos);
+	void CoinReleaseAnimation(float dt);
+	void MushroomReleaseAnimationStart(const sf::Vector2f& pos);
+	void MushroomReleaseAnimation(float dt);
+
 
 };
 

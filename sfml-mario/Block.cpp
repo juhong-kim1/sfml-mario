@@ -72,6 +72,8 @@ void Block::Reset()
 	case BlockType::QuestionBlock:
 		blockRect = { 768, 0, 32, 32 };
 		break;
+		
+
 	}
 
 	block.setTextureRect(blockRect);
@@ -84,6 +86,10 @@ void Block::Reset()
 void Block::Update(float dt)
 {
 	BlockShakeAnimation(dt);
+	CoinReleaseAnimation(dt);
+	MushroomReleaseAnimation(dt);
+
+
 }
 
 void Block::Draw(sf::RenderWindow& window)
@@ -100,7 +106,7 @@ void Block::BlockShakeAnimation(float dt)
 
 	shakeCurrentTime += dt;
 
-	if (shakeCurrentTime < shakeMaxTime)
+	if (shakeCurrentTime < shakeMaxTime && !isItemUsed)
 	{
 		float shake = shakeCurrentTime / shakeMaxTime;
 
@@ -143,13 +149,98 @@ void Block::SetItem(Item* item)
 
 void Block::ReleaseItem()
 {
-	if (items != nullptr && !items->GetActive())
+	if (items != nullptr && !items->GetActive() && !isItemUsed)
 	{
 			items->SetActive(true);
 
-			sf::Vector2f newPos = position;
-			newPos.y -= 32.f;
-			newPos.x += 2.f;
-			items->SetPosition(newPos);
+			if (blocktype == BlockType::QuestionBlock)
+			{
+				blockRect = { 864, 0, 32, 32 };
+				block.setTextureRect(blockRect);
+			}
+
+			if (items->GetItemType() == ItemType::Mushroom)
+			{
+				MushroomReleaseAnimationStart(position);
+			}
+			if (items->GetItemType() == ItemType::Coin)
+			{
+				CoinReleaseAnimationStart(position);
+			}
+	}
+}
+
+void Block::CoinReleaseAnimationStart(const sf::Vector2f& pos)
+{
+	isAnimateCoin = true;
+	coinCurrentTime = 0.0;
+	originCoinPosition = pos;
+}
+
+void Block::CoinReleaseAnimation(float dt)
+{
+	if (!isAnimateCoin)
+	{
+		return;
+	}
+
+	coinCurrentTime += dt;
+
+	if (coinCurrentTime < coinMaxTime)
+	{
+		float progress = coinCurrentTime / coinMaxTime;
+		float offsetY = 0;
+
+		if (progress < 0.5f)
+		{
+			offsetY = -(progress * 2.0f) * coinDistance;
+		}
+		else
+		{
+			offsetY = -((1.0f - progress) * 2.0f) * coinDistance;
+		}
+
+		items->SetPosition(originCoinPosition + sf::Vector2f(0, offsetY));
+	}
+	else
+	{
+		isAnimateCoin = false;
+		items->SetActive(false);
+		isItemUsed = true;
+	}
+}
+
+void Block::MushroomReleaseAnimationStart(const sf::Vector2f& pos)
+{
+	isAnimateMushroom = true;
+	mushroomCurrentTime = 0.0;
+	originMushroomPosition = pos;
+}
+
+void Block::MushroomReleaseAnimation(float dt)
+{
+	if (!isAnimateMushroom)
+	{
+		return;
+	}
+
+	mushroomCurrentTime += dt;
+
+	if (mushroomCurrentTime < mushroomMaxTime)
+	{
+		float progress = mushroomCurrentTime / mushroomMaxTime;
+		float offsetY = 0;
+
+
+		offsetY = -(progress * 2.0f) * mushroomDistance;
+
+
+		items->SetPosition(originMushroomPosition + sf::Vector2f(0, offsetY));
+	}
+	else
+	{
+		isAnimateMushroom = false;
+		items->SetActive(false);
+		isItemUsed = true;
 	}
 }

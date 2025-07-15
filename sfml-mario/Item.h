@@ -26,5 +26,10 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void startItemUp();
+
+	ItemType GetItemType() const
+	{
+		return itemType;
+	}
 };
 
