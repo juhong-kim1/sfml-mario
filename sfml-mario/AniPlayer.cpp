@@ -207,7 +207,7 @@ void AniPlayer::Update(float dt)
 			{
 				animator.Play("animations/big_idle.csv");
 			}
-		}
+		} 
 		if (InputMgr::GetKey(sf::Keyboard::Space))
 		{
 			if (currentJumpTime < maxJumpTime)

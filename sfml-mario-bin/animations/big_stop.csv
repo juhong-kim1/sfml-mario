@@ -1,5 +1,5 @@
 ID,FPS,"LoopType (0: Single, 1: Loop)		",,,
-Big_Idle,10,"1	",,,
+Big_Stop,10,"1	",,,
 "				",,,,,
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/characters2x.png,514,0,37,65,0
+graphics/characters2x.png,293,0,35,65,0

@@ -2,4 +2,4 @@ ID,FPS,"LoopType (0: Single, 1: Loop)		",,,
 Big_Sitdown,10,"1	",,,
 "				",,,,,
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/characters2x.png,468,0,42,65,0
+graphics/characters2x.png,550,20,42,45,0

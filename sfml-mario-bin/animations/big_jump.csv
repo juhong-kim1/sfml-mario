@@ -1,5 +1,5 @@
 ﻿ID,FPS,"LoopType (0: Single, 1: Loop)"
-big_Jump,10,0
+Big_Jump,10,0
 
 TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
-graphics/Mario.png,160,40,30,57,0
+graphics/characters2x.png,734,0,35,67,0
