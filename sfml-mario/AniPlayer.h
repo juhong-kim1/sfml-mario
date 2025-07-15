@@ -11,14 +11,14 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 	GroundTileMap* ground = nullptr;
-	Mario mario = Mario::Big;
+	Mario mario;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f velocityJump = { 0.f, 0.f };
 	bool isGrounded = true;
 	float speed = 220.f;
-	//float speed = 500.f;
+	//float speed = 1000.f;
 	
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;
@@ -54,6 +54,8 @@ public:
 	void isWallCheck();
 	void isBlockCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
+
+	/*void MarioGetMushroom();*/
 
 
 	//const HitBox& GetHitBox() const

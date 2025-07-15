@@ -28,6 +28,7 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/characters2x.png");
 	texIds.push_back("graphics/tiles2x.png");
 	texIds.push_back("graphics/items2x.png");
+	texIds.push_back("graphics/Castle.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
 
@@ -48,6 +49,8 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/mushroom.csv");
 	ANI_CLIP_MGR.Load("animations/coin.csv");
 
+	ANI_CLIP_MGR.Load("animations/get_mushroom.csv");
+
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
 	background->sortingLayer = SortingLayers::Background;
 	AddGameObject(background);*/
@@ -55,6 +58,11 @@ void SceneDev2::Init()
 	SpriteGo* background = new SpriteGo("graphics/background2.png");
 	background->sortingLayer = SortingLayers::Background;
 	AddGameObject(background);
+
+	SpriteGo* castle = new SpriteGo("graphics/Castle.png");
+	castle->SetPosition({ 6528.f, 416.f });
+	castle->SetOrigin(Origins::BC);
+	AddGameObject(castle);
 
 	float hill1Y = 422.f;
 	float hill2Y = 442.f;

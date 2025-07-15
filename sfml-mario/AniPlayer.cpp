@@ -6,7 +6,7 @@
 #include "Block.h"
 
 AniPlayer::AniPlayer(const std::string& name)
-	: GameObject(name)
+	: GameObject(name), mario(Mario::Small)
 {
 }
 
@@ -167,6 +167,7 @@ void AniPlayer::Update(float dt)
 				animator.Play("animations/jump.csv");
 			}
 		}
+		break;
 	case Mario::Big:
 		if (animator.GetCurrentClipId() == "Big_Idle")
 		{
@@ -223,7 +224,17 @@ void AniPlayer::Update(float dt)
 			//speed 변경해야할듯?
 			animator.Play("animations/big_sitdown.csv");
 		}
+		break;
 	}
+
+	//if (InputMgr::GetKey(sf::Keyboard::Q))
+	//{
+	//	MarioGetMushroom();
+	//}
+
+
+
+
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 }
 
@@ -383,3 +394,9 @@ void AniPlayer::isBlockCheck()
 		}
 	}
 }
+
+//void AniPlayer::MarioGetMushroom()
+//{
+//	animator.Play("animations/get_mushroom.csv");
+//	mario = Mario::Big;
+//}
