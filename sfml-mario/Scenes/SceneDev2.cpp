@@ -44,7 +44,7 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/goomba_die.csv");
 
 	ANI_CLIP_MGR.Load("animations/mushroom.csv");
-
+	ANI_CLIP_MGR.Load("animations/coin.csv");
 
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
 	background->sortingLayer = SortingLayers::Background;
@@ -218,7 +218,7 @@ void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType bl
 	blocks.push_back(block);
 
 	Item* item = new Item(name, blockItem);
-	item->SetPosition({ x,y });
+	item->SetPosition({ x ,y });
 	item->SetActive(false);
 	AddGameObject(item);
 	items.push_back(item);

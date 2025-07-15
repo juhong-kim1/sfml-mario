@@ -67,13 +67,15 @@ void Item::Reset()
 	}
 	if (itemType == ItemType::Coin)
 	{
-		animator.Play("animations/mushroom.csv");
+		animator.Play("animations/coin.csv");
 	}
 
 }
 
 void Item::Update(float dt)
 {
+	animator.Update(dt);
+
 }
 
 void Item::Draw(sf::RenderWindow& window)

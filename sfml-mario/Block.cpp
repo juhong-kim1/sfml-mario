@@ -149,6 +149,7 @@ void Block::ReleaseItem()
 
 			sf::Vector2f newPos = position;
 			newPos.y -= 32.f;
+			newPos.x += 2.f;
 			items->SetPosition(newPos);
 	}
 }
