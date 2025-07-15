@@ -54,3 +54,10 @@ enum class ItemType
 	Coin,
 	Mushroom,
 };
+
+enum class Mario
+{
+	Small,
+	Big,
+	White,
+};

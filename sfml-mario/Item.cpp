@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Item.h"
+#include "GroundTileMap.h"
+#include "SceneDev2.h"
+#include "Block.h"
 
 Item::Item(const std::string& name)
 	: GameObject(name)
@@ -76,6 +79,23 @@ void Item::Update(float dt)
 {
 	animator.Update(dt);
 
+	if (itemType == ItemType::Mushroom && activeMushroom)
+	{
+		velocity.x = speed;
+		position += velocity * dt;
+
+		if (!isGrounded)
+		{
+			velocity += gravity * dt;
+		}
+
+		isWallCheckMushroom();
+		isBlockCheckMushroom();
+		isGroundedCheckMushroom();
+	}
+
+	SetPosition(position);
+
 }
 
 void Item::Draw(sf::RenderWindow& window)
@@ -85,4 +105,119 @@ void Item::Draw(sf::RenderWindow& window)
 
 void Item::startItemUp()
 {
+}
+
+void Item::isGroundedCheckMushroom()
+{
+	if (!ground)
+	{
+		return;
+	}
+
+	sf::FloatRect hitBox = item.getGlobalBounds();
+
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (scene)
+	{
+		auto blocks = scene->GetBlocks();
+
+		for (auto* block : blocks)
+		{
+			sf::FloatRect blockBounds = block->GetGlobalBounds();
+			if (hitBox.intersects(blockBounds))
+			{
+				return;
+			}
+		}
+	}
+
+	if (velocity.y >= 0)
+	{
+		bool foundGround = false;
+
+		for (float i = hitBox.left; i < hitBox.left + hitBox.width; ++i)
+		{
+			if (ground->IsGroundAt({ i, hitBox.top + hitBox.height }))
+			{
+				position.y = 390.f;
+				velocity.y = 0;
+				isGrounded = true;
+				foundGround = true;
+				return;
+			}
+		}
+		if (!foundGround)
+		{
+			isGrounded = false;
+		}
+	}
+}
+
+void Item::isWallCheckMushroom()
+{
+	if (!ground)
+	{
+		return;
+	}
+
+	if (velocity.x > 0)
+	{
+		sf::FloatRect hitBox = GetHitBoxMushroom();
+		if (ground->IsWallAt({ hitBox.left + hitBox.width, hitBox.top + hitBox.height / 2 }))
+		{
+			speed = -speed;
+		}
+	}
+	else if (velocity.x < 0)
+	{
+		sf::FloatRect hitBox = GetHitBoxMushroom();
+		if (ground->IsWallAt({ hitBox.left, hitBox.top + hitBox.height / 2 }))
+		{
+			speed = -speed;
+			//velocity.x = 0;
+		}
+	}
+}
+
+void Item::isBlockCheckMushroom()
+{
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (!scene)
+	{
+		return;
+	}
+
+	auto blocks = scene->GetBlocks();
+
+	for (auto* block : blocks)
+	{
+		sf::FloatRect blockBounds = block->GetGlobalBounds();
+
+		sf::FloatRect hitBox = GetHitBoxMushroom();
+
+
+		if (velocity.y > 0 && hitBox.intersects(blockBounds))
+		{
+			//position.y = blockBounds.top;
+			velocity.y = 0;
+			isGrounded = true;
+			return;
+		}
+		if (velocity.x > 0 && hitBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
+		}
+		if (velocity.x < 0 && hitBox.intersects(blockBounds))
+		{
+			velocity.x = 0;
+			return;
+		}
+
+	}
+}
+
+sf::FloatRect Item::GetHitBoxMushroom() const
+{
+	return item.getGlobalBounds();
 }

@@ -1,12 +1,24 @@
 #pragma once
 #include "Animator.h"
 #include "GameObject.h"
+#include "GroundTileMap.h"
+
+class GroundTileMan;
+
 class Item : public GameObject
 {
 protected:
 	sf::Sprite item;
 	Animator animator;
 	ItemType itemType;
+
+	GroundTileMap* ground = nullptr;
+
+	sf::Vector2f gravity = { 0.f, 1100.f };
+	sf::Vector2f velocity = { 0.f, 0.f };
+	bool isGrounded = true;
+	float speed = 80.f;
+	bool activeMushroom = false;
 
 public:
 	Item(const std::string& name = "");
@@ -31,5 +43,14 @@ public:
 	{
 		return itemType;
 	}
+
+	void isGroundedCheckMushroom();
+	void isWallCheckMushroom();
+	void isBlockCheckMushroom();
+	void SetGroundMapMushroom(GroundTileMap* groundMap) { ground = groundMap; };
+
+	sf::FloatRect GetHitBoxMushroom() const;
+
+	void ActiveMushroom() {	activeMushroom = true; }
 };
 

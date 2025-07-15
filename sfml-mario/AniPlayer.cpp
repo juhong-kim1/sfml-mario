@@ -60,7 +60,15 @@ void AniPlayer::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 
-	animator.Play("animations/idle.csv");
+	switch (mario)
+	{
+	case Mario::Small:
+		animator.Play("animations/idle.csv");
+		break;
+	case Mario::Big:
+		animator.Play("animations/big_idle.csv");
+		break;
+	}
 	SetOrigin(Origins::BC);
 
 	currentJumpTime = 0;
@@ -106,44 +114,48 @@ void AniPlayer::Update(float dt)
 	}
 
 	// Ani
-	if (animator.GetCurrentClipId() == "Idle")
+	switch (mario)
 	{
-		if (h != 0.f)
+	case Mario::Small:
+		if (animator.GetCurrentClipId() == "Idle")
 		{
-			animator.Play("animations/run.csv");
+			if (h != 0.f)
+			{
+				animator.Play("animations/run.csv");
+			}
 		}
-	}
-	else if (animator.GetCurrentClipId() == "Run")
-	{
-		if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+		else if (animator.GetCurrentClipId() == "Run")
 		{
-			animator.Play("animations/stop.csv");
+			if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+			{
+				animator.Play("animations/stop.csv");
+			}
+			if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+			{
+				animator.Play("animations/stop.csv");
+			}
+			if (h == 0.f)
+			{
+				animator.Play("animations/idle.csv");
+			}
 		}
-		if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+		else if (animator.GetCurrentClipId() == "Jump" && isGrounded)
 		{
-			animator.Play("animations/stop.csv");
+			if (h == 0.f)
+			{
+				animator.Play("animations/idle.csv");
+			}
+			else
+			{
+				animator.Play("animations/run.csv");
+			}
 		}
-		if (h == 0.f)
+		if (animator.GetCurrentClipId() == "Stop")
 		{
-			animator.Play("animations/idle.csv");
-		}
-	}
-	else if (animator.GetCurrentClipId() == "Jump" && isGrounded)
-	{
-		if (h == 0.f)
-		{
-			animator.Play("animations/idle.csv");
-		}
-		else
-		{
-			animator.Play("animations/run.csv");
-		}
-	}
-	if (animator.GetCurrentClipId() == "Stop")
-	{
-		if (velocity.x < 0.3f && velocity.x > -0.3f)
-		{
-			animator.Play("animations/idle.csv");
+			if (velocity.x < 0.3f && velocity.x > -0.3f)
+			{
+				animator.Play("animations/idle.csv");
+			}
 		}
 	}
 

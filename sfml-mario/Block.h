@@ -29,7 +29,7 @@ protected:
 	bool isAnimateMushroom = false;
 	float mushroomCurrentTime = 0.0;
 	float mushroomMaxTime = 1.f;
-	float mushroomDistance = 32.f;
+	float mushroomDistance = 28.f;
 	sf::Vector2f originMushroomPosition;
 
 public:

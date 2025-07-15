@@ -96,6 +96,9 @@ void SceneDev2::Init()
 	AddCloud("", 5900.f, 128.f, "graphics/Cloud1.png");
 	AddCloud("", 6260.f, 144.f, "graphics/Cloud1.png");
 
+	groundMap = new GroundTileMap("GroundTileMap");
+	AddGameObject(groundMap);
+
 	AddQuestionBlock("coin1", 512.f, 288.f, ItemType::Coin);
 	AddQuestionBlock("mushroom", 672.f, 288.f, ItemType::Mushroom);
 	AddQuestionBlock("coin1", 704.f, 160.f, ItemType::Coin);
@@ -144,9 +147,6 @@ void SceneDev2::Init()
 	AddGeneralBlock("General", 5376.f, 288.f);
 	AddGeneralBlock("General", 5408.f, 288.f);
 	AddGeneralBlock("General", 5472.f, 288.f);
-
-	groundMap = new GroundTileMap("GroundTileMap");
-	AddGameObject(groundMap);
 
 	player = new AniPlayer();
 	player->SetGroundMap(groundMap);
@@ -220,6 +220,7 @@ void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType bl
 	Item* item = new Item(name, blockItem);
 	item->SetPosition({ x ,y });
 	item->SetActive(false);
+	item->SetGroundMapMushroom(groundMap);
 	AddGameObject(item);
 	items.push_back(item);
 

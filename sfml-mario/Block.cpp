@@ -229,18 +229,16 @@ void Block::MushroomReleaseAnimation(float dt)
 	if (mushroomCurrentTime < mushroomMaxTime)
 	{
 		float progress = mushroomCurrentTime / mushroomMaxTime;
-		float offsetY = 0;
-
-
-		offsetY = -(progress * 2.0f) * mushroomDistance;
-
-
+		float offsetY = -(progress)*mushroomDistance;
 		items->SetPosition(originMushroomPosition + sf::Vector2f(0, offsetY));
 	}
 	else
 	{
 		isAnimateMushroom = false;
-		items->SetActive(false);
+		sf::Vector2f finalPos = originMushroomPosition;
+		finalPos.y -= mushroomDistance;
+		items->SetPosition(finalPos);
+		items->ActiveMushroom();
 		isItemUsed = true;
 	}
 }

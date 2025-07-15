@@ -11,6 +11,7 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 	GroundTileMap* ground = nullptr;
+	Mario mario = Mario::Small;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
