@@ -19,6 +19,7 @@ protected:
 	bool isGrounded = true;
 	float speed = 220.f;
 	//float speed = 1000.f;
+
 	
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;

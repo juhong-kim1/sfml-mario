@@ -48,7 +48,7 @@ void AniPlayer::Init()
 	animator.SetTarget(&body);
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 417.f });
+	SetPosition({ 100.f, 416.f });
 }
 
 void AniPlayer::Release()
@@ -103,9 +103,34 @@ void AniPlayer::Update(float dt)
 	isWallCheck();
 	isBlockCheck();
 
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (scene)
+	{
+		auto items = scene->GetItems();
+		sf::FloatRect playerBounds = body.getGlobalBounds();
+
+		for (auto* item : items)
+		{
+			if (item->GetActive() && playerBounds.intersects(item->GetHitBoxMushroom()))
+			{
+				if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small)
+				{
+					mario = Mario::Big;
+					animator.Play("animations/get_mushroom.csv");
+
+					SetOrigin(Origins::BC);
+				}
+				item->SetActive(false);
+			}
+		}
+	}
+
+
 	position += velocity * dt;
 
+
 	isGroundedCheck();
+
 	SetPosition(position);
 
 	if (h != 0.f)
@@ -227,14 +252,6 @@ void AniPlayer::Update(float dt)
 		break;
 	}
 
-	//if (InputMgr::GetKey(sf::Keyboard::Q))
-	//{
-	//	MarioGetMushroom();
-	//}
-
-
-
-
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 }
 
@@ -259,13 +276,28 @@ sf::FloatRect AniPlayer::GetHitBoxTop() const
 sf::FloatRect AniPlayer::GetHitBoxLeft() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-	return sf::FloatRect(globalBounds.left, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+	if (mario == Mario::Small)
+	{
+		return sf::FloatRect(globalBounds.left, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+	}
+	else
+	{
+		return sf::FloatRect(globalBounds.left, globalBounds.top + 4.f, 6.f, globalBounds.height - 8.f);
+	}
 }
 
 sf::FloatRect AniPlayer::GetHitBoxRight() const
 {
 	sf::FloatRect globalBounds = body.getGlobalBounds();
-	return sf::FloatRect(globalBounds.left + globalBounds.width - 4.f, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+	if (mario == Mario::Small)
+	{
+		return sf::FloatRect(globalBounds.left + globalBounds.width - 4.f, globalBounds.top + 2.f, 4.f, globalBounds.height - 4.f);
+	}
+	else
+	{
+		return sf::FloatRect(globalBounds.left + globalBounds.width - 8.f, globalBounds.top + 4.f, 6.f, globalBounds.height - 8.f);
+	}
+
 }
 
 void AniPlayer::isGroundedCheck()
@@ -300,9 +332,9 @@ void AniPlayer::isGroundedCheck()
 		{
 			if (ground->IsGroundAt({ i, bottomBox.top + bottomBox.height }))
 			{
+				
 				int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
 				float tileTopY = tileY * 32.f;
-
 				position.y = tileTopY;
 				velocity.y = 0;
 				isGrounded = true;
@@ -328,17 +360,25 @@ void AniPlayer::isWallCheck()
 	if (velocity.x > 0)
 	{
 		sf::FloatRect rightBox = GetHitBoxRight();
-		if (ground->IsWallAt({ rightBox.left + rightBox.width, rightBox.top + rightBox.height / 2 }))
+		for (float y = rightBox.top; y < rightBox.top + rightBox.height; y += 8.f)
 		{
-			velocity.x = 0;
+			if (ground->IsWallAt({ rightBox.left + rightBox.width, y }))
+			{
+				velocity.x = 0;
+				return;
+			}
 		}
 	}
 	else if (velocity.x < 0)
 	{
 		sf::FloatRect leftBox = GetHitBoxLeft();
-		if (ground->IsWallAt({ leftBox.left, leftBox.top + leftBox.height / 2 }))
+		for (float y = leftBox.top; y < leftBox.top + leftBox.height; y += 8.f)
 		{
-			velocity.x = 0;
+			if (ground->IsWallAt({ leftBox.left, y }))
+			{
+				velocity.x = 0;
+				return;
+			}
 		}
 	}
 }
