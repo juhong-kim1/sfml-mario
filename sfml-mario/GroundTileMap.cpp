@@ -77,6 +77,7 @@ void GroundTileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
     CreateStairs(149, 4);
     CreateStairs(181, 8);
     CreateStairs(182, 8);
+    CreateStairs(198, 1);
 
     CreateReverseStairs(140, 4);
     CreateReverseStairs(155, 4);

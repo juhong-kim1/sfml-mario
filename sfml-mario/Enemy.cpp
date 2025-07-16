@@ -47,8 +47,8 @@ void Enemy::Init()
 {
 	animator.SetTarget(&body);
 
-	body.setScale({ 1.f, 1.f });
-	SetPosition({ positionX, positionY });
+	//body.setScale({ 1.f, 1.f });
+	//SetPosition({ positionX, positionY });
 }
 
 void Enemy::Release()
@@ -57,12 +57,29 @@ void Enemy::Release()
 
 void Enemy::Reset()
 {
+
+	std::cout << "Enemy::Reset() called!" << std::endl;
+
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
+
+	//SetOrigin(Origins::BC);
+
+	body.setScale({ 1.f, 1.f });
+	SetPosition({ positionX, positionY });
 
 	SetOrigin(Origins::BC);
 
 	animator.Play("animations/goomba_move.csv");
+
+	isDying = false;
+	deathCurrentTimer = 0.0f;
+	velocity = { 0.f, 0.f };
+	isGrounded = true;
+	speed = -80.f;
+
+	std::cout << "Enemy reset to position: " << positionX << ", " << positionY << std::endl;
+
 }
 
 void Enemy::Update(float dt)
@@ -98,11 +115,14 @@ void Enemy::Update(float dt)
 	isGroundedCheckEnemy();
 
 	SetPosition(position);
+
+	hitBox.UpdateTransform(body, body.getLocalBounds());
 }
 
 void Enemy::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	hitBox.Draw(window);
 }
 
 void Enemy::isGroundedCheckEnemy()
@@ -137,7 +157,7 @@ void Enemy::isGroundedCheckEnemy()
 		{
 			if (ground->IsGroundAt({ i, hitBox.top + hitBox.height }))
 			{
-				position.y = 380.f;
+				//position.y = 380.f;
 				velocity.y = 0;
 				isGrounded = true;
 				foundGround = true;

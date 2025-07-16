@@ -24,6 +24,12 @@ protected:
 	float maxJumpTime = 0.5f;
 	float currentJumpTime = 0.f;
 
+	bool isMarioDie = false;
+	bool deathProcessed = false;
+	float dieCurrentTime = 0.0f;
+	sf::Vector2f originPosition;
+
+
 	HitBox hitBox;
 
 
@@ -57,11 +63,5 @@ public:
 	void isEnemyCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
-	/*void MarioGetMushroom();*/
-
-
-	//const HitBox& GetHitBox() const
-	//{
-	//	return hitBox;
-	//}
+	void MarioDie();
 };

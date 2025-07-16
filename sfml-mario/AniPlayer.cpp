@@ -48,8 +48,11 @@ void AniPlayer::Init()
 {
 	animator.SetTarget(&body);
 
-	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 416.f });
+	sortingLayer = SortingLayers::Foreground;
+	sortingOrder = 0;
+
+	//body.setScale({ 1.f, 1.f });
+	//SetPosition({ 100.f, 416.f });
 }
 
 void AniPlayer::Release()
@@ -60,6 +63,8 @@ void AniPlayer::Reset()
 {
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
+
+	mario = Mario::Small;
 
 	switch (mario)
 	{
@@ -73,187 +78,216 @@ void AniPlayer::Reset()
 	SetOrigin(Origins::BC);
 
 	currentJumpTime = 0;
+
+	isMarioDie = false;
+	deathProcessed = false;
+	dieCurrentTime = 0.0f;
+
+	body.setScale({ 1.f, 1.f });
+	SetPosition({ 100.f, 416.f });
 }
 
 void AniPlayer::Update(float dt)
 {
-	animator.Update(dt);
-
-	float h = 0.f;
-
-	h = InputMgr::GetAxis(Axis::Horizontal);
-	velocity.x = h * speed;
-
-
-	//if (InputMgr::GetKey(sf::Keyboard::Space))
-	//{
-	//	if (currentJumpTime < maxJumpTime)
-	//	{
-	//		currentJumpTime += dt;
-	//		isGrounded = false;
-	//		velocity.y = -250.f;
-	//		animator.Play("animations/jump.csv");
-	//	}
-	//}
-
-	if (!isGrounded)
+	if (isMarioDie)
 	{
-		velocity += gravity * dt;
-	}
+		animator.Update(dt);
+		dieCurrentTime += dt;
 
-	isWallCheck();
-	isBlockCheck();
-	isEnemyCheck();
-
-	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
-	if (scene)
-	{
-		auto items = scene->GetItems();
-		sf::FloatRect playerBounds = body.getGlobalBounds();
-
-		for (auto* item : items)
+		if (dieCurrentTime < 0.3f)
 		{
-			if (item->GetActive() && playerBounds.intersects(item->GetHitBoxMushroom()))
+			velocity.y = -200.f;
+		}
+		else
+		{
+			velocity.y += gravity.y * dt;
+		}
+
+		position += velocity * dt;
+		SetPosition(position);
+
+		//hitBox.UpdateTransform(body, body.getLocalBounds());
+		//return;
+		
+	}
+	if (!isMarioDie)
+	{
+		animator.Update(dt);
+
+		float h = 0.f;
+
+		h = InputMgr::GetAxis(Axis::Horizontal);
+		velocity.x = h * speed;
+
+
+		if (!isGrounded)
+		{
+			velocity += gravity * dt;
+		}
+
+
+		isWallCheck();
+		isBlockCheck();
+		isEnemyCheck();
+
+
+		SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+		if (scene)
+		{
+			auto items = scene->GetItems();
+			sf::FloatRect playerBounds = body.getGlobalBounds();
+
+			for (auto* item : items)
 			{
-				if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small)
+				if (item->GetActive() && playerBounds.intersects(item->GetHitBoxMushroom()))
 				{
-					mario = Mario::Big;
-					animator.Play("animations/big_idle.csv");
+					if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small)
+					{
+						mario = Mario::Big;
+						animator.Play("animations/big_idle.csv");
 
-					SetOrigin(Origins::BC);
+						SetOrigin(Origins::BC);
+					}
+					item->SetActive(false);
 				}
-				item->SetActive(false);
 			}
+		}
+
+
+		position += velocity * dt;
+
+
+		isGroundedCheck();
+		SetPosition(position);
+
+		if (h != 0.f)
+		{
+			SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(-1.f, 1.f));
+		}
+
+		// Ani
+		switch (mario)
+		{
+		case Mario::Small:
+			if (animator.GetCurrentClipId() == "Idle")
+			{
+				if (h != 0.f)
+				{
+					animator.Play("animations/run.csv");
+				}
+			}
+			else if (animator.GetCurrentClipId() == "Run")
+			{
+				if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+				{
+					animator.Play("animations/stop.csv");
+				}
+				if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+				{
+					animator.Play("animations/stop.csv");
+				}
+				if (h == 0.f)
+				{
+					animator.Play("animations/idle.csv");
+				}
+			}
+			else if (animator.GetCurrentClipId() == "Jump" && isGrounded)
+			{
+				if (h == 0.f)
+				{
+					animator.Play("animations/idle.csv");
+				}
+				else
+				{
+					animator.Play("animations/run.csv");
+				}
+			}
+			if (animator.GetCurrentClipId() == "Stop")
+			{
+				if (velocity.x < 0.3f && velocity.x > -0.3f)
+				{
+					animator.Play("animations/idle.csv");
+				}
+			}
+			if (InputMgr::GetKey(sf::Keyboard::Space))
+			{
+				if (currentJumpTime < maxJumpTime)
+				{
+					currentJumpTime += dt;
+					isGrounded = false;
+					velocity.y = -250.f;
+					animator.Play("animations/jump.csv");
+				}
+			}
+			break;
+		case Mario::Big:
+			if (animator.GetCurrentClipId() == "Big_Idle")
+			{
+				if (h != 0.f)
+				{
+					animator.Play("animations/big_run.csv");
+				}
+			}
+			else if (animator.GetCurrentClipId() == "Big_Run")
+			{
+				if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+				{
+					animator.Play("animations/big_stop.csv");
+				}
+				if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+				{
+					animator.Play("animations/big_stop.csv");
+				}
+				if (h == 0.f)
+				{
+					animator.Play("animations/big_idle.csv");
+				}
+			}
+			else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
+			{
+				if (h == 0.f)
+				{
+					animator.Play("animations/big_idle.csv");
+				}
+				else
+				{
+					animator.Play("animations/big_run.csv");
+				}
+			}
+			if (animator.GetCurrentClipId() == "Big_Stop")
+			{
+				if (velocity.x < 0.3f && velocity.x > -0.3f)
+				{
+					animator.Play("animations/big_idle.csv");
+				}
+			}
+			if (InputMgr::GetKey(sf::Keyboard::Space))
+			{
+				if (currentJumpTime < maxJumpTime)
+				{
+					currentJumpTime += dt;
+					isGrounded = false;
+					velocity.y = -250.f;
+					animator.Play("animations/big_jump.csv");
+				}
+			}
+			if (InputMgr::GetKey(sf::Keyboard::S))
+			{
+				//speed 변경해야할듯?
+				animator.Play("animations/big_sitdown.csv");
+			}
+			break;
 		}
 	}
+		if (body.getPosition().y >= 2000.f && !deathProcessed)
+		{
+			deathProcessed = true;
+			MarioDie();
 
-
-	position += velocity * dt;
-
-
-	isGroundedCheck();
-
-	SetPosition(position);
-
-	if (h != 0.f)
-	{
-		SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(-1.f, 1.f));
-	}
-
-	// Ani
-	switch (mario)
-	{
-	case Mario::Small:
-		if (animator.GetCurrentClipId() == "Idle")
-		{
-			if (h != 0.f)
-			{
-				animator.Play("animations/run.csv");
-			}
+			isMarioDie = false;
+			return;
 		}
-		else if (animator.GetCurrentClipId() == "Run")
-		{
-			if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
-			{
-				animator.Play("animations/stop.csv");
-			}
-			if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
-			{
-				animator.Play("animations/stop.csv");
-			}
-			if (h == 0.f)
-			{
-				animator.Play("animations/idle.csv");
-			}
-		}
-		else if (animator.GetCurrentClipId() == "Jump" && isGrounded)
-		{
-			if (h == 0.f)
-			{
-				animator.Play("animations/idle.csv");
-			}
-			else
-			{
-				animator.Play("animations/run.csv");
-			}
-		}
-		if (animator.GetCurrentClipId() == "Stop")
-		{
-			if (velocity.x < 0.3f && velocity.x > -0.3f)
-			{
-				animator.Play("animations/idle.csv");
-			}
-		}
-		if (InputMgr::GetKey(sf::Keyboard::Space))
-		{
-			if (currentJumpTime < maxJumpTime)
-			{
-				currentJumpTime += dt;
-				isGrounded = false;
-				velocity.y = -250.f;
-				animator.Play("animations/jump.csv");
-			}
-		}
-		break;
-	case Mario::Big:
-		if (animator.GetCurrentClipId() == "Big_Idle")
-		{
-			if (h != 0.f)
-			{
-				animator.Play("animations/big_run.csv");
-			}
-		}
-		else if (animator.GetCurrentClipId() == "Big_Run")
-		{
-			if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
-			{
-				animator.Play("animations/big_stop.csv");
-			}
-			if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
-			{
-				animator.Play("animations/big_stop.csv");
-			}
-			if (h == 0.f)
-			{
-				animator.Play("animations/big_idle.csv");
-			}
-		}
-		else if (animator.GetCurrentClipId() == "Big_Jump" && isGrounded)
-		{
-			if (h == 0.f)
-			{
-				animator.Play("animations/big_idle.csv");
-			}
-			else
-			{
-				animator.Play("animations/big_run.csv");
-			}
-		}
-		if (animator.GetCurrentClipId() == "Big_Stop")
-		{
-			if (velocity.x < 0.3f && velocity.x > -0.3f)
-			{
-				animator.Play("animations/big_idle.csv");
-			}
-		} 
-		if (InputMgr::GetKey(sf::Keyboard::Space))
-		{
-			if (currentJumpTime < maxJumpTime)
-			{
-				currentJumpTime += dt;
-				isGrounded = false;
-				velocity.y = -250.f;
-				animator.Play("animations/big_jump.csv");
-			}
-		}
-		if (InputMgr::GetKey(sf::Keyboard::S))
-		{
-			//speed 변경해야할듯?
-			animator.Play("animations/big_sitdown.csv");
-		}
-		break;
-	}
-
+	
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 }
 
@@ -440,7 +474,10 @@ void AniPlayer::isBlockCheck()
 void AniPlayer::isEnemyCheck()
 {
 	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
-	if (!scene) return;
+	if (!scene)
+	{
+		return;
+	}
 
 	auto enemies = scene->GetEnemies();
 
@@ -456,7 +493,7 @@ void AniPlayer::isEnemyCheck()
 
 		sf::FloatRect enemyBounds = enemy->GetHitBoxEnemy();
 
-		if (velocity.y > 0 && bottomBox.intersects(enemyBounds))
+		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie)
 		{
 			enemy->Die();
 			velocity.y = -200.f;
@@ -465,13 +502,17 @@ void AniPlayer::isEnemyCheck()
 
 		else if (playerBounds.intersects(enemyBounds))
 		{
-
+			isMarioDie = true;
+			animator.Play("animations/mario_die.csv");
+			dieCurrentTime = 0.0f;
+			originPosition = GetPosition();
+			velocity = { 0.f, 0.f };
 		}
 	}
 }
 
-//void AniPlayer::MarioGetMushroom()
-//{
-//	animator.Play("animations/get_mushroom.csv");
-//	mario = Mario::Big;
-//}
+void AniPlayer::MarioDie()
+{
+	//SCENE_MGR.GetCurrentScene()->Reset();
+		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+}

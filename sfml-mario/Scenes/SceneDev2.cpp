@@ -36,6 +36,7 @@ void SceneDev2::Init()
 	ANI_CLIP_MGR.Load("animations/run.csv");
 	ANI_CLIP_MGR.Load("animations/jump.csv");
 	ANI_CLIP_MGR.Load("animations/stop.csv");
+	ANI_CLIP_MGR.Load("animations/mario_die.csv");
 
 	ANI_CLIP_MGR.Load("animations/big_idle.csv");
 	ANI_CLIP_MGR.Load("animations/big_run.csv");
@@ -199,6 +200,8 @@ void SceneDev2::Enter()
 void SceneDev2::Update(float dt)
 {
 	Scene::Update(dt);
+
+
 
 	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x)
 	{

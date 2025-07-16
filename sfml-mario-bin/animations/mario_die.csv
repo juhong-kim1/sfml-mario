@@ -1,0 +1,5 @@
+ID,FPS,"LoopType (0: Single, 1: Loop)"
+Mario-Die,10,1
+
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/characters2x.png,23,85,34,37,0
