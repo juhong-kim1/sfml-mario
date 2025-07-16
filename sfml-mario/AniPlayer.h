@@ -13,7 +13,7 @@ protected:
 	Animator animator;
 	GroundTileMap* ground = nullptr;
 	Mario mario;
-	Flag* flag;
+	Flag* flag = nullptr;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
@@ -36,6 +36,10 @@ protected:
 	float maxInvincibleTime = 2.0f;
 
 	bool isMarioDown = false;
+
+	bool isFlagCleared = false;
+	int clearStep = 0;
+	float clearTimer = 0.0f;
 
 	HitBox hitBox;
 
@@ -68,8 +72,9 @@ public:
 	void isWallCheck();
 	void isBlockCheck();
 	void isEnemyCheck();
-	//void isFlagCheck();
+	void isFlagCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
+	void SetFlag(Flag* f) { flag = f; };
 
 	void MarioDie();
 };

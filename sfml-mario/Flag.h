@@ -1,11 +1,16 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
+
+class HitBox;
+
 class Flag : public GameObject
 {
 protected:
 	sf::Sprite sprite;
 	sf::Vector2f positionFlag;
 	std::string texture;
+	HitBox hitBox;
 
 public:
 	Flag(const std::string& name = "");
@@ -23,6 +28,11 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	sf::FloatRect GetGlobalBounds() const
+	{
+		return sprite.getGlobalBounds();
+	}
 
 };
 

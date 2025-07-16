@@ -84,6 +84,9 @@ void AniPlayer::Reset()
 	deathProcessed = false;
 	dieCurrentTime = 0.0f;
 	isMarioDown = false;
+	isFlagCleared = false;
+	clearStep = 0;
+	clearTimer = 0.0f;
 
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
@@ -91,6 +94,58 @@ void AniPlayer::Reset()
 
 void AniPlayer::Update(float dt)
 {
+	if (isFlagCleared)
+	{
+		animator.Update(dt);
+		clearTimer += dt;
+
+		if (clearStep == 1)
+		{
+			if (mario == Mario::Small)
+			{
+				animator.Play("animations/flag.csv");
+			}
+			else if (mario == Mario::Big)
+			{
+				animator.Play("animations/big_flag.csv");
+			}
+			position.y += 80 * dt;
+			SetPosition(position);
+
+			if (position.y >= 416.f)
+			{
+				clearStep = 2;
+				clearTimer = 0.0f;
+			}
+		}
+		else if (clearStep == 2)
+		{
+			if (mario == Mario::Small)
+			{
+				animator.Play("animations/run.csv");
+			}
+			else if (mario == Mario::Big)
+			{
+				animator.Play("animations/big_run.csv");
+			}
+
+			position.x += 60 * dt;
+			SetPosition(position);
+
+			if (clearTimer >= 3.0f)  // 3초 걷기
+			{
+				clearStep = 3;
+			}
+		}
+		else if (clearStep == 3)  // 완료
+		{
+			SCENE_MGR.ChangeScene(SceneIds::Dev2);
+		}
+
+		hitBox.UpdateTransform(body, body.getLocalBounds());
+		return;
+	}
+
 	if (isInvincible)
 	{
 		invincibleTime += dt;
@@ -146,16 +201,20 @@ void AniPlayer::Update(float dt)
 			}
 		}
 
-		if (!isGrounded)
+		if (InputMgr::GetKey(sf::Keyboard::Space) && currentJumpTime < maxJumpTime && velocity.y < 0)
+		{
+			velocity += gravity * 0.3f * dt;
+			currentJumpTime += dt;
+		}
+		else
 		{
 			velocity += gravity * dt;
 		}
 
-
 		isWallCheck();
 		isBlockCheck();
 		isEnemyCheck();
-
+		isFlagCheck();
 
 		SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
 		if (scene)
@@ -179,9 +238,7 @@ void AniPlayer::Update(float dt)
 			}
 		}
 
-
 		position += velocity * dt;
-
 
 		isGroundedCheck();
 		SetPosition(position);
@@ -235,16 +292,14 @@ void AniPlayer::Update(float dt)
 					animator.Play("animations/idle.csv");
 				}
 			}
-			if (InputMgr::GetKey(sf::Keyboard::Space))
+			if (InputMgr::GetKeyDown(sf::Keyboard::Space) && isGrounded)
 			{
-				if (currentJumpTime < maxJumpTime)
-				{
-					currentJumpTime += dt;
-					isGrounded = false;
-					velocity.y = -250.f;
-					animator.Play("animations/jump.csv");
-				}
+				currentJumpTime = 0.0f;
+				isGrounded = false;
+				velocity.y = -340.f;
+				animator.Play("animations/jump.csv");
 			}
+
 			break;
 		case Mario::Big:
 			if (animator.GetCurrentClipId() == "Big_Idle")
@@ -287,13 +342,13 @@ void AniPlayer::Update(float dt)
 					animator.Play("animations/big_idle.csv");
 				}
 			}
-			if (InputMgr::GetKey(sf::Keyboard::Space))
+			if (InputMgr::GetKeyDown(sf::Keyboard::Space) && isGrounded)
 			{
 				if (currentJumpTime < maxJumpTime)
 				{
 					currentJumpTime += dt;
 					isGrounded = false;
-					velocity.y = -250.f;
+					velocity.y = -340.f;
 					animator.Play("animations/big_jump.csv");
 				}
 			}
@@ -564,23 +619,25 @@ void AniPlayer::isEnemyCheck()
 	}
 }
 
-//void AniPlayer::isFlagCheck()
-//{
-//	sf::FloatRect flagBounds = flag->GetGlobalBounds();
-//
-//	sf::FloatRect rightBox = GetHitBoxRight();
-//
-//	if ( rightBox.intersects(flagBounds))
-//	{
-//		velocity.x = 0.f;
-//		velocity.y = 10.f;
-//	}
-//
-//
-//
-//
-//
-//}
+void AniPlayer::isFlagCheck()
+{
+	if (!flag || isFlagCleared)
+	{
+		return;
+	}
+
+	sf::FloatRect flagBounds = flag->GetGlobalBounds();
+	sf::FloatRect rightBox = GetHitBoxRight();
+
+	if (rightBox.intersects(flagBounds))
+	{
+		isFlagCleared = true;
+		clearStep = 1;
+		clearTimer = 0.0f;
+		velocity.x = 0.f;
+		position.x += 20.f;
+	}
+}
 
 void AniPlayer::MarioDie()
 {

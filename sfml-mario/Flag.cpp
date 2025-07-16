@@ -46,6 +46,7 @@ void Flag::SetOrigin(Origins preset)
 
 void Flag::Init()
 {
+
 }
 
 void Flag::Release()
@@ -60,10 +61,12 @@ void Flag::Reset()
 
 void Flag::Update(float dt)
 {
+	hitBox.UpdateTransform(sprite, sprite.getLocalBounds());
 }
 
 void Flag::Draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
+	hitBox.Draw(window);
 }
 

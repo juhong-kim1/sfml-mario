@@ -72,8 +72,6 @@ void Block::Reset()
 	case BlockType::QuestionBlock:
 		blockRect = { 768, 0, 32, 32 };
 		break;
-		
-
 	}
 
 	block.setTextureRect(blockRect);
@@ -270,4 +268,6 @@ void Block::BlockBreakAnimation(float dt)
 	}
 
 	SetActive(false);
+
+
 }

@@ -54,6 +54,9 @@ void SceneDev2::Init()
 
 	ANI_CLIP_MGR.Load("animations/get_mushroom.csv");
 
+	ANI_CLIP_MGR.Load("animations/flag.csv");
+	ANI_CLIP_MGR.Load("animations/big_flag.csv");
+
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
 	background->sortingLayer = SortingLayers::Background;
 	AddGameObject(background);*/
@@ -112,7 +115,7 @@ void SceneDev2::Init()
 	groundMap = new GroundTileMap("GroundTileMap");
 	AddGameObject(groundMap);
 
-	Flag* flag = new Flag("graphics/FlagPole.png");
+	Flag* flag = new Flag("FlagPole");
 	flag->SetTexture("graphics/FlagPole.png");
 	flag->sortingLayer = SortingLayers::Background;
 	flag->sortingOrder = 0;
@@ -171,6 +174,7 @@ void SceneDev2::Init()
 
 	player = new AniPlayer();
 	player->SetGroundMap(groundMap);
+	player->SetFlag(flag);
 	AddGameObject(player);
 
 	AddEnemy("", 700.f, 380.f);

@@ -1,0 +1,5 @@
+﻿ID,FPS,"LoopType (0: Single, 1: Loop)"
+Big_Flag,10,0
+
+TEXTURE ID,LEFT,TOP,WIDTH,HEIGHT,"FLIPX (0:Fale, 1:True)"
+graphics/characters2x.png,774,0,35,67,0
