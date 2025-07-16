@@ -35,6 +35,8 @@ protected:
 	float invincibleTime = 0.0f;
 	float maxInvincibleTime = 2.0f;
 
+	bool isMarioDown = false;
+
 	HitBox hitBox;
 
 

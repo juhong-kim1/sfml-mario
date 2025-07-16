@@ -208,7 +208,7 @@ void SceneDev2::Enter()
 
 void SceneDev2::Update(float dt)
 {
-	//Scene::Update(dt);
+	Scene::Update(dt);
 
 
 
@@ -230,7 +230,7 @@ void SceneDev2::Update(float dt)
 		}
 	}
 
-	Scene::Update(dt);
+	//Scene::Update(dt);
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType blockItem)

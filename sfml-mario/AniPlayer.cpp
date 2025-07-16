@@ -83,6 +83,7 @@ void AniPlayer::Reset()
 	isMarioDie = false;
 	deathProcessed = false;
 	dieCurrentTime = 0.0f;
+	isMarioDown = false;
 
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
@@ -124,9 +125,26 @@ void AniPlayer::Update(float dt)
 
 		float h = 0.f;
 
-		h = InputMgr::GetAxis(Axis::Horizontal);
-		velocity.x = h * speed;
+		if (!isMarioDown)
+		{
+			h = InputMgr::GetAxis(Axis::Horizontal);
+			velocity.x = h * speed;
+		}
+		else
+		{
+			float friction = 200.f;
 
+			if (velocity.x > 0)
+			{
+				velocity.x -= friction * dt;
+				if (velocity.x < 0) velocity.x = 0;
+			}
+			else if (velocity.x < 0)
+			{
+				velocity.x += friction * dt;
+				if (velocity.x > 0) velocity.x = 0;
+			}
+		}
 
 		if (!isGrounded)
 		{
@@ -283,6 +301,18 @@ void AniPlayer::Update(float dt)
 			{
 				//speed 변경해야할듯?
 				animator.Play("animations/big_sitdown.csv");
+				SetOrigin(Origins::BC);
+				//velocity.x = 0.f;
+				isMarioDown = true;
+
+			}
+			if (InputMgr::GetKeyUp(sf::Keyboard::S))
+			{
+
+				animator.Play("animations/big_idle.csv");
+				//position.y -= 20;
+				SetOrigin(Origins::BC);
+				isMarioDown = false;
 			}
 			break;
 		}
