@@ -335,9 +335,9 @@ void AniPlayer::isGroundedCheck()
 			if (ground->IsGroundAt({ i, bottomBox.top + bottomBox.height }))
 			{
 				
-				int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
-				float tileTopY = tileY * 32.f;
-				position.y = tileTopY;
+				//int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
+				//float tileTopY = tileY * 32.f;
+				//position.y = tileTopY;
 				velocity.y = 0;
 				isGrounded = true;
 				currentJumpTime = 0;
