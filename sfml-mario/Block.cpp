@@ -85,11 +85,14 @@ void Block::Reset()
 	coinCurrentTime = 0.0;
 	isAnimateMushroom = false;
 	mushroomCurrentTime = 0.0;
+	isBreakBlock = false;
 
 	SetOrigin(Origins::TL);
 	SetScale({ 1.f, 1.f });
 
 	isShaking = false;
+
+	SetActive(true);
 }
 
 void Block::Update(float dt)
@@ -97,6 +100,7 @@ void Block::Update(float dt)
 	BlockShakeAnimation(dt);
 	CoinReleaseAnimation(dt);
 	MushroomReleaseAnimation(dt);
+	BlockBreakAnimation(dt);
 
 
 }
@@ -250,4 +254,20 @@ void Block::MushroomReleaseAnimation(float dt)
 		items->ActiveMushroom();
 		isItemUsed = true;
 	}
+}
+
+void Block::BlockBreakAnimationStart()
+{
+	isBreakBlock = true;
+	breakSpeed = 500.f;
+}
+
+void Block::BlockBreakAnimation(float dt)
+{
+	if (!isBreakBlock)
+	{
+		return;
+	}
+
+	SetActive(false);
 }

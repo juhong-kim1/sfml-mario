@@ -66,7 +66,7 @@ public:
 	void isWallCheck();
 	void isBlockCheck();
 	void isEnemyCheck();
-	void isFlagCheck();
+	//void isFlagCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
 	void MarioDie();

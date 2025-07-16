@@ -187,8 +187,6 @@ void SceneDev2::Init()
 	AddEnemy("", 3954.f, 380.f);
 	AddEnemy("", 4028.f, 380.f);
 	AddEnemy("", 4092.f, 380.f);
-	AddEnemy("", 4028.f, 380.f);
-	AddEnemy("", 4092.f, 380.f);
 	AddEnemy("", 5560.f, 380.f);
 	AddEnemy("", 5624.f, 380.f);
 
@@ -204,12 +202,13 @@ void SceneDev2::Enter()
 	worldView.setSize(size);
 	worldView.setCenter({ 0.f, 120.f });
 
+
 	Scene::Enter();
 }
 
 void SceneDev2::Update(float dt)
 {
-	Scene::Update(dt);
+	//Scene::Update(dt);
 
 
 
@@ -225,12 +224,13 @@ void SceneDev2::Update(float dt)
 			float distance = abs(player->GetPosition().x - enemy->GetPosition().x);
 			if (distance <= 600.f)
 			{
+				std::cout << "±À¹Ù ÃâÇö" << std::endl;
 				enemy->SetActive(true);
 			}
 		}
 	}
 
-
+	Scene::Update(dt);
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType blockItem)

@@ -83,6 +83,10 @@ void Enemy::Update(float dt)
 		return;
 	}
 
+	if (body.getPosition().y >= 500.f)
+	{
+		isDying = true;
+	}
 	if (isDying)
 	{
 		animator.Update(dt);
@@ -92,6 +96,7 @@ void Enemy::Update(float dt)
 		{
 			SetActive(false);
 		}
+		
 		return;
 	}
 

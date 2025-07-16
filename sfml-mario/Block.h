@@ -32,6 +32,11 @@ protected:
 	float mushroomDistance = 28.f;
 	sf::Vector2f originMushroomPosition;
 
+	bool isBreakBlock = false;
+	float breakSpeed = 500.f;
+	sf::Vector2f gravity = { 0.f, 1100.f };
+	sf::Vector2f velocity = { 0.f, 0.f };
+
 public:
 	Block(const std::string& name, BlockType type);
 	virtual ~Block() = default;
@@ -69,7 +74,9 @@ public:
 	void CoinReleaseAnimation(float dt);
 	void MushroomReleaseAnimationStart(const sf::Vector2f& pos);
 	void MushroomReleaseAnimation(float dt);
-
+	void BlockBreakAnimationStart();
+	void BlockBreakAnimation(float dt);
+	BlockType GetBlockType() { return blocktype; }
 
 };
 

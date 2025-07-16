@@ -361,7 +361,7 @@ void AniPlayer::isGroundedCheck()
 		for (auto* block : blocks)
 		{
 			sf::FloatRect blockBounds = block->GetGlobalBounds();
-			if (bottomBox.intersects(blockBounds))
+			if (bottomBox.intersects(blockBounds) && block->GetActive())
 			{
 				return;
 			}
@@ -446,7 +446,7 @@ void AniPlayer::isBlockCheck()
 		sf::FloatRect leftBox = GetHitBoxLeft();
 		sf::FloatRect rightBox = GetHitBoxRight();
 
-		if (velocity.y > 0 && bottomBox.intersects(blockBounds))
+		if (velocity.y > 0 && bottomBox.intersects(blockBounds) && block->GetActive())
 		{
 			//position.y = blockBounds.top;
 
@@ -455,8 +455,13 @@ void AniPlayer::isBlockCheck()
 			currentJumpTime = 0;
 			return;
 		}
-		if (velocity.y < 0 && topBox.intersects(blockBounds) && position.x > blockBounds.left - 4.f && position.x < blockBounds.left + blockBounds.width + 4.f)
+		if (velocity.y < 0 && topBox.intersects(blockBounds) && position.x > blockBounds.left - 4.f && position.x < blockBounds.left + blockBounds.width + 4.f && block->GetActive())
 		{
+			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
+			{
+				std::cout << "호출 됨" << std::endl;
+				block->BlockBreakAnimationStart();
+			}
 			if (!block->IsShaking())
 			{
 				velocity.y = 0;
@@ -466,12 +471,12 @@ void AniPlayer::isBlockCheck()
 				return;
 			}
 		}
-		if (velocity.x > 0 && rightBox.intersects(blockBounds))
+		if (velocity.x > 0 && rightBox.intersects(blockBounds) && block->GetActive())
 		{
 			velocity.x = 0;
 			return;
 		}
-		if (velocity.x < 0 && leftBox.intersects(blockBounds))
+		if (velocity.x < 0 && leftBox.intersects(blockBounds) && block->GetActive())
 		{
 			velocity.x = 0;
 			return;
@@ -503,12 +508,9 @@ void AniPlayer::isEnemyCheck()
 
 		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie && !isInvincible)
 		{
-	/*		if (position.y < enemyBounds.top)
-			{*/
-				enemy->Die();
-				velocity.y = -200.f;
-				return;
-		/*	}*/
+			enemy->Die();
+			velocity.y = -200.f;
+			return;
 		}
 
 		else if (playerBounds.intersects(enemyBounds) && !isInvincible)
@@ -532,24 +534,23 @@ void AniPlayer::isEnemyCheck()
 	}
 }
 
-void AniPlayer::isFlagCheck()
-{
-	sf::FloatRect flagBounds = flag->GetGlobalBounds();
-
-	sf::FloatRect rightBox = GetHitBoxRight();
-
-	if ( rightBox.intersects(flagBounds))
-	{
-		velocity.x = 0.f;
-		velocity.y = 10.f;
-
-	}
-
-
-
-
-
-}
+//void AniPlayer::isFlagCheck()
+//{
+//	sf::FloatRect flagBounds = flag->GetGlobalBounds();
+//
+//	sf::FloatRect rightBox = GetHitBoxRight();
+//
+//	if ( rightBox.intersects(flagBounds))
+//	{
+//		velocity.x = 0.f;
+//		velocity.y = 10.f;
+//	}
+//
+//
+//
+//
+//
+//}
 
 void AniPlayer::MarioDie()
 {
