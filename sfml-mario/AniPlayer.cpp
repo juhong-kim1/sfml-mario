@@ -5,6 +5,7 @@
 #include "SceneDev2.h"
 #include "Block.h"
 #include "Enemy.h"
+#include "Flag.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name), mario(Mario::Small)
@@ -89,9 +90,20 @@ void AniPlayer::Reset()
 
 void AniPlayer::Update(float dt)
 {
+	if (isInvincible)
+	{
+		invincibleTime += dt;
+		if (invincibleTime >= maxInvincibleTime)
+		{
+			isInvincible = false;
+			invincibleTime = 0.0f;
+		}
+	}
+
 	if (isMarioDie)
 	{
 		animator.Update(dt);
+
 		dieCurrentTime += dt;
 
 		if (dieCurrentTime < 0.3f)
@@ -105,10 +117,6 @@ void AniPlayer::Update(float dt)
 
 		position += velocity * dt;
 		SetPosition(position);
-
-		//hitBox.UpdateTransform(body, body.getLocalBounds());
-		//return;
-		
 	}
 	if (!isMarioDie)
 	{
@@ -493,26 +501,57 @@ void AniPlayer::isEnemyCheck()
 
 		sf::FloatRect enemyBounds = enemy->GetHitBoxEnemy();
 
-		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie)
+		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie && !isInvincible)
 		{
-			enemy->Die();
-			velocity.y = -200.f;
-			return;
+	/*		if (position.y < enemyBounds.top)
+			{*/
+				enemy->Die();
+				velocity.y = -200.f;
+				return;
+		/*	}*/
 		}
 
-		else if (playerBounds.intersects(enemyBounds))
+		else if (playerBounds.intersects(enemyBounds) && !isInvincible)
 		{
-			isMarioDie = true;
-			animator.Play("animations/mario_die.csv");
-			dieCurrentTime = 0.0f;
-			originPosition = GetPosition();
-			velocity = { 0.f, 0.f };
+			if (mario == Mario::Small)
+			{
+				isMarioDie = true;
+				animator.Play("animations/mario_die.csv");
+				dieCurrentTime = 0.0f;
+				originPosition = GetPosition();
+				velocity = { 0.f, 0.f };
+			}
+			if (mario == Mario::Big)
+			{
+				isInvincible = true;
+				mario = Mario::Small;
+				animator.Play("animations/idle.csv");
+				invincibleTime = 0.0f;
+			}
 		}
 	}
 }
 
+void AniPlayer::isFlagCheck()
+{
+	sf::FloatRect flagBounds = flag->GetGlobalBounds();
+
+	sf::FloatRect rightBox = GetHitBoxRight();
+
+	if ( rightBox.intersects(flagBounds))
+	{
+		velocity.x = 0.f;
+		velocity.y = 10.f;
+
+	}
+
+
+
+
+
+}
+
 void AniPlayer::MarioDie()
 {
-	//SCENE_MGR.GetCurrentScene()->Reset();
-		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+	SCENE_MGR.ChangeScene(SceneIds::Dev2);
 }

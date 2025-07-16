@@ -8,6 +8,7 @@
 #include "BackgroundElements.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "Flag.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -29,6 +30,7 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/tiles2x.png");
 	texIds.push_back("graphics/items2x.png");
 	texIds.push_back("graphics/Castle.png");
+	texIds.push_back("graphics/FlagPole.png");
 
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
 
@@ -110,6 +112,14 @@ void SceneDev2::Init()
 	groundMap = new GroundTileMap("GroundTileMap");
 	AddGameObject(groundMap);
 
+	Flag* flag = new Flag("graphics/FlagPole.png");
+	flag->SetTexture("graphics/FlagPole.png");
+	flag->sortingLayer = SortingLayers::Background;
+	flag->sortingOrder = 0;
+	flag->SetPosition({ 6352.f, 384.f });
+	flag->SetOrigin(Origins::BC);
+	AddGameObject(flag);
+
 	AddQuestionBlock("coin1", 512.f, 288.f, ItemType::Coin);
 	AddQuestionBlock("mushroom", 672.f, 288.f, ItemType::Mushroom);
 	AddQuestionBlock("coin1", 704.f, 160.f, ItemType::Coin);
@@ -167,8 +177,8 @@ void SceneDev2::Init()
 	AddEnemy("", 1300.f, 380.f);
 	AddEnemy("", 1600.f, 380.f);
 	AddEnemy("", 1664.f, 380.f);
-	AddEnemy("", 2600.f, 100.f);
-	AddEnemy("", 2670.f, 100.f);
+	AddEnemy("", 2600.f, 110.f);
+	AddEnemy("", 2670.f, 110.f);
 	AddEnemy("", 3100.f, 380.f);
 	AddEnemy("", 3164.f, 380.f);
 	AddEnemy("", 3664.f, 380.f);

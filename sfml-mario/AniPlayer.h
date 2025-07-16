@@ -4,6 +4,7 @@
 
 class HitBox;
 class GroundTileMap;
+class Flag;
 
 class AniPlayer : public GameObject
 {
@@ -12,6 +13,7 @@ protected:
 	Animator animator;
 	GroundTileMap* ground = nullptr;
 	Mario mario;
+	Flag* flag;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
@@ -29,6 +31,9 @@ protected:
 	float dieCurrentTime = 0.0f;
 	sf::Vector2f originPosition;
 
+	bool isInvincible = false;
+	float invincibleTime = 0.0f;
+	float maxInvincibleTime = 2.0f;
 
 	HitBox hitBox;
 
@@ -61,6 +66,7 @@ public:
 	void isWallCheck();
 	void isBlockCheck();
 	void isEnemyCheck();
+	void isFlagCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 
 	void MarioDie();

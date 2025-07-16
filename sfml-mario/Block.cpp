@@ -79,8 +79,17 @@ void Block::Reset()
 	block.setTextureRect(blockRect);
 	block.setPosition(position);
 
+	shakeCurrentTime = 0.0f;
+	isItemUsed = false;
+	isAnimateCoin = false;
+	coinCurrentTime = 0.0;
+	isAnimateMushroom = false;
+	mushroomCurrentTime = 0.0;
+
 	SetOrigin(Origins::TL);
 	SetScale({ 1.f, 1.f });
+
+	isShaking = false;
 }
 
 void Block::Update(float dt)

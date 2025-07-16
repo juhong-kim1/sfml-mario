@@ -57,9 +57,6 @@ void Enemy::Release()
 
 void Enemy::Reset()
 {
-
-	std::cout << "Enemy::Reset() called!" << std::endl;
-
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 
@@ -77,9 +74,6 @@ void Enemy::Reset()
 	velocity = { 0.f, 0.f };
 	isGrounded = true;
 	speed = -80.f;
-
-	std::cout << "Enemy reset to position: " << positionX << ", " << positionY << std::endl;
-
 }
 
 void Enemy::Update(float dt)

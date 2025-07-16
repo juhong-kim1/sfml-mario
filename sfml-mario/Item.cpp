@@ -73,6 +73,10 @@ void Item::Reset()
 		animator.Play("animations/coin.csv");
 	}
 
+	isGrounded = true;
+	speed = 80.f;
+	activeMushroom = false;
+
 }
 
 void Item::Update(float dt)
