@@ -230,7 +230,6 @@ void AniPlayer::Update(float dt)
 					{
 						mario = Mario::Big;
 						animator.Play("animations/big_idle.csv");
-
 						SetOrigin(Origins::BC);
 					}
 					item->SetActive(false);
@@ -553,6 +552,7 @@ void AniPlayer::isBlockCheck()
 				currentJumpTime = maxJumpTime;
 				block->BlockShakeAnimationStart();
 				block->ReleaseItem();
+				block->CheckEnemiesOnTop();
 				return;
 			}
 		}
@@ -584,7 +584,7 @@ void AniPlayer::isEnemyCheck()
 
 	for (auto* enemy : enemies)
 	{
-		if (!enemy->GetActive() || enemy->IsDying())
+		if (!enemy->GetActive() || enemy->IsDying() || enemy->IsDyingOnTop())
 		{
 			continue;
 		}
@@ -598,7 +598,7 @@ void AniPlayer::isEnemyCheck()
 			return;
 		}
 
-		else if (playerBounds.intersects(enemyBounds) && !isInvincible)
+		else if (playerBounds.intersects(enemyBounds))
 		{
 			if (mario == Mario::Small)
 			{

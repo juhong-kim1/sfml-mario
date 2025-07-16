@@ -74,12 +74,39 @@ void Enemy::Reset()
 	velocity = { 0.f, 0.f };
 	isGrounded = true;
 	speed = -80.f;
+	isDyingOnTop = false;
+	dyingCurrentTime = 0.0f;
 }
 
 void Enemy::Update(float dt)
 {
 	if (!GetActive())
 	{
+		return;
+	}
+
+	if (isDyingOnTop)
+	{
+		animator.Update(dt);
+		dyingCurrentTime += dt;
+
+		if (dyingCurrentTime < 0.3f)
+		{
+			velocity.y = -100.f;
+		}
+		else
+		{
+			velocity.y += gravity.y * dt;
+		}
+
+		position += velocity * dt;
+		SetPosition(position);
+		SetScale({ 1.f,-1.f });
+
+		if (dyingCurrentTime >= dyingMaxTime)
+		{
+			SetActive(false);
+		}
 		return;
 	}
 
@@ -242,6 +269,17 @@ void Enemy::Die()
 		animator.Play("animations/goomba_die.csv");
 		velocity.x = 0;
 	}
+}
+
+void Enemy::DyingOnTop()
+{
+	if (!isDyingOnTop)
+	{
+		isDyingOnTop = true;
+		dyingCurrentTime = 0.0f;
+		velocity = { 0.f, -200.f };
+	}
+
 }
 
 sf::FloatRect Enemy::GetHitBoxEnemy() const

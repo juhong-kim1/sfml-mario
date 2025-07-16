@@ -2,6 +2,7 @@
 #include "Block.h"
 #include "Item.h"
 #include "sceneDev2.h"
+#include "Enemy.h"
 
 Block::Block(const std::string& name, BlockType type)
 	:GameObject(name), blocktype(type)
@@ -270,4 +271,31 @@ void Block::BlockBreakAnimation(float dt)
 	SetActive(false);
 
 
+}
+
+void Block::CheckEnemiesOnTop()
+{
+	SceneDev2* scene = dynamic_cast<SceneDev2*>(SCENE_MGR.GetCurrentScene());
+	if (!scene)
+	{
+		return;
+	}
+
+	auto enemies = scene->GetEnemies();
+	sf::FloatRect blockBounds = GetGlobalBounds();
+
+	for (auto* enemy : enemies)
+	{
+		if (!enemy->GetActive() || enemy->IsDying())
+		{
+			continue;
+		}
+
+		sf::FloatRect enemyBounds = enemy->GetHitBoxEnemy();
+
+		if (enemyBounds.intersects(blockBounds) && enemyBounds.top < blockBounds.top)
+		{
+			enemy->DyingOnTop();
+		}
+	}
 }

@@ -76,6 +76,7 @@ public:
 	void MushroomReleaseAnimation(float dt);
 	void BlockBreakAnimationStart();
 	void BlockBreakAnimation(float dt);
+	void CheckEnemiesOnTop();
 	BlockType GetBlockType() { return blocktype; }
 
 };

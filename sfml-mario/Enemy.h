@@ -26,6 +26,10 @@ protected:
 	float deathCurrentTimer = 0.0f;
 	float deathTimer = 0.5f;
 
+	bool isDyingOnTop = false;
+	float dyingCurrentTime = 0.0f;
+	float dyingMaxTime = 2.0f;
+
 
 public:
 	Enemy(const std::string& name = "", float x = 0.f, float y = 0.f);
@@ -49,6 +53,8 @@ public:
 	void SetGroundMapEnemy(GroundTileMap* groundMap) { ground = groundMap; };
 	void Die();
 	bool IsDying() const{ return isDying; };
+	void DyingOnTop();
+	bool IsDyingOnTop() { return isDyingOnTop; };
 
 	sf::FloatRect GetHitBoxEnemy() const;
 };
