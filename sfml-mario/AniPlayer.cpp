@@ -89,11 +89,22 @@ void AniPlayer::Reset()
 	clearTimer = 0.0f;
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 416.f });
+	SetPosition({ 100.f, 412.f });
 }
 
 void AniPlayer::Update(float dt)
 {
+	if (isInvincible)
+	{
+		invincibleTime += dt;
+		if (invincibleTime >= maxInvincibleTime)
+		{
+			isInvincible = false;
+			invincibleTime = 0.0f;
+		}
+	}
+
+
 	if (isFlagCleared)
 	{
 		animator.Update(dt);
@@ -132,28 +143,18 @@ void AniPlayer::Update(float dt)
 			position.x += 60 * dt;
 			SetPosition(position);
 
-			if (clearTimer >= 3.0f)  // 3초 걷기
+			if (clearTimer >= 3.0f)
 			{
 				clearStep = 3;
 			}
 		}
-		else if (clearStep == 3)  // 완료
+		else if (clearStep == 3)
 		{
 			SCENE_MGR.ChangeScene(SceneIds::Dev2);
 		}
 
 		hitBox.UpdateTransform(body, body.getLocalBounds());
 		return;
-	}
-
-	if (isInvincible)
-	{
-		invincibleTime += dt;
-		if (invincibleTime >= maxInvincibleTime)
-		{
-			isInvincible = false;
-			invincibleTime = 0.0f;
-		}
 	}
 
 	if (isMarioDie)
@@ -598,7 +599,7 @@ void AniPlayer::isEnemyCheck()
 			return;
 		}
 
-		else if (playerBounds.intersects(enemyBounds))
+		else if (playerBounds.intersects(enemyBounds) && invincibleTime == 0)
 		{
 			if (mario == Mario::Small)
 			{
@@ -607,6 +608,7 @@ void AniPlayer::isEnemyCheck()
 				dieCurrentTime = 0.0f;
 				originPosition = GetPosition();
 				velocity = { 0.f, 0.f };
+				SetOrigin(Origins::BC);
 			}
 			if (mario == Mario::Big)
 			{
@@ -614,6 +616,7 @@ void AniPlayer::isEnemyCheck()
 				mario = Mario::Small;
 				animator.Play("animations/idle.csv");
 				invincibleTime = 0.0f;
+				SetOrigin(Origins::BC);
 			}
 		}
 	}
