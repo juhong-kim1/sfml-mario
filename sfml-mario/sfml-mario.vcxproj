@@ -22,6 +22,7 @@
     <ClCompile Include="AniPlayer.cpp" />
     <ClCompile Include="BackGroundElements.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BreakBlock.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
@@ -43,11 +44,13 @@
     <ClCompile Include="Scenes\SceneDev1.cpp" />
     <ClCompile Include="Scenes\SceneDev2.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UiHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AniPlayer.h" />
     <ClInclude Include="BackGroundElements.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="BreakBlock.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
@@ -72,6 +75,7 @@
     <ClInclude Include="Scenes\SceneDev1.h" />
     <ClInclude Include="Scenes\SceneDev2.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="UiHud.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

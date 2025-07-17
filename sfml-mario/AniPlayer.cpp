@@ -145,6 +145,7 @@ void AniPlayer::Update(float dt)
 		invincibleTime += dt;
 		if (invincibleTime < maxInvincibleTime)
 		{
+			speed = 80.f;
 			float blinkTime = fmod(invincibleTime, 0.1f);
 			if (blinkTime < 0.05f)
 			{
@@ -160,6 +161,7 @@ void AniPlayer::Update(float dt)
 		{
 			isInvincible = false;
 			invincibleTime = 0.0f;
+			speed = 220.f;
 		}
 	}
 	if (isFormChanging)
@@ -578,7 +580,6 @@ void AniPlayer::isBlockCheck()
 		{
 			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
 			{
-				std::cout << "호출 됨" << std::endl;
 				block->BlockBreakAnimationStart();
 			}
 			if (!block->IsShaking())

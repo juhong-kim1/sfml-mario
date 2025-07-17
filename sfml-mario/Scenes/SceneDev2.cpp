@@ -9,6 +9,8 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "Flag.h"
+#include "BreakBlock.h"
+#include "UiHud.h"
 
 SceneDev2::SceneDev2() : Scene(SceneIds::Dev2)
 {
@@ -31,8 +33,9 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/items2x.png");
 	texIds.push_back("graphics/Castle.png");
 	texIds.push_back("graphics/FlagPole.png");
+	texIds.push_back("graphics/break_block2.png");
 
-	fontIds.push_back("fonts/DS-DIGIT.ttf");
+	fontIds.push_back("fonts/main_font.ttf");
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
@@ -194,6 +197,8 @@ void SceneDev2::Init()
 	AddEnemy("", 5560.f, 380.f);
 	AddEnemy("", 5624.f, 380.f);
 
+	uiHud = (UiHud*)AddGameObject(new UiHud());
+
 	Scene::Init();
 }
 
@@ -233,8 +238,6 @@ void SceneDev2::Update(float dt)
 			}
 		}
 	}
-
-	//Scene::Update(dt);
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType blockItem)

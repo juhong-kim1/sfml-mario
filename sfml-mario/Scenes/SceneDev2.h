@@ -6,15 +6,19 @@ class AniPlayer;
 class Enemy;
 class Block;
 class Item;
+class BreakBlock;
+class UiHud;
 
 class SceneDev2 : public Scene
 {
 protected:
 	AniPlayer* player;
 	Enemy* enemy;
+	UiHud* uiHud;
 	std::vector<Block*> blocks;
 	std::vector<Enemy*> enemies;
 	std::vector<Item*> items;
+	std::vector<BreakBlock*> breakBlocks;
 	GroundTileMap* groundMap = nullptr;
 
 public:
@@ -32,5 +36,6 @@ public:
 	std::vector<Block*> GetBlocks() const { return blocks; }
 	std::vector<Item*>& GetItems() { return items; }
 	std::vector<Enemy*> GetEnemies() { return enemies; }
+	std::vector<BreakBlock*> GetBreakBlocks() { return breakBlocks; }
 };
 

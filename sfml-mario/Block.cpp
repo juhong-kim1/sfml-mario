@@ -107,6 +107,14 @@ void Block::Update(float dt)
 void Block::Draw(sf::RenderWindow& window)
 {
 	window.draw(block);
+
+	if (isFragmentsActive)
+	{
+		for (auto& f : fragments)
+		{
+			window.draw(f);
+		}
+	}
 }
 
 void Block::BlockShakeAnimation(float dt)
@@ -257,20 +265,41 @@ void Block::MushroomReleaseAnimation(float dt)
 
 void Block::BlockBreakAnimationStart()
 {
-	isBreakBlock = true;
-	breakSpeed = 500.f;
+	SetActive(false);
+
+	isFragmentsActive = true;
+	blockBreakTime = 0.0f;
+
+	fragments.resize(4);
+	velocityFragments = { { -150.f, -100.f }, {150, -100}, {-80,-100}, {80, 100} };
+
+	for (int i = 0; i < 4; ++i)
+	{
+		fragments[i].setTexture(TEXTURE_MGR.Get("graphics/break_block2.png"));
+		fragments[i].setPosition(position.x + (i%2)*16, position.y - (i/2)*16);
+	}
 }
 
 void Block::BlockBreakAnimation(float dt)
 {
-	if (!isBreakBlock)
+	if (!isFragmentsActive)
 	{
 		return;
 	}
 
-	SetActive(false);
+	blockBreakTime += dt;
 
-
+	for (int i = 0; i < 4; ++i)
+	{
+		velocityFragments[i].y += 500.0f * dt;
+		sf::Vector2f pos = fragments[i].getPosition();
+		pos += velocityFragments[i] * dt;
+		fragments[i].setPosition(pos);
+	}
+	//if (blockBreakTime >= 2.0f)
+	//{
+	//	SetActive(false);
+	//}
 }
 
 void Block::CheckEnemiesOnTop()

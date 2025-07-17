@@ -12,6 +12,10 @@ protected:
 	sf::IntRect blockRect;
 	BlockType blocktype = BlockType::GeneralBlock;
 
+	std::vector<sf::Sprite> fragments;
+	std::vector<sf::Vector2f> velocityFragments;
+	float blockBreakTime = 0.0f;
+
 	Item* items = nullptr;
 
 	bool isShaking = false;
@@ -33,9 +37,8 @@ protected:
 	sf::Vector2f originMushroomPosition;
 
 	bool isBreakBlock = false;
-	float breakSpeed = 500.f;
-	sf::Vector2f gravity = { 0.f, 1100.f };
-	sf::Vector2f velocity = { 0.f, 0.f };
+
+	bool isFragmentsActive = false;
 
 public:
 	Block(const std::string& name, BlockType type);
@@ -63,10 +66,7 @@ public:
 	void BlockShakeAnimation(float dt);
 	void BlockShakeAnimationStart();
 
-	bool IsShaking() const
-	{
-		return isShaking;
-	}
+	bool IsShaking() const { return isShaking; }
 
 	void SetItem(Item* item);
 	void ReleaseItem();

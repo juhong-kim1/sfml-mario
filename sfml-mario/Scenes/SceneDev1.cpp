@@ -22,6 +22,15 @@ SceneDev1::~SceneDev1()
 void SceneDev1::Init()
 {
 	fontIds.push_back("fonts/DS-DIGIT.ttf");
+	fontIds.push_back("fonts/Barkentina_font.ttf");
+	fontIds.push_back("fonts/arial.ttf");
+	fontIds.push_back("fonts/Cairo-Regular.ttf");
+	fontIds.push_back("fonts/Floating_font.ttf");
+	fontIds.push_back("fonts/main_font.ttf");
+	fontIds.push_back("fonts/menu_font.ttf");
+	fontIds.push_back("fonts/PixeloidSans.ttf");
+	fontIds.push_back("fonts/some_font.ttf");
+
 
 	// 첫 번째 사각형 (키보드로 회전)
 	rect1 = new sf::RectangleShape(sf::Vector2f(100.f, 150.f));
@@ -54,7 +63,7 @@ void SceneDev1::Init()
 	Utils::SetOrigin(*circle2, Origins::MC);
 
 	// 충돌 상태 텍스트
-	collisionText = new TextGo("fonts/DS-DIGIT.ttf");
+	collisionText = new TextGo("fonts/main_font.ttf");
 	collisionText->SetString("No Collision");
 	collisionText->SetCharacterSize(30);
 	collisionText->SetFillColor(sf::Color::White);
@@ -62,7 +71,7 @@ void SceneDev1::Init()
 	AddGameObject(collisionText);
 
 	// 모드 표시 텍스트
-	modeText = new TextGo("fonts/DS-DIGIT.ttf");
+	modeText = new TextGo("fonts/main_font.ttf");
 	modeText->SetString("Mode: Rectangle");
 	modeText->SetCharacterSize(25);
 	modeText->SetFillColor(sf::Color::Cyan);
@@ -70,7 +79,7 @@ void SceneDev1::Init()
 	AddGameObject(modeText);
 
 	// 안내 텍스트
-	TextGo* instructionText = new TextGo("fonts/DS-DIGIT.ttf");
+	TextGo* instructionText = new TextGo("fonts/main_font.ttf");
 	instructionText->SetString("Tab: Switch Mode | Q/E: Rotate Green | Mouse: Move Blue | L/R Click: Rotate Blue | Enter: Next Scene");
 	instructionText->SetCharacterSize(20);
 	instructionText->SetFillColor(sf::Color::Yellow);
