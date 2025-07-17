@@ -41,6 +41,10 @@ protected:
 	int clearStep = 0;
 	float clearTimer = 0.0f;
 
+	bool isFormChanging = false;
+	float formChangeTime = 0.f;
+	float formChangeMaxTime = 2.f;
+
 	HitBox hitBox;
 
 

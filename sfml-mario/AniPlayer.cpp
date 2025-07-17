@@ -66,16 +66,7 @@ void AniPlayer::Reset()
 	sortingOrder = 0;
 
 	mario = Mario::Small;
-
-	switch (mario)
-	{
-	case Mario::Small:
-		animator.Play("animations/idle.csv");
-		break;
-	case Mario::Big:
-		animator.Play("animations/big_idle.csv");
-		break;
-	}
+	animator.Play("animations/idle.csv");
 	SetOrigin(Origins::BC);
 
 	currentJumpTime = 0;
@@ -87,6 +78,7 @@ void AniPlayer::Reset()
 	isFlagCleared = false;
 	clearStep = 0;
 	clearTimer = 0.0f;
+	formChangeTime = 0.0f;
 
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
@@ -139,6 +131,8 @@ void AniPlayer::Update(float dt)
 		}
 		else if (clearStep == 3)
 		{
+			animator.Play("animations/idle.csv");
+			SetOrigin(Origins::BC);
 			SCENE_MGR.ChangeScene(SceneIds::Dev2);
 		}
 
@@ -155,6 +149,27 @@ void AniPlayer::Update(float dt)
 			invincibleTime = 0.0f;
 		}
 	}
+	if (isFormChanging)
+	{
+		formChangeTime += dt;
+
+		if (1.f > formChangeTime / formChangeMaxTime)
+		{
+			animator.Play("animations/get_mushroom.csv");
+			//SetScale({ 1.f,1.f });
+			SetOrigin(Origins::BC);
+		}
+		else
+		{
+			animator.Play("animations/big_idle.csv");
+			SetScale({ 1.f,1.f });
+			SetOrigin(Origins::BC);
+			formChangeTime = 0.f;
+			isFormChanging = false;
+		}
+	}
+
+
 	if (isMarioDie)
 	{
 		animator.Update(dt);
@@ -225,11 +240,12 @@ void AniPlayer::Update(float dt)
 			{
 				if (item->GetActive() && playerBounds.intersects(item->GetHitBoxMushroom()))
 				{
-					if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small)
+					if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small && !isFormChanging)
 					{
+						/*animator.Play("animations/big_idle.csv");
+						SetOrigin(Origins::BC);*/
 						mario = Mario::Big;
-						animator.Play("animations/big_idle.csv");
-						SetOrigin(Origins::BC);
+						isFormChanging = true;
 					}
 					item->SetActive(false);
 				}
@@ -241,7 +257,7 @@ void AniPlayer::Update(float dt)
 		isGroundedCheck();
 		SetPosition(position);
 
-		if (h != 0.f)
+		if (h != 0.f && !isFormChanging)
 		{
 			SetScale(h > 0.f ? sf::Vector2f(1.f, 1.f) : sf::Vector2f(-1.f, 1.f));
 		}
@@ -460,9 +476,9 @@ void AniPlayer::isGroundedCheck()
 			if (ground->IsGroundAt({ i, bottomBox.top + bottomBox.height }))
 			{
 				
-				//int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
-				//float tileTopY = tileY * 32.f;
-				//position.y = tileTopY;
+				int tileY = static_cast<int>((bottomBox.top + bottomBox.height) / 32.f);
+				float tileTopY = tileY * 32.f;
+				position.y = tileTopY;
 				velocity.y = 0;
 				isGrounded = true;
 				currentJumpTime = 0;
