@@ -143,7 +143,20 @@ void AniPlayer::Update(float dt)
 	if (isInvincible)
 	{
 		invincibleTime += dt;
-		if (invincibleTime >= maxInvincibleTime)
+		if (invincibleTime < maxInvincibleTime)
+		{
+			float blinkTime = fmod(invincibleTime, 0.1f);
+			if (blinkTime < 0.05f)
+			{
+				animator.Play("animations/big_idle.csv");
+			}
+			else
+			{
+				animator.Play("animations/idle.csv");
+			}
+			SetOrigin(Origins::BC);
+		}
+		else
 		{
 			isInvincible = false;
 			invincibleTime = 0.0f;
@@ -153,19 +166,26 @@ void AniPlayer::Update(float dt)
 	{
 		formChangeTime += dt;
 
-		if (1.f > formChangeTime / formChangeMaxTime)
+		if (formChangeTime >= formChangeMaxTime)
 		{
-			animator.Play("animations/get_mushroom.csv");
-			//SetScale({ 1.f,1.f });
+			mario = Mario::Big;
+			animator.Play("animations/big_idle.csv");
 			SetOrigin(Origins::BC);
+			isFormChanging = false;
+			formChangeTime = 0.f;
 		}
 		else
 		{
-			animator.Play("animations/big_idle.csv");
-			SetScale({ 1.f,1.f });
+			float blinkTime = fmod(formChangeTime, 0.2f);
+			if (blinkTime < 0.1f)
+			{
+				animator.Play("animations/idle.csv");
+			}
+			else
+			{
+				animator.Play("animations/big_idle.csv");
+			}
 			SetOrigin(Origins::BC);
-			formChangeTime = 0.f;
-			isFormChanging = false;
 		}
 	}
 

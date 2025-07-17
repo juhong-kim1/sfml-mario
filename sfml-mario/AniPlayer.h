@@ -33,7 +33,7 @@ protected:
 
 	bool isInvincible = false;
 	float invincibleTime = 0.0f;
-	float maxInvincibleTime = 2.0f;
+	float maxInvincibleTime = 1.5f;
 
 	bool isMarioDown = false;
 
@@ -41,9 +41,9 @@ protected:
 	int clearStep = 0;
 	float clearTimer = 0.0f;
 
-	bool isFormChanging = false;
 	float formChangeTime = 0.f;
-	float formChangeMaxTime = 2.f;
+	float formChangeMaxTime = 1.f;
+	bool isFormChanging = false;
 
 	HitBox hitBox;
 

@@ -22,7 +22,7 @@ void BackGroundElements::Release()
 void BackGroundElements::Reset()
 {
 	sprite.setTexture(TEXTURE_MGR.Get(texture));
-	Utils::SetOrigin(sprite, Origins::BC);
+	Utils::SetOrigin(sprite, Origins::BL);
 }
 
 void BackGroundElements::Update(float dt)
