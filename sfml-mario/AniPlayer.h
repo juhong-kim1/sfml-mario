@@ -75,6 +75,7 @@ public:
 	void isFlagCheck();
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 	void SetFlag(Flag* f) { flag = f; };
+	bool IsFlagCleared() { return isFlagCleared; };
 
 	void MarioDie();
 };

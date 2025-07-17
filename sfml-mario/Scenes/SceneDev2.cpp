@@ -216,14 +216,14 @@ void SceneDev2::Update(float dt)
 
 
 
-	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x)
+	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x && !player->IsFlagCleared())
 	{
 		worldView.setCenter(player->GetPosition().x , 240.f);
 	}
 
 	for (auto* enemy : enemies)
 	{
-		if (!enemy->GetActive() && !enemy->IsDying())
+		if (!enemy->GetActive() && !enemy->IsDying() && !enemy->IsDyingOnTop())
 		{
 			float distance = abs(player->GetPosition().x - enemy->GetPosition().x);
 			if (distance <= 600.f)

@@ -75,22 +75,22 @@ void Enemy::Reset()
 	isGrounded = true;
 	speed = -80.f;
 	isDyingOnTop = false;
-	dyingCurrentTime = 0.0f;
+	dyingCurrentTimer = 0.0f;
 }
 
 void Enemy::Update(float dt)
 {
-	if (!GetActive())
-	{
-		return;
-	}
+	//if (!GetActive())
+	//{
+	//	return;
+	//}
 
 	if (isDyingOnTop)
 	{
 		animator.Update(dt);
-		dyingCurrentTime += dt;
+		dyingCurrentTimer += dt;
 
-		if (dyingCurrentTime < 0.3f)
+		if (dyingCurrentTimer < 0.3f)
 		{
 			velocity.y = -100.f;
 		}
@@ -103,7 +103,7 @@ void Enemy::Update(float dt)
 		SetPosition(position);
 		SetScale({ 1.f,-1.f });
 
-		if (dyingCurrentTime >= dyingMaxTime)
+		if (dyingCurrentTimer >= dyingTimer)
 		{
 			SetActive(false);
 		}
@@ -276,7 +276,7 @@ void Enemy::DyingOnTop()
 	if (!isDyingOnTop)
 	{
 		isDyingOnTop = true;
-		dyingCurrentTime = 0.0f;
+		dyingCurrentTimer = 0.0f;
 		velocity = { 0.f, -200.f };
 	}
 

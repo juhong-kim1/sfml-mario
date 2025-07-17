@@ -27,8 +27,8 @@ protected:
 	float deathTimer = 0.5f;
 
 	bool isDyingOnTop = false;
-	float dyingCurrentTime = 0.0f;
-	float dyingMaxTime = 2.0f;
+	float dyingCurrentTimer = 0.0f;
+	float dyingTimer = 2.0f;
 
 
 public:

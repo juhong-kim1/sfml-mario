@@ -89,22 +89,11 @@ void AniPlayer::Reset()
 	clearTimer = 0.0f;
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 412.f });
+	SetPosition({ 100.f, 416.f });
 }
 
 void AniPlayer::Update(float dt)
 {
-	if (isInvincible)
-	{
-		invincibleTime += dt;
-		if (invincibleTime >= maxInvincibleTime)
-		{
-			isInvincible = false;
-			invincibleTime = 0.0f;
-		}
-	}
-
-
 	if (isFlagCleared)
 	{
 		animator.Update(dt);
@@ -157,6 +146,15 @@ void AniPlayer::Update(float dt)
 		return;
 	}
 
+	if (isInvincible)
+	{
+		invincibleTime += dt;
+		if (invincibleTime >= maxInvincibleTime)
+		{
+			isInvincible = false;
+			invincibleTime = 0.0f;
+		}
+	}
 	if (isMarioDie)
 	{
 		animator.Update(dt);
