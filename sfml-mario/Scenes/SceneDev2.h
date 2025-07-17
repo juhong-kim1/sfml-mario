@@ -27,6 +27,7 @@ public:
 	void Init() override;
 	void Enter() override;
 	void Update(float dt) override;
+	void Draw(sf::RenderWindow& window) override;
 	void AddQuestionBlock(std::string name, float x, float y, ItemType blockitem);
 	void AddGeneralBlock(std::string name, float x, float y);
 	void AddBush(std::string name, float x, float y, std::string texId);

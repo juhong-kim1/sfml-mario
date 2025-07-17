@@ -176,8 +176,11 @@ void SceneDev2::Init()
 	AddGeneralBlock("General", 5472.f, 288.f);
 
 	player = new AniPlayer();
+	uiHud = (UiHud*)AddGameObject(new UiHud());
+
 	player->SetGroundMap(groundMap);
 	player->SetFlag(flag);
+	player->SetHUD(uiHud);
 	AddGameObject(player);
 
 	AddEnemy("", 700.f, 380.f);
@@ -196,8 +199,6 @@ void SceneDev2::Init()
 	AddEnemy("", 4092.f, 380.f);
 	AddEnemy("", 5560.f, 380.f);
 	AddEnemy("", 5624.f, 380.f);
-
-	uiHud = (UiHud*)AddGameObject(new UiHud());
 
 	Scene::Init();
 }
@@ -238,6 +239,15 @@ void SceneDev2::Update(float dt)
 			}
 		}
 	}
+}
+
+void SceneDev2::Draw(sf::RenderWindow& window)
+{
+	window.setView(worldView);
+	Scene::Draw(window);
+
+	window.setView(uiView);
+	uiHud->Draw(window);
 }
 
 void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType blockItem)
@@ -297,6 +307,7 @@ void SceneDev2::AddEnemy(std::string name, float x, float y)
 	Enemy* enemy = new Enemy("Enemy", x, y);
 	enemy->SetGroundMapEnemy(groundMap);
 	enemy->SetActive(false);
+	enemy->SetHUD(uiHud);
 	AddGameObject(enemy);
 	enemies.push_back(enemy);
 }

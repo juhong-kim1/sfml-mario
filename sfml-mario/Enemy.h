@@ -5,6 +5,7 @@
 
 class GroundTileMap;
 class HitBox;
+class UiHud;
 
 class Enemy : public GameObject
 {
@@ -12,6 +13,7 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 	GroundTileMap* ground = nullptr;
+	UiHud* uiHud = nullptr;
 	HitBox hitBox;
 
 	float positionX = 0.f;
@@ -51,6 +53,7 @@ public:
 	void isWallCheckEnemy();
 	void isBlockCheckEnemy();
 	void SetGroundMapEnemy(GroundTileMap* groundMap) { ground = groundMap; };
+	void SetHUD(UiHud* hud) { uiHud = hud; };
 	void Die();
 	bool IsDying() const{ return isDying; };
 	void DyingOnTop();

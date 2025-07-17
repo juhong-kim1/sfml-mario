@@ -5,6 +5,7 @@
 class HitBox;
 class GroundTileMap;
 class Flag;
+class UiHud;
 
 class AniPlayer : public GameObject
 {
@@ -14,6 +15,7 @@ protected:
 	GroundTileMap* ground = nullptr;
 	Mario mario;
 	Flag* flag = nullptr;
+	UiHud* uiHud = nullptr;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
@@ -77,6 +79,7 @@ public:
 	void isBlockCheck();
 	void isEnemyCheck();
 	void isFlagCheck();
+	void SetHUD(UiHud* hud) { uiHud = hud; };
 	void SetGroundMap(GroundTileMap* groundMap) { ground = groundMap; };
 	void SetFlag(Flag* f) { flag = f; };
 	bool IsFlagCleared() { return isFlagCleared; };

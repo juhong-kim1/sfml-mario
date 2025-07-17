@@ -6,6 +6,7 @@
 #include "Block.h"
 #include "Enemy.h"
 #include "Flag.h"
+#include "UiHud.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name), mario(Mario::Small)
@@ -194,6 +195,7 @@ void AniPlayer::Update(float dt)
 
 	if (isMarioDie)
 	{
+
 		animator.Update(dt);
 
 		dieCurrentTime += dt;
@@ -411,6 +413,7 @@ void AniPlayer::Update(float dt)
 		if (body.getPosition().y >= 2000.f && !deathProcessed)
 		{
 			deathProcessed = true;
+			uiHud->LoseLife();
 			MarioDie();
 
 			isMarioDie = false;
@@ -630,6 +633,7 @@ void AniPlayer::isEnemyCheck()
 		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie && !isInvincible)
 		{
 			enemy->Die();
+			uiHud->AddScore(100);
 			velocity.y = -200.f;
 			return;
 		}
@@ -639,6 +643,7 @@ void AniPlayer::isEnemyCheck()
 			if (mario == Mario::Small)
 			{
 				isMarioDie = true;
+				//uiHud->LoseLife();
 				animator.Play("animations/mario_die.csv");
 				dieCurrentTime = 0.0f;
 				originPosition = GetPosition();

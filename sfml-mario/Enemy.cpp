@@ -4,6 +4,7 @@
 #include "SceneDev2.h"
 #include "Block.h"
 #include "GroundTileMap.h"
+#include "UiHud.h"
 
 Enemy::Enemy(const std::string& name, float x, float y)
 	:GameObject(name), positionX(x), positionY(y)
@@ -278,6 +279,7 @@ void Enemy::DyingOnTop()
 		isDyingOnTop = true;
 		dyingCurrentTimer = 0.0f;
 		velocity = { 0.f, -200.f };
+		uiHud->AddScore(100);
 	}
 
 }
