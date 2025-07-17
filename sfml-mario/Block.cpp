@@ -267,7 +267,9 @@ void Block::MushroomReleaseAnimation(float dt)
 
 void Block::BlockBreakAnimationStart()
 {
-	SetActive(false);
+	sf::Color transparent = block.getColor();
+	transparent.a = 0;
+	block.setColor(transparent);
 
 	isFragmentsActive = true;
 	blockBreakTime = 0.0f;
@@ -298,10 +300,12 @@ void Block::BlockBreakAnimation(float dt)
 		pos += velocityFragments[i] * dt;
 		fragments[i].setPosition(pos);
 	}
-	//if (blockBreakTime >= 2.0f)
-	//{
-	//	SetActive(false);
-	//}
+	if (blockBreakTime >= 2.0f)
+	{
+		SetPosition({ -1000.f, -1000.f });
+		SetActive(false);
+		isFragmentsActive = false;
+	}
 }
 
 void Block::CheckEnemiesOnTop()
