@@ -73,6 +73,8 @@ void SceneDev2::Init()
 	castle->SetOrigin(Origins::BC);
 	AddGameObject(castle);
 
+	uiHud = (UiHud*)AddGameObject(new UiHud());
+
 	float hill1Y = 422.f;
 	float hill2Y = 442.f;
 	float bushY = 432.f;
@@ -176,7 +178,7 @@ void SceneDev2::Init()
 	AddGeneralBlock("General", 5472.f, 288.f);
 
 	player = new AniPlayer();
-	uiHud = (UiHud*)AddGameObject(new UiHud());
+	//uiHud = (UiHud*)AddGameObject(new UiHud());
 
 	player->SetGroundMap(groundMap);
 	player->SetFlag(flag);
@@ -254,6 +256,7 @@ void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType bl
 {
 	Block* block = new Block(name, BlockType::QuestionBlock);
 	block->SetPosition({ x , y });
+	block->SetHUD(uiHud);
 	AddGameObject(block);
 	blocks.push_back(block);
 
@@ -261,9 +264,9 @@ void SceneDev2::AddQuestionBlock(std::string name, float x, float y, ItemType bl
 	item->SetPosition({ x ,y });
 	item->SetActive(false);
 	item->SetGroundMapMushroom(groundMap);
+	item->SetHUD(uiHud);
 	AddGameObject(item);
 	items.push_back(item);
-
 	block->SetItem(item);
 }
 

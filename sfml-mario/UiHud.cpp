@@ -50,13 +50,10 @@ void UiHud::SetLives(int newLives)
 
 void UiHud::LoseLife()
 {
-	std::cout << "LoseLife called! Lives before: " << lives << std::endl;
 	lives--;
-	std::cout << "Lives after decrement: " << lives << std::endl;
 	if (lives <= 0)
 	{
 		isGameOver = true;
-		std::cout << "shouldResetLives set to true" << std::endl;
 	}
 	UpdateLives();
 }
@@ -152,6 +149,7 @@ void UiHud::Reset()
 	coins = 0;
 	worldName = "1-1";
 	gameTime = 400;
+	isTimeFreezed = false;
 
 	if (isGameOver)
 	{
@@ -171,6 +169,32 @@ void UiHud::Reset()
 
 void UiHud::Update(float dt)
 {
+	if (isGameOver || isTimeFreezed)
+	{
+		return;
+	}
+
+	timeTimer += dt;
+	if (timeTimer >= 1.0f)
+	{
+		timeTimer = 0.0f;
+		if (gameTime > 0)
+		{
+			gameTime--;
+			UpdateTime();
+		}
+
+		if (gameTime <= 0)
+		{
+			LoseLife();
+
+			if (!isGameOver)
+			{
+				gameTime = 400;
+				UpdateTime();
+			}
+		}
+	}
 }
 
 void UiHud::Draw(sf::RenderWindow& window)
@@ -181,5 +205,21 @@ void UiHud::Draw(sf::RenderWindow& window)
 	window.draw(textWorld);
 	window.draw(textTime);
 	window.draw(textLives);
+}
+
+void UiHud::ApplyTimeBonus()
+{
+	if (gameTime > 0)
+	{
+		int bonus = gameTime * 50;
+
+		AddScore(bonus);
+		FreezeTime();
+
+		isGameOver = true;
+
+		/*gameTime = 0;
+		UpdateTime();*/
+	}
 }
 	

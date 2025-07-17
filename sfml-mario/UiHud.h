@@ -20,6 +20,7 @@ protected:
 	float timeTimer = 0.0f;
 
 	bool isGameOver = false;
+	bool isTimeFreezed = false;
 
 public:
 	UiHud(const std::string& name = "");
@@ -48,5 +49,7 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
+	void ApplyTimeBonus();
+	void FreezeTime() { isTimeFreezed = true; }
 };
 

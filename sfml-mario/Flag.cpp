@@ -70,3 +70,34 @@ void Flag::Draw(sf::RenderWindow& window)
 	hitBox.Draw(window);
 }
 
+int Flag::GetScoreByHeight(float playerY) const
+{
+    float flagTop = position.y - 200.f;
+    float flagBottom = position.y;
+
+    float relativeHeight = (flagBottom - playerY) / (flagBottom - flagTop);
+
+    relativeHeight = std::max(0.0f, std::min(1.0f, relativeHeight));
+
+    if (relativeHeight >= 0.9f)
+    {
+        return 1000;
+    }
+    else if (relativeHeight >= 0.7f)
+    {
+        return 800;
+    }
+    else if (relativeHeight >= 0.5f)
+    {
+        return 500;
+    }
+    else if (relativeHeight >= 0.3f)
+    {
+        return 300;
+    }
+    else
+    {
+        return 100;
+    }
+}
+

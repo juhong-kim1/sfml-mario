@@ -29,6 +29,8 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
+	int GetScoreByHeight(float playerY) const;
+
 	sf::FloatRect GetGlobalBounds() const
 	{
 		return sprite.getGlobalBounds();

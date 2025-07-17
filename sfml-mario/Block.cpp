@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "sceneDev2.h"
 #include "Enemy.h"
+#include "UiHud.h"
 
 Block::Block(const std::string& name, BlockType type)
 	:GameObject(name), blocktype(type)
@@ -227,6 +228,7 @@ void Block::CoinReleaseAnimation(float dt)
 		isAnimateCoin = false;
 		items->SetActive(false);
 		isItemUsed = true;
+		uiHud->AddCoin();
 	}
 }
 

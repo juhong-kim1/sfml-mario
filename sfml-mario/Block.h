@@ -3,6 +3,7 @@
 #include "item.h"
 #include "SceneDev2.h"
 
+class UiHud;
 
 class Block : public GameObject
 {
@@ -17,6 +18,8 @@ protected:
 	float blockBreakTime = 0.0f;
 
 	Item* items = nullptr;
+	UiHud* uiHud = nullptr;
+
 
 	bool isShaking = false;
 	float shakeCurrentTime = 0.0f;
@@ -77,6 +80,7 @@ public:
 	void BlockBreakAnimationStart();
 	void BlockBreakAnimation(float dt);
 	void CheckEnemiesOnTop();
+	void SetHUD(UiHud* hud) { uiHud = hud; };
 	BlockType GetBlockType() { return blocktype; }
 
 };

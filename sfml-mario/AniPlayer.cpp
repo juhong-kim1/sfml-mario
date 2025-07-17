@@ -264,6 +264,10 @@ void AniPlayer::Update(float dt)
 			{
 				if (item->GetActive() && playerBounds.intersects(item->GetHitBoxMushroom()))
 				{
+					if (item->GetItemType() == ItemType::Coin)
+					{
+						uiHud->AddCoin();
+					}
 					if (item->GetItemType() == ItemType::Mushroom && mario == Mario::Small && !isFormChanging)
 					{
 						/*animator.Play("animations/big_idle.csv");
@@ -271,6 +275,8 @@ void AniPlayer::Update(float dt)
 						mario = Mario::Big;
 						isFormChanging = true;
 					}
+					uiHud->AddScore(1000);
+					
 					item->SetActive(false);
 				}
 			}
@@ -584,6 +590,7 @@ void AniPlayer::isBlockCheck()
 			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
 			{
 				block->BlockBreakAnimationStart();
+				uiHud->AddScore(50);
 			}
 			if (!block->IsShaking())
 			{
@@ -679,6 +686,11 @@ void AniPlayer::isFlagCheck()
 		clearTimer = 0.0f;
 		velocity.x = 0.f;
 		position.x += 20.f;
+
+		int flagScore = flag->GetScoreByHeight(position.y);
+		uiHud->AddScore(flagScore);
+
+		uiHud->ApplyTimeBonus();
 	}
 }
 

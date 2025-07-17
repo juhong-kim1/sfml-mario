@@ -4,6 +4,7 @@
 #include "GroundTileMap.h"
 
 class GroundTileMan;
+class UiHud;
 
 class Item : public GameObject
 {
@@ -13,6 +14,7 @@ protected:
 	ItemType itemType;
 
 	GroundTileMap* ground = nullptr;
+	UiHud* uiHud = nullptr;
 
 	sf::Vector2f gravity = { 0.f, 1100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
@@ -48,6 +50,7 @@ public:
 	void isWallCheckMushroom();
 	void isBlockCheckMushroom();
 	void SetGroundMapMushroom(GroundTileMap* groundMap) { ground = groundMap; };
+	void SetHUD(UiHud* hud) { uiHud = hud; };
 
 	sf::FloatRect GetHitBoxMushroom() const;
 
