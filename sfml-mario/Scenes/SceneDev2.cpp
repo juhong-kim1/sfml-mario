@@ -40,6 +40,13 @@ void SceneDev2::Init()
 	soundIds.push_back("sounds/overworld.ogg");
 	soundIds.push_back("sounds/coin.wav");
 	soundIds.push_back("sounds/mario_die.wav");
+	soundIds.push_back("sounds/jump.wav");
+	soundIds.push_back("sounds/kick.wav");
+	soundIds.push_back("sounds/smash.wav");
+	soundIds.push_back("sounds/powerup.wav");
+	soundIds.push_back("sounds/mushroom.wav");
+	soundIds.push_back("sounds/powerup_appears.wav");
+	soundIds.push_back("sounds/flagpole.wav");
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");

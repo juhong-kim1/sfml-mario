@@ -80,6 +80,7 @@ void AniPlayer::Reset()
 	clearStep = 0;
 	clearTimer = 0.0f;
 	formChangeTime = 0.0f;
+	isFlagPoleDown = false;
 
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
@@ -94,6 +95,12 @@ void AniPlayer::Update(float dt)
 
 		if (clearStep == 1)
 		{
+			SOUND_MGR.StopBgm();
+			if (!isFlagPoleDown)
+			{
+				SOUND_MGR.PlaySfx("sounds/flagpole.wav");
+				isFlagPoleDown = true;
+			}
 			if (mario == Mario::Small)
 			{
 				animator.Play("animations/flag.csv");
@@ -113,6 +120,7 @@ void AniPlayer::Update(float dt)
 		}
 		else if (clearStep == 2)
 		{
+			SOUND_MGR.StopAllSfx();
 			if (mario == Mario::Small)
 			{
 				animator.Play("animations/run.csv");
@@ -278,6 +286,7 @@ void AniPlayer::Update(float dt)
 					{
 						/*animator.Play("animations/big_idle.csv");
 						SetOrigin(Origins::BC);*/
+						SOUND_MGR.PlaySfx("sounds/powerup.wav");
 						mario = Mario::Big;
 						isFormChanging = true;
 					}
@@ -344,6 +353,7 @@ void AniPlayer::Update(float dt)
 			}
 			if (InputMgr::GetKeyDown(sf::Keyboard::Space) && isGrounded)
 			{
+				SOUND_MGR.PlaySfx("sounds/jump.wav");
 				currentJumpTime = 0.0f;
 				isGrounded = false;
 				velocity.y = -340.f;
@@ -396,6 +406,7 @@ void AniPlayer::Update(float dt)
 			{
 				if (currentJumpTime < maxJumpTime)
 				{
+					SOUND_MGR.PlaySfx("sounds/jump.wav");
 					currentJumpTime += dt;
 					isGrounded = false;
 					velocity.y = -340.f;
@@ -596,6 +607,7 @@ void AniPlayer::isBlockCheck()
 			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
 			{
 				block->BlockBreakAnimationStart();
+				SOUND_MGR.PlaySfx("sounds/smash.wav");
 				uiHud->AddScore(50);
 			}
 			if (!block->IsShaking())
@@ -646,6 +658,7 @@ void AniPlayer::isEnemyCheck()
 		if (velocity.y > 0 && bottomBox.intersects(enemyBounds) && !isMarioDie && !isInvincible)
 		{
 			enemy->Die();
+			SOUND_MGR.PlaySfx("sounds/kick.wav");
 			uiHud->AddScore(100);
 			velocity.y = -200.f;
 			return;
@@ -657,7 +670,7 @@ void AniPlayer::isEnemyCheck()
 			{
 				isMarioDie = true;
 				//uiHud->LoseLife();
-				animator.Play("animations/mario_die.csv");
+ 				animator.Play("animations/mario_die.csv");
 				SOUND_MGR.StopBgm();
 				SOUND_MGR.PlaySfx("sounds/mario_die.wav");
 				dieCurrentTime = 0.0f;
@@ -670,6 +683,7 @@ void AniPlayer::isEnemyCheck()
 				isInvincible = true;
 				mario = Mario::Small;
 				animator.Play("animations/idle.csv");
+				SOUND_MGR.PlaySfx("sounds/powerup_appears.wav");
 				invincibleTime = 0.0f;
 				SetOrigin(Origins::BC);
 			}

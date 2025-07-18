@@ -35,7 +35,7 @@ protected:
 
 	bool isInvincible = false;
 	float invincibleTime = 0.0f;
-	float maxInvincibleTime = 1.5f;
+	float maxInvincibleTime = 1.f;
 
 	bool isMarioDown = false;
 
@@ -48,6 +48,7 @@ protected:
 	bool isFormChanging = false;
 
 	bool alreadySfxPlaying = false;
+	bool isFlagPoleDown = false;
 
 	HitBox hitBox;
 

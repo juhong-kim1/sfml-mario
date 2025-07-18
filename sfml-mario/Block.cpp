@@ -183,10 +183,12 @@ void Block::ReleaseItem()
 			if (items->GetItemType() == ItemType::Mushroom)
 			{
 				MushroomReleaseAnimationStart(position);
+				SOUND_MGR.PlaySfx("sounds/mushroom.wav");
 			}
 			if (items->GetItemType() == ItemType::Coin)
 			{
 				CoinReleaseAnimationStart(position);
+				SOUND_MGR.PlaySfx("sounds/coin.wav");
 			}
 	}
 }
