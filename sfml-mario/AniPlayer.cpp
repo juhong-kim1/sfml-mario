@@ -80,6 +80,7 @@ void AniPlayer::Reset()
 	clearStep = 0;
 	clearTimer = 0.0f;
 	formChangeTime = 0.0f;
+	isFlagPoleCatch = false;
 	isFlagPoleDown = false;
 
 	body.setScale({ 1.f, 1.f });
@@ -96,10 +97,10 @@ void AniPlayer::Update(float dt)
 		if (clearStep == 1)
 		{
 			SOUND_MGR.StopBgm();
-			if (!isFlagPoleDown)
+			if (!isFlagPoleCatch)
 			{
 				SOUND_MGR.PlaySfx("sounds/flagpole.wav");
-				isFlagPoleDown = true;
+				isFlagPoleCatch = true;
 			}
 			if (mario == Mario::Small)
 			{
@@ -120,7 +121,12 @@ void AniPlayer::Update(float dt)
 		}
 		else if (clearStep == 2)
 		{
-			SOUND_MGR.StopAllSfx();
+			if (!isFlagPoleDown)
+			{
+				SOUND_MGR.StopAllSfx();
+				SOUND_MGR.PlaySfx("sounds/stage_clear.wav");
+				isFlagPoleDown = true;
+			}
 			if (mario == Mario::Small)
 			{
 				animator.Play("animations/run.csv");
@@ -130,10 +136,13 @@ void AniPlayer::Update(float dt)
 				animator.Play("animations/big_run.csv");
 			}
 
-			position.x += 60 * dt;
-			SetPosition(position);
+			if (position.x <= 6528.f)
+			{
+				position.x += 60 * dt;
+				SetPosition(position);
+			}
 
-			if (clearTimer >= 3.0f)
+			if (clearTimer >= 7.0f)
 			{
 				clearStep = 3;
 			}

@@ -48,6 +48,7 @@ protected:
 	bool isFormChanging = false;
 
 	bool alreadySfxPlaying = false;
+	bool isFlagPoleCatch = false;
 	bool isFlagPoleDown = false;
 
 	HitBox hitBox;
