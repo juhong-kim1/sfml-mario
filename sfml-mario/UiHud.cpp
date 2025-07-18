@@ -203,12 +203,9 @@ void UiHud::ApplyTimeBonus()
 		int bonus = gameTime * 50;
 
 		AddScore(bonus);
-		FreezeTime();
+		isTimeFreezed = true;
 
 		isGameOver = true;
-
-		/*gameTime = 0;
-		UpdateTime();*/
 	}
 }
 	

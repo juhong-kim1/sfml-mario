@@ -49,7 +49,7 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void ApplyTimeBonus();
-	void FreezeTime() { isTimeFreezed = true; }
+	//void FreezeTime() { isTimeFreezed = true; }
 	int GetTime() const { return gameTime; }
 };
 

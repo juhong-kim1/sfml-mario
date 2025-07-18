@@ -112,7 +112,7 @@ void AniPlayer::Update(float dt)
 			{
 				animator.Play("animations/big_flag.csv");
 			}
-			position.y += 80 * dt;
+			position.y += 120 * dt;
 			SetPosition(position);
 
 			if (position.y >= 416.f)
