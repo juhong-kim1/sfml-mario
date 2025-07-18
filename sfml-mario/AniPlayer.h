@@ -47,6 +47,8 @@ protected:
 	float formChangeMaxTime = 1.f;
 	bool isFormChanging = false;
 
+	bool alreadySfxPlaying = false;
+
 	HitBox hitBox;
 
 

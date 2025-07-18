@@ -37,6 +37,10 @@ void SceneDev2::Init()
 
 	fontIds.push_back("fonts/main_font.ttf");
 
+	soundIds.push_back("sounds/overworld.ogg");
+	soundIds.push_back("sounds/coin.wav");
+	soundIds.push_back("sounds/mario_die.wav");
+
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");
 	ANI_CLIP_MGR.Load("animations/jump.csv");
@@ -59,6 +63,8 @@ void SceneDev2::Init()
 
 	ANI_CLIP_MGR.Load("animations/flag.csv");
 	ANI_CLIP_MGR.Load("animations/big_flag.csv");
+
+	//SOUND_MGR.PlaySfx("sounds/coin.wav");
 
 	/*SpriteGo* background = new SpriteGo("graphics/temporary_background2x.png");
 	background->sortingLayer = SortingLayers::Background;
@@ -216,6 +222,8 @@ void SceneDev2::Enter()
 
 
 	Scene::Enter();
+
+	SOUND_MGR.PlayBgm("sounds/overworld.ogg");
 }
 
 void SceneDev2::Update(float dt)

@@ -191,6 +191,12 @@ void AniPlayer::Update(float dt)
 			SetOrigin(Origins::BC);
 		}
 	}
+	if (body.getPosition().y >= 510.f && !isMarioDie && !alreadySfxPlaying)
+	{
+		SOUND_MGR.StopBgm();
+		SOUND_MGR.PlaySfx("sounds/mario_die.wav");
+		alreadySfxPlaying = true;
+	}
 
 
 	if (isMarioDie)
@@ -416,7 +422,7 @@ void AniPlayer::Update(float dt)
 			break;
 		}
 	}
-		if (body.getPosition().y >= 2000.f && !deathProcessed)
+		if (body.getPosition().y >= 8000.f && !deathProcessed)
 		{
 			deathProcessed = true;
 			uiHud->LoseLife();
@@ -652,6 +658,8 @@ void AniPlayer::isEnemyCheck()
 				isMarioDie = true;
 				//uiHud->LoseLife();
 				animator.Play("animations/mario_die.csv");
+				SOUND_MGR.StopBgm();
+				SOUND_MGR.PlaySfx("sounds/mario_die.wav");
 				dieCurrentTime = 0.0f;
 				originPosition = GetPosition();
 				velocity = { 0.f, 0.f };
