@@ -52,9 +52,6 @@ void AniPlayer::Init()
 
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
-
-	//body.setScale({ 1.f, 1.f });
-	//SetPosition({ 100.f, 416.f });
 }
 
 void AniPlayer::Release()
@@ -85,12 +82,13 @@ void AniPlayer::Reset()
 	isTimeOver = false;
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 416.f });
+	SetPosition({ 100.f, 415.f });
 	SetOrigin(Origins::BC);
 }
 
 void AniPlayer::Update(float dt)
 {
+	//std::cout << GetPosition().x <<"," << GetPosition().y << std::endl;
 	if (isFlagCleared)
 	{
 		animator.Update(dt);
@@ -117,6 +115,8 @@ void AniPlayer::Update(float dt)
 
 			if (position.y >= 416.f)
 			{
+				position.y = 416.f;
+				SetPosition(position);
 				clearStep = 2;
 				clearTimer = 0.0f;
 			}
@@ -151,6 +151,7 @@ void AniPlayer::Update(float dt)
 		}
 		else if (clearStep == 3)
 		{
+			//std::cout << GetPosition().x << GetPosition().y<< std::endl;
 			animator.Play("animations/idle.csv");
 			SetOrigin(Origins::BC);
 			SCENE_MGR.ChangeScene(SceneIds::Dev2);
@@ -252,6 +253,11 @@ void AniPlayer::Update(float dt)
 		}
 
 	}
+	if (position.x <= 0.f)
+	{
+		position.x = 0.f;
+	}
+
 	if (!isMarioDie)
 	{
 		animator.Update(dt);
@@ -375,6 +381,14 @@ void AniPlayer::Update(float dt)
 				if (velocity.x < 0.3f && velocity.x > -0.3f)
 				{
 					animator.Play("animations/idle.csv");
+				}
+				if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+				{
+					animator.Play("animations/run.csv");
+				}
+				if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+				{
+					animator.Play("animations/run.csv");
 				}
 			}
 			if (InputMgr::GetKeyDown(sf::Keyboard::Space) && isGrounded)
@@ -632,7 +646,7 @@ void AniPlayer::isBlockCheck()
 		{
 			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
 			{
-				block->BlockBreakAnimationStart();
+				//block->BlockBreakAnimationStart();
 				SOUND_MGR.PlaySfx("sounds/smash.wav");
 				uiHud->AddScore(50);
 			}
