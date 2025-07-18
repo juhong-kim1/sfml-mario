@@ -18,7 +18,6 @@ protected:
 	int gameTime = 400;
 	int lives = 3;
 	float timeTimer = 0.0f;
-
 	bool isGameOver = false;
 	bool isTimeFreezed = false;
 
@@ -51,5 +50,6 @@ public:
 
 	void ApplyTimeBonus();
 	void FreezeTime() { isTimeFreezed = true; }
+	int GetTime() const { return gameTime; }
 };
 

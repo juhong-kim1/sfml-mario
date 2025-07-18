@@ -158,6 +158,7 @@ void Block::BlockShakeAnimation(float dt)
 
 void Block::BlockShakeAnimationStart()
 {
+	SOUND_MGR.PlaySfx("sounds/bump.wav");
 	isShaking = true;
 	shakeCurrentTime = 0.0f;
 	originPosition = position;

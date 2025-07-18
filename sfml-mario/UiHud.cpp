@@ -183,17 +183,6 @@ void UiHud::Update(float dt)
 			gameTime--;
 			UpdateTime();
 		}
-
-		if (gameTime <= 0)
-		{
-			LoseLife();
-
-			if (!isGameOver)
-			{
-				gameTime = 400;
-				UpdateTime();
-			}
-		}
 	}
 }
 

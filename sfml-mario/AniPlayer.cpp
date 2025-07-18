@@ -68,7 +68,7 @@ void AniPlayer::Reset()
 
 	mario = Mario::Small;
 	animator.Play("animations/idle.csv");
-	SetOrigin(Origins::BC);
+	//SetOrigin(Origins::BC);
 
 	currentJumpTime = 0;
 
@@ -82,9 +82,11 @@ void AniPlayer::Reset()
 	formChangeTime = 0.0f;
 	isFlagPoleCatch = false;
 	isFlagPoleDown = false;
+	isTimeOver = false;
 
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
+	SetOrigin(Origins::BC);
 }
 
 void AniPlayer::Update(float dt)
@@ -215,10 +217,8 @@ void AniPlayer::Update(float dt)
 		alreadySfxPlaying = true;
 	}
 
-
 	if (isMarioDie)
 	{
-
 		animator.Update(dt);
 
 		dieCurrentTime += dt;
@@ -234,6 +234,23 @@ void AniPlayer::Update(float dt)
 
 		position += velocity * dt;
 		SetPosition(position);
+	}
+	if (uiHud->GetTime() <= 0)
+	{
+		isMarioDie = true;
+
+		if (!isTimeOver)
+		{
+			animator.Play("animations/mario_die.csv");
+			SOUND_MGR.StopBgm();
+			SOUND_MGR.PlaySfx("sounds/mario_die.wav");
+			dieCurrentTime = 0.0f;
+			originPosition = GetPosition();
+			velocity = { 0.f, 0.f };
+			SetOrigin(Origins::BC);
+			isTimeOver = true;
+		}
+
 	}
 	if (!isMarioDie)
 	{
@@ -678,7 +695,6 @@ void AniPlayer::isEnemyCheck()
 			if (mario == Mario::Small)
 			{
 				isMarioDie = true;
-				//uiHud->LoseLife();
  				animator.Play("animations/mario_die.csv");
 				SOUND_MGR.StopBgm();
 				SOUND_MGR.PlaySfx("sounds/mario_die.wav");

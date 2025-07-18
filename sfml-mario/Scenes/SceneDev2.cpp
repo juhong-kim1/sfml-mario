@@ -48,6 +48,7 @@ void SceneDev2::Init()
 	soundIds.push_back("sounds/powerup_appears.wav");
 	soundIds.push_back("sounds/flagpole.wav");
 	soundIds.push_back("sounds/stage_clear.wav");
+	soundIds.push_back("sounds/bump.wav");
 
 	ANI_CLIP_MGR.Load("animations/idle.csv");
 	ANI_CLIP_MGR.Load("animations/run.csv");

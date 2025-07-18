@@ -51,6 +51,8 @@ protected:
 	bool isFlagPoleCatch = false;
 	bool isFlagPoleDown = false;
 
+	bool isTimeOver = false;
+
 	HitBox hitBox;
 
 
