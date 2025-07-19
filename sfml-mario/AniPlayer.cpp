@@ -441,6 +441,14 @@ void AniPlayer::Update(float dt)
 				{
 					animator.Play("animations/big_idle.csv");
 				}
+				if (h > 0.f && InputMgr::GetKeyDown(sf::Keyboard::D))
+				{
+					animator.Play("animations/big_run.csv");
+				}
+				if (h < 0.f && InputMgr::GetKeyDown(sf::Keyboard::A))
+				{
+					animator.Play("animations/big_run.csv");
+				}
 			}
 			if (InputMgr::GetKeyDown(sf::Keyboard::Space) && isGrounded)
 			{
@@ -657,7 +665,7 @@ void AniPlayer::isBlockCheck()
 				block->BlockShakeAnimationStart();
 				block->ReleaseItem();
 				block->CheckEnemiesOnTop();
-				return;
+				//return;
 			}
 		}
 		if (velocity.x > 0 && rightBox.intersects(blockBounds) && block->GetActive())

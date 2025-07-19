@@ -315,9 +315,14 @@ bool GroundTileMap::IsWallAt(const sf::Vector2f& worldPos)
     int x = static_cast<int>(localPos.x / cellSize.x);
     int y = static_cast<int>(localPos.y / cellSize.y);
 
-    if (x < 0 || y < 0 || x >= cellCount.x || y >= cellCount.y)
+    if (x < 0 || x >= cellCount.x || y >= cellCount.y)
     {
         return true;
+    }
+
+    if (y < 0)
+    {
+        return false;
     }
 
     int index = y * cellCount.x + x;

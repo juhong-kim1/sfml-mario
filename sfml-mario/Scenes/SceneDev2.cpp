@@ -242,7 +242,7 @@ void SceneDev2::Update(float dt)
 
 
 
-	if (player != nullptr && worldView.getCenter().x && !player->IsFlagCleared())
+	if (player != nullptr  && !player->IsFlagCleared())
 	{
 		sf::Vector2f playerPos = player->GetPosition();
 		if (playerPos.x > worldView.getCenter().x)
