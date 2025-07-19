@@ -242,10 +242,21 @@ void SceneDev2::Update(float dt)
 
 
 
-	if (player != nullptr && player->GetPosition().x > worldView.getCenter().x && !player->IsFlagCleared())
+	if (player != nullptr && worldView.getCenter().x && !player->IsFlagCleared())
 	{
-		worldView.setCenter(player->GetPosition().x , 240.f);
+		sf::Vector2f playerPos = player->GetPosition();
+		if (playerPos.x > worldView.getCenter().x)
+		{
+			worldView.setCenter(player->GetPosition().x, 240.f);
+		}
+		float leftLimit = worldView.getCenter().x - worldView.getSize().x * 0.5f + 22.f;
+		if (playerPos.x < leftLimit)
+		{
+			player->SetPosition({ leftLimit, playerPos.y });
+		}
 	}
+
+	
 
 	for (auto* enemy : enemies)
 	{

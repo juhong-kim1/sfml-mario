@@ -286,6 +286,7 @@ void Enemy::DyingOnTop()
 
 sf::FloatRect Enemy::GetHitBoxEnemy() const
 {
-	return body.getGlobalBounds();
+	sf::FloatRect globalBounds = body.getGlobalBounds();
+	return sf::FloatRect(globalBounds.left + 4.0f ,globalBounds.top + 8.0f,globalBounds.width -4.0f,globalBounds.height - 8.0f);
 }
 
