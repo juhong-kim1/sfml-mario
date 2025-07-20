@@ -26,6 +26,8 @@ protected:
 	float shakeMaxTime = 0.15f;
 	sf::Vector2f originPosition;
 
+	//sf::Vector2f originBlockPosition;
+
 	bool isItemUsed = false;
 	bool isAnimateCoin = false;
 	float coinCurrentTime = 0.0;

@@ -265,7 +265,6 @@ void SceneDev2::Update(float dt)
 			float distance = abs(player->GetPosition().x - enemy->GetPosition().x);
 			if (distance <= 600.f)
 			{
-				std::cout << "±À¹Ù ÃâÇö" << std::endl;
 				enemy->SetActive(true);
 			}
 		}

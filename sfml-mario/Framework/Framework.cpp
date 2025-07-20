@@ -42,11 +42,11 @@ void Framework::Do()
 
             if (isPaused)
             {
-                SOUND_MGR.SetBgmVolume(0);
+                SOUND_MGR.StopBgm();
             }
             else
             {
-                SOUND_MGR.SetBgmVolume(100);
+                SOUND_MGR.PlayBgm("sounds/overworld.ogg");
             }
         }
 

@@ -22,7 +22,7 @@ void Block::UpdateTransform()
 void Block::SetPosition(const sf::Vector2f& pos)
 {
 	GameObject::SetPosition(pos);
-	originPosition = pos;
+	//originBlockPosition = pos;
 	UpdateTransform();
 }
 
@@ -80,7 +80,7 @@ void Block::Reset()
 	}
 
 	block.setTextureRect(blockRect);
-	block.setPosition(originPosition);
+	block.setPosition(position);
 
 	isFragmentsActive = false;
 	blockBreakTime = 0.0f;
@@ -310,7 +310,7 @@ void Block::BlockBreakAnimation(float dt)
 	}
 	if (blockBreakTime >= 2.0f)
 	{
-		SetPosition({ -1000.f, -1000.f });
+		block.setPosition({ -1000.f, -1000.f });
 		SetActive(false);
 		isFragmentsActive = false;
 	}
