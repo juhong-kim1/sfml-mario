@@ -36,9 +36,22 @@ void Framework::Do()
 
         InputMgr::Update(deltaTime);
 
-        // Update
-        SOUND_MGR.Update(deltaTime);
+        if (InputMgr::GetKeyDown(sf::Keyboard::P))
+        {
+            isPaused = !isPaused;
 
+            if (isPaused)
+            {
+                SOUND_MGR.SetBgmVolume(0);
+            }
+            else
+            {
+                SOUND_MGR.SetBgmVolume(100);
+            }
+        }
+
+        //update
+        SOUND_MGR.Update(deltaTime);
 #ifdef DEF_DEV
         if (InputMgr::GetKeyDown(sf::Keyboard::F10))
         {
@@ -46,8 +59,10 @@ void Framework::Do()
         }
 #endif
 
-
-        SCENE_MGR.Update(deltaTime);
+        if (!isPaused)
+        {
+            SCENE_MGR.Update(deltaTime);
+        }
 
         // Draw
         window.clear();

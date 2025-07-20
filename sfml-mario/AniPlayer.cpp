@@ -664,7 +664,7 @@ void AniPlayer::isBlockCheck()
 		{
 			if (mario == Mario::Big && block->GetBlockType()==BlockType::GeneralBlock)
 			{
-				//block->BlockBreakAnimationStart();
+				block->BlockBreakAnimationStart();
 				SOUND_MGR.PlaySfx("sounds/smash.wav");
 				uiHud->AddScore(50);
 			}

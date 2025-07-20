@@ -19,6 +19,8 @@ protected:
 	float realTime = 0.f;
 	float realDeltaTime = 0.f;
 
+	bool isPaused = false;
+
 	std::vector<std::string> texIds;
 	std::vector<std::string> fontIds;
 	std::vector<std::string> soundIds;

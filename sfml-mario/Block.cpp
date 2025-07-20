@@ -22,6 +22,7 @@ void Block::UpdateTransform()
 void Block::SetPosition(const sf::Vector2f& pos)
 {
 	GameObject::SetPosition(pos);
+	originPosition = pos;
 	UpdateTransform();
 }
 
@@ -66,6 +67,8 @@ void Block::Reset()
 {
 	block.setTexture(TEXTURE_MGR.Get("graphics/tiles2x.png"));
 
+	block.setColor(sf::Color::White);
+
 	switch (blocktype)
 	{
 	case BlockType::GeneralBlock:
@@ -77,8 +80,10 @@ void Block::Reset()
 	}
 
 	block.setTextureRect(blockRect);
-	block.setPosition(position);
+	block.setPosition(originPosition);
 
+	isFragmentsActive = false;
+	blockBreakTime = 0.0f;
 	shakeCurrentTime = 0.0f;
 	isItemUsed = false;
 	isAnimateCoin = false;
