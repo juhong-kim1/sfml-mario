@@ -82,13 +82,16 @@ void AniPlayer::Reset()
 	isTimeOver = false;
 
 	body.setScale({ 1.f, 1.f });
-	SetPosition({ 100.f, 415.f });
+	SetPosition({ 100.f, 416.f });
+
+	isGrounded = true;
+	velocity = { 0.f, 0.f };
+
 	SetOrigin(Origins::BC);
 }
 
 void AniPlayer::Update(float dt)
 {
-	//std::cout << GetPosition().x <<"," << GetPosition().y << std::endl;
 	if (isFlagCleared)
 	{
 		animator.Update(dt);
