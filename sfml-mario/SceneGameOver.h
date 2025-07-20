@@ -1,16 +1,15 @@
 #pragma once
 #include "Scene.h"
 
-class UiHud;
-
-class SceneDev1 : public Scene
+class SceneGameOver : public Scene
 {
 protected:
-	UiHud* uiHud;
+	float timer = 0.0f;
+	float maxTimer = 3.0f;
 
 public:
-	SceneDev1();
-	~SceneDev1() override = default;
+	SceneGameOver();
+	~SceneGameOver() override = default;
 
 	void Init() override;
 	void Enter() override;

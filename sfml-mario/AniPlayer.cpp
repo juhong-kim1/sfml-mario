@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "Flag.h"
 #include "UiHud.h"
+#include "SceneGameClear.h"
 
 AniPlayer::AniPlayer(const std::string& name)
 	: GameObject(name), mario(Mario::Small)
@@ -84,9 +85,6 @@ void AniPlayer::Reset()
 	body.setScale({ 1.f, 1.f });
 	SetPosition({ 100.f, 416.f });
 
-	isGrounded = true;
-	velocity = { 0.f, 0.f };
-
 	SetOrigin(Origins::BC);
 }
 
@@ -154,10 +152,19 @@ void AniPlayer::Update(float dt)
 		}
 		else if (clearStep == 3)
 		{
-			//std::cout << GetPosition().x << GetPosition().y<< std::endl;
 			animator.Play("animations/idle.csv");
+			velocity = { 0.f, 0.f };
 			SetOrigin(Origins::BC);
-			SCENE_MGR.ChangeScene(SceneIds::Dev2);
+
+			int currentScore = uiHud->GetScore();
+
+			SceneGameClear* clearScene = dynamic_cast<SceneGameClear*>(SCENE_MGR.GetScene(SceneIds::GameClear));
+			if (clearScene)
+			{
+				clearScene->SetFinalScore(currentScore);
+			}
+
+			SCENE_MGR.ChangeScene(SceneIds::GameClear);
 		}
 
 		hitBox.UpdateTransform(body, body.getLocalBounds());
@@ -768,5 +775,12 @@ void AniPlayer::isFlagCheck()
 
 void AniPlayer::MarioDie()
 {
-	SCENE_MGR.ChangeScene(SceneIds::Dev2);
+	if (uiHud->GetLives() <= 0)
+	{
+		SCENE_MGR.ChangeScene(SceneIds::GameOver);
+	}
+	else
+	{
+		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+	}
 }

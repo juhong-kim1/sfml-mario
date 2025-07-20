@@ -51,5 +51,7 @@ public:
 	void ApplyTimeBonus();
 	//void FreezeTime() { isTimeFreezed = true; }
 	int GetTime() const { return gameTime; }
+	int GetLives() const { return lives; }
+	int GetScore() const { return score; }
 };
 
